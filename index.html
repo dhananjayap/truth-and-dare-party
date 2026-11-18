@@ -1,0 +1,5293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#7928ca" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Truth &amp; Dare" />
+  <title>Truth &amp; Dare Party â€” Offline Edition</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <style>
+/* ==========================================================
+   Truth & Dare Party - Ultra-Modern Neon Party Theme
+   ========================================================== */
+
+:root {
+  --bg-main: #0c081e;
+  --bg-gradient: radial-gradient(circle at 50% 10%, #2b125d 0%, #0d061f 60%, #05020c 100%);
+  --card-bg: rgba(26, 18, 54, 0.75);
+  --card-border: rgba(168, 85, 247, 0.25);
+  --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(139, 92, 246, 0.15);
+  
+  --primary: #9d4edd;
+  --primary-glow: #c77dff;
+  --truth-blue: #00d2ff;
+  --truth-glow: rgba(0, 210, 255, 0.4);
+  --dare-red: #ff0055;
+  --dare-glow: rgba(255, 0, 85, 0.4);
+  --random-purple: #a855f7;
+  --random-glow: rgba(168, 85, 247, 0.4);
+  
+  --accent-gold: #ffbe0b;
+  --accent-green: #00f5d4;
+  --text-white: #ffffff;
+  --text-dim: #a19bb8;
+  --text-muted: #6e678a;
+
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-main);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background animated glow orbs */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+body::before {
+  top: -80px;
+  left: -80px;
+  background: #ff007f;
+}
+
+body::after {
+  bottom: -80px;
+  right: -80px;
+  background: #00f0ff;
+}
+
+/* App container */
+.app-container {
+  width: 100%;
+  max-width: 960px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Confetti Canvas */
+#confettiCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: rgba(20, 14, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 10px #ff0055);
+}
+
+.logo-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #00d2ff, #ff007f, #ffbe0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-white);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+.header-btn.install-btn {
+  background: linear-gradient(135deg, #00f0ff, #7928ca);
+  border-color: #00f0ff;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.45);
+}
+
+.header-btn.install-btn:hover {
+  background: linear-gradient(135deg, #00f0ff, #ff007f);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.header-btn.exit-btn {
+  background: linear-gradient(135deg, rgba(255, 0, 85, 0.25), rgba(255, 0, 85, 0.1));
+  border-color: rgba(255, 0, 85, 0.4);
+  color: #ff6b8b;
+}
+
+.header-btn.exit-btn:hover {
+  background: linear-gradient(135deg, #ff0055, #c70039);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
+}
+
+.header-btn.round-pill {
+  background: rgba(157, 78, 221, 0.2);
+  border-color: var(--primary);
+  color: #d8b4fe;
+}
+
+/* Glassmorphism Cards */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Setup Screen */
+.setup-hero {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.setup-hero h1 {
+  font-size: 2.3rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #ffffff, #d8b4fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.setup-hero p {
+  color: var(--text-dim);
+  font-size: 1.05rem;
+}
+
+/* Add Player Input Group */
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.styled-input {
+  flex: 1;
+  background: rgba(13, 8, 30, 0.85);
+  border: 1.5px solid rgba(168, 85, 247, 0.35);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  color: var(--text-white);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.styled-input:focus {
+  border-color: var(--truth-blue);
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #7928ca, #ff0080);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
+}
+
+.primary-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 0, 128, 0.5);
+  filter: brightness(1.1);
+}
+
+.primary-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.primary-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+/* Player chips container */
+.player-list-box {
+  background: rgba(10, 6, 24, 0.6);
+  border: 1px dashed rgba(168, 85, 247, 0.3);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  min-height: 120px;
+  margin-bottom: 16px;
+}
+
+.player-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.player-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(36, 25, 71, 0.85);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  padding: 6px 14px 6px 8px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.player-chip-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.player-chip-name {
+  color: var(--text-white);
+}
+
+.player-chip-remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  transition: color 0.15s;
+}
+
+.player-chip-remove:hover {
+  color: #ff0055;
+}
+
+.quick-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  color: var(--truth-blue);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.text-btn:hover {
+  color: #fff;
+}
+
+.text-btn.danger {
+  color: #ff6b8b;
+}
+
+/* Settings Box */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.setting-card {
+  background: rgba(18, 12, 40, 0.65);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.setting-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #d8b4fe;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.setting-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.select-styled {
+  width: 100%;
+  background: rgba(12, 8, 28, 0.9);
+  color: var(--text-white);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Category Checkboxes */
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.category-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  transition: background 0.15s;
+}
+
+.category-checkbox-label:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.category-checkbox-label input[type="checkbox"] {
+  accent-color: #ff007f;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Big Start Button */
+.big-start-btn {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #00f0ff, #7000ff, #ff007f);
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* Hints & Badges */
+.badge-warning {
+  color: #ffbe0b;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge-info {
+  color: #00d2ff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge-success {
+  color: #00f5d4;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ==========================================================
+   GAME SCREEN STYLES
+   ========================================================== */
+
+/* Player status strip at top of game */
+.players-strip-container {
+  margin-bottom: 20px;
+}
+
+.strip-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.players-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 6px 4px 12px 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+.strip-player {
+  flex: 0 0 auto;
+  min-width: 100px;
+  background: rgba(20, 14, 44, 0.8);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: var(--radius-md);
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.strip-player.ready {
+  border-color: rgba(0, 245, 212, 0.4);
+}
+
+.strip-player.resting {
+  opacity: 0.65;
+  filter: grayscale(0.2);
+  border-color: rgba(255, 190, 11, 0.3);
+  background: rgba(14, 10, 30, 0.5);
+}
+
+.strip-player.active {
+  border-color: #00f0ff;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.45);
+  transform: scale(1.05);
+  background: rgba(30, 20, 65, 0.95);
+}
+
+.strip-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.strip-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  max-width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.strip-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.strip-status.ready {
+  background: rgba(0, 245, 212, 0.15);
+  color: #00f5d4;
+}
+
+.strip-status.resting {
+  background: rgba(255, 190, 11, 0.15);
+  color: #ffbe0b;
+}
+
+.strip-status.chosen {
+  background: rgba(0, 210, 255, 0.25);
+  color: #00d2ff;
+  animation: pulse 1.5s infinite;
+}
+
+/* ==========================================================
+   SPIN AREA / ROULETTE REEL
+   ========================================================== */
+.spin-panel {
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.spin-heading {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.spin-subheading {
+  color: var(--text-dim);
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+/* ==========================================================
+   ENHANCED SUSPENSE SPOTLIGHT / WHEEL OF FATE
+   ========================================================== */
+.spin-panel {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.spin-heading {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.spin-subheading {
+  color: var(--text-dim);
+  font-size: 0.98rem;
+  margin-bottom: 24px;
+}
+
+/* Central Holographic Stage */
+.portal-stage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 270px;
+  margin: 0 auto 22px auto;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(circle at center, rgba(58, 25, 115, 0.8) 0%, rgba(13, 7, 32, 0.98) 75%);
+  border: 2px solid rgba(168, 85, 247, 0.45);
+  box-shadow: 0 0 40px rgba(121, 40, 202, 0.35), inset 0 0 30px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Rotating Energy Ring */
+.portal-energy-ring {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0%, #ff007f 25%, transparent 50%, #00f0ff 75%, transparent 100%);
+  opacity: 0.3;
+  animation: rotateRing 8s linear infinite;
+  pointer-events: none;
+  filter: blur(10px);
+}
+
+/* Sweeping laser scanner line */
+.portal-scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00f0ff, #ff007f, transparent);
+  box-shadow: 0 0 15px #00f0ff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.portal-stage.spinning .portal-scanner-line {
+  opacity: 1;
+  animation: laserScan 1.6s ease-in-out infinite alternate;
+}
+
+.portal-stage.spinning .portal-energy-ring {
+  opacity: 0.6;
+  animation-duration: 2.5s;
+}
+
+/* Center Slot Card */
+.slot-card {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 360px;
+  padding: 24px 20px;
+  border-radius: var(--radius-md);
+  background: rgba(22, 14, 48, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(168, 85, 247, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.slot-card.fast-spin {
+  transform: scale(0.97);
+  filter: blur(0.4px);
+}
+
+.slot-card.suspense-tick {
+  transform: scale(1.04);
+  border-color: #ffbe0b;
+  box-shadow: 0 0 30px rgba(255, 190, 11, 0.6);
+}
+
+.slot-card.fakeout {
+  border-color: #ff0055;
+  box-shadow: 0 0 35px rgba(255, 0, 85, 0.7);
+  animation: heartbeatPulse 0.45s ease infinite alternate;
+}
+
+.slot-card.winner-locked {
+  transform: scale(1.08);
+  border-color: #00f0ff;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(28, 16, 62, 0.95));
+  box-shadow: 0 0 45px rgba(0, 240, 255, 0.8), 0 0 20px #ffe600;
+  animation: winnerShockwave 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.slot-avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease;
+}
+
+.slot-name {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  max-width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.slot-status-badge {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #d8b4fe;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+/* Radar Candidate Pulse Strip */
+.eligible-radar-box {
+  margin-bottom: 24px;
+}
+
+.radar-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.eligible-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.radar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(20, 14, 44, 0.7);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+}
+
+.radar-chip.active-target {
+  background: rgba(0, 240, 255, 0.25);
+  border-color: #00f0ff;
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+}
+
+.radar-chip.winner-target {
+  background: rgba(255, 230, 0, 0.3);
+  border-color: #ffe600;
+  color: #ffe600;
+  transform: scale(1.15);
+  box-shadow: 0 0 18px rgba(255, 230, 0, 0.7);
+}
+
+.spin-action-btn {
+  padding: 18px 44px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #ff007f, #7928ca, #00f0ff);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+  box-shadow: 0 0 30px rgba(255, 0, 127, 0.5);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+/* Animations for suspense */
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes laserScan {
+  0% { top: 0%; }
+  100% { top: 98%; }
+}
+
+@keyframes heartbeatPulse {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.07); }
+}
+
+@keyframes winnerShockwave {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1.08); }
+}
+
+/* ==========================================================
+   CHOICE AREA: TRUTH OR DARE
+   ========================================================== */
+.choice-panel {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.chosen-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.chosen-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  box-shadow: 0 0 25px rgba(157, 78, 221, 0.5);
+}
+
+.chosen-name {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.chosen-prompt {
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Choice Cards Grid */
+.choice-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.choice-btn-card {
+  background: rgba(22, 14, 46, 0.85);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: 30px 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.choice-btn-card .choice-icon {
+  font-size: 3rem;
+  transition: transform 0.3s;
+}
+
+.choice-btn-card .choice-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.choice-btn-card .choice-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+/* Truth Card */
+.choice-btn-card.truth {
+  border-color: rgba(0, 210, 255, 0.35);
+  box-shadow: 0 8px 25px rgba(0, 210, 255, 0.15);
+}
+
+.choice-btn-card.truth .choice-title {
+  color: var(--truth-blue);
+}
+
+.choice-btn-card.truth:hover {
+  transform: translateY(-8px) scale(1.03);
+  border-color: var(--truth-blue);
+  background: linear-gradient(180deg, rgba(0, 210, 255, 0.2), rgba(22, 14, 46, 0.95));
+  box-shadow: 0 15px 35px var(--truth-glow);
+}
+
+.choice-btn-card.truth:hover .choice-icon {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+/* Dare Card */
+.choice-btn-card.dare {
+  border-color: rgba(255, 0, 85, 0.35);
+  box-shadow: 0 8px 25px rgba(255, 0, 85, 0.15);
+}
+
+.choice-btn-card.dare .choice-title {
+  color: var(--dare-red);
+}
+
+.choice-btn-card.dare:hover {
+  transform: translateY(-8px) scale(1.03);
+  border-color: var(--dare-red);
+  background: linear-gradient(180deg, rgba(255, 0, 85, 0.2), rgba(22, 14, 46, 0.95));
+  box-shadow: 0 15px 35px var(--dare-glow);
+}
+
+.choice-btn-card.dare:hover .choice-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Random Card */
+.choice-btn-card.random {
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.15);
+}
+
+.choice-btn-card.random .choice-title {
+  color: var(--random-purple);
+}
+
+.choice-btn-card.random:hover {
+  transform: translateY(-8px) scale(1.03);
+  border-color: var(--random-purple);
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.2), rgba(22, 14, 46, 0.95));
+  box-shadow: 0 15px 35px var(--random-glow);
+}
+
+.choice-btn-card.random:hover .choice-icon {
+  transform: scale(1.15) rotate(10deg);
+}
+
+/* ==========================================================
+   TASK DISPLAY AREA
+   ========================================================== */
+.task-panel {
+  padding: 30px 24px;
+  position: relative;
+}
+
+.task-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.task-badges-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.task-badge {
+  font-size: 0.95rem;
+  font-weight: 900;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.badge-truth {
+  background: rgba(0, 210, 255, 0.2);
+  border: 1px solid var(--truth-blue);
+  color: var(--truth-blue);
+}
+
+.badge-dare {
+  background: rgba(255, 0, 85, 0.2);
+  border: 1px solid var(--dare-red);
+  color: var(--dare-red);
+}
+
+.task-tag-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ddd;
+}
+
+.task-tag-badge.spice-extreme {
+  background: rgba(255, 0, 85, 0.25);
+  border-color: #ff0055;
+  color: #ff80a0;
+  animation: pulse 1.2s infinite;
+}
+
+.task-tag-badge.spice-spicy {
+  background: rgba(255, 190, 11, 0.2);
+  border-color: #ffbe0b;
+  color: #ffd166;
+}
+
+.task-player-turn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 24px;
+}
+
+.task-player-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.task-player-name {
+  color: #ffbe0b;
+}
+
+/* Giant readable question card */
+.task-content-card {
+  background: rgba(14, 9, 34, 0.8);
+  border: 1.5px solid rgba(168, 85, 247, 0.3);
+  border-radius: var(--radius-md);
+  padding: 30px 24px;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.task-question-text {
+  font-size: 1.55rem;
+  line-height: 1.45;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Secondary controls (read aloud, reroll, switch) */
+.task-secondary-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.control-pill-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  color: var(--text-white);
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Timer strip */
+.timer-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-sm);
+}
+
+.timer-box {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #00f5d4;
+  background: rgba(0, 245, 212, 0.1);
+  border: 1px solid #00f5d4;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.timer-box.timer-ended {
+  color: #ff0055;
+  background: rgba(255, 0, 85, 0.15);
+  border-color: #ff0055;
+  animation: pulse 0.5s infinite;
+}
+
+/* Primary completion action buttons */
+.task-actions-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.complete-btn {
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  padding: 18px 24px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(0, 176, 155, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.complete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 176, 155, 0.6);
+  filter: brightness(1.1);
+}
+
+.chicken-btn {
+  background: rgba(255, 87, 87, 0.15);
+  border: 1.5px solid rgba(255, 87, 87, 0.4);
+  border-radius: var(--radius-md);
+  color: #ff8080;
+  padding: 18px 18px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.chicken-btn:hover {
+  background: rgba(255, 87, 87, 0.3);
+  border-color: #ff5757;
+  color: #fff;
+}
+
+/* ==========================================================
+   MODALS (Exit Door, Forfeit, Recap)
+   ========================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(6, 3, 16, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-card {
+  background: #140d2b;
+  border: 1.5px solid rgba(168, 85, 247, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(157, 78, 221, 0.25);
+  padding: 30px;
+  width: 100%;
+  max-width: 580px;
+  text-align: center;
+  animation: zoomIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-icon {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.modal-desc {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.modal-buttons-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-action-btn {
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modal-action-btn.primary {
+  background: linear-gradient(135deg, #7928ca, #ff0080);
+  color: #fff;
+}
+
+.modal-action-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-action-btn.danger {
+  background: rgba(255, 0, 85, 0.2);
+  color: #ff6b8b;
+  border: 1px solid rgba(255, 0, 85, 0.4);
+}
+
+.modal-action-btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+/* Forfeit text box */
+.forfeit-box {
+  background: rgba(255, 0, 85, 0.1);
+  border: 1.5px dashed #ff0055;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+/* Superlatives Cards in Recap */
+.superlatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.superlative-card {
+  background: rgba(22, 14, 46, 0.8);
+  border-radius: var(--radius-md);
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.superlative-card .sup-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.superlative-card .sup-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.superlative-card .sup-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.superlative-card .sup-count {
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+}
+
+/* Recap table */
+.recap-table-wrap {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+}
+
+.recap-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.recap-table th, .recap-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.recap-table th {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+/* Utility classes */
+.hidden {
+  display: none !important;
+}
+
+/* Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .app-container {
+    padding: 10px 12px;
+  }
+
+  .setup-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .choice-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .task-actions-row {
+    grid-template-columns: 1fr;
+  }
+
+  .task-question-text {
+    font-size: 1.25rem;
+  }
+
+  .roulette-container {
+    height: 100px;
+  }
+
+  .reel-item {
+    width: 90px;
+    height: 75px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Canvas for celebration confetti -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="app-container">
+    <!-- Main Top Navigation -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">&#127870;</span>
+        <div class="logo-title">TRUTH &amp; DARE</div>
+      </div>
+      <div class="header-actions">
+        <button id="installAppBtn" class="header-btn install-btn" title="Install to Phone Home Screen">ðŸ“² Install App</button>
+        <button id="muteToggleBtn" class="header-btn" title="Toggle Sound">ðŸ”Š Sound ON</button>
+        <button id="exitGameBtn" class="header-btn exit-btn" title="Exit or view game recap">ðŸšª Exit Door</button>
+      </div>
+    </header>
+
+    <!-- ========================================================
+         SCREEN 1: SETUP & PLAYER LOBBY
+         ======================================================== -->
+    <main id="setupScreen" class="glass-panel">
+      <div class="setup-hero">
+        <h1>Add Your Squad</h1>
+        <p>Enter players manually, configure turn cooldowns, and unleash pure chaos!</p>
+      </div>
+
+      <!-- Add Player Section -->
+      <section class="add-player-section">
+        <div class="input-row">
+          <input 
+            type="text" 
+            id="playerNameInput" 
+            class="styled-input" 
+            placeholder="Type player name (e.g. Rahul, Anjali...)" 
+            maxlength="25"
+            autocomplete="off"
+          />
+          <button id="addPlayerBtn" class="primary-btn">âž• Add Player</button>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="quick-actions-row">
+          <span id="playerCountHint" class="badge-warning">âš ï¸ Need at least 2 players</span>
+          <div>
+            <button id="loadSampleBtn" class="text-btn">âš¡ Add Party Squad</button>
+            <span style="color:var(--text-muted); margin:0 6px;">|</span>
+            <button id="clearPlayersBtn" class="text-btn danger">ðŸ—‘ï¸ Clear All</button>
+          </div>
+        </div>
+
+        <!-- Player Chips Container -->
+        <div class="player-list-box">
+          <div id="playerListContainer" class="player-chips-wrap">
+            <!-- Player chips will be rendered here dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Grid -->
+      <section class="settings-grid">
+        <!-- Turn Cooldown Rule -->
+        <div class="setting-card">
+          <h3>â±ï¸ Player Cooldown Rule</h3>
+          <p>Prevent recently called players from being picked again immediately:</p>
+          <select id="cooldownSelect" class="select-styled">
+            <option value="2" selected>Wait 2 turns after completing (Recommended)</option>
+            <option value="3">Wait 3 turns after completing (Large groups)</option>
+            <option value="1">Wait 1 turn after completing (Fast alternation)</option>
+          </select>
+        </div>
+
+        <!-- Spicy Categories -->
+        <div class="setting-card">
+          <h3>ðŸŒ¶ï¸ Question Packs &amp; Spice</h3>
+          <p>Select which decks to shuffle into the endless party loop:</p>
+          <div class="categories-list">
+            <label class="category-checkbox-label">
+              <input type="checkbox" id="toggleCampus" checked />
+              <span>ðŸŽ“ <strong>Campus Life</strong> (60 Truths + 60 Dares)</span>
+            </label>
+            <label class="category-checkbox-label">
+              <input type="checkbox" id="toggleRoast" checked />
+              <span>ðŸ’€ <strong>Savage Roast</strong> (60 Truths + 60 Dares)</span>
+            </label>
+            <label class="category-checkbox-label">
+              <input type="checkbox" id="toggleExtreme" checked />
+              <span>ðŸ”¥ <strong>Extreme Spicy &amp; Wild</strong> (50 Bonus Questions)</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Big Start Button -->
+      <button id="startGameBtn" class="primary-btn big-start-btn" disabled>
+        ðŸš€ START THE PARTY
+      </button>
+    </main>
+
+    <!-- ========================================================
+         SCREEN 2: ACTIVE GAMEPLAY
+         ======================================================== -->
+    <main id="gameScreen" class="glass-panel hidden">
+      <!-- Player Roster & Cooldown Status Strip -->
+      <div class="players-strip-container">
+        <div class="strip-label">
+          <span>Active Squad &amp; Cooldowns</span>
+          <span id="roundBadge" class="header-btn round-pill">ROUND 1</span>
+        </div>
+        <div id="playersStrip" class="players-strip">
+          <!-- Dynamic player strip cards with cooldown badges -->
+        </div>
+      </div>
+
+      <!-- PHASE 1: SUSPENSE SPOTLIGHT / WHEEL OF FATE -->
+      <div id="spinArea" class="spin-panel">
+        <h2 class="spin-heading">Who Will Fate Choose Next?</h2>
+        <p class="spin-subheading">Eligible candidates are loaded. Fate is 100% unpredictable!</p>
+
+        <!-- Dynamic Holographic Spotlight Stage -->
+        <div id="rouletteStage" class="portal-stage">
+          <div class="portal-energy-ring"></div>
+          <div class="portal-scanner-line"></div>
+          
+          <div class="slot-card" id="slotCard">
+            <div id="activeSlotAvatar" class="slot-avatar">ðŸŽ¯</div>
+            <div id="activeSlotName" class="slot-name">READY TO SPIN</div>
+            <div id="slotStatusBadge" class="slot-status-badge">ðŸŸ¢ AWAITING FATE</div>
+          </div>
+        </div>
+
+        <!-- Live Candidate Pulse Grid -->
+        <div class="eligible-radar-box">
+          <span class="radar-label">Eligible In This Round:</span>
+          <div id="eligibleRadarChips" class="eligible-chips-wrap">
+            <!-- Real-time lighting chips -->
+          </div>
+        </div>
+
+        <button id="spinBtn" class="primary-btn spin-action-btn">
+          âš¡ ACTIVATE WHEEL OF FATE!
+        </button>
+      </div>
+
+      <!-- PHASE 2: PLAYER CHOSEN â€” CHOOSE TRUTH OR DARE -->
+      <div id="choiceArea" class="choice-panel hidden">
+        <div class="chosen-banner">
+          <div id="chosenPlayerAvatar" class="chosen-avatar">ðŸ˜Ž</div>
+          <h2 id="chosenPlayerName" class="chosen-name">Player</h2>
+          <div class="chosen-prompt">Choose Your Destiny!</div>
+        </div>
+
+        <div class="choice-cards-grid">
+          <!-- Truth Option -->
+          <div id="chooseTruthBtn" class="choice-btn-card truth">
+            <span class="choice-icon">ðŸ”µ</span>
+            <div class="choice-title">TRUTH</div>
+            <div class="choice-desc">Confess real secrets, campus scandals &amp; awkward moments</div>
+          </div>
+
+          <!-- Dare Option -->
+          <div id="chooseDareBtn" class="choice-btn-card dare">
+            <span class="choice-icon">ðŸ”´</span>
+            <div class="choice-title">DARE</div>
+            <div class="choice-desc">Execute crazy acting, savage roasts &amp; wild party challenges</div>
+          </div>
+
+          <!-- Random Option -->
+          <div id="chooseRandomBtn" class="choice-btn-card random">
+            <span class="choice-icon">ðŸŽ²</span>
+            <div class="choice-title">RANDOM</div>
+            <div class="choice-desc">Leave your fate entirely to the universe!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 3: TASK CARD DISPLAY & COMPLETION -->
+      <div id="taskArea" class="task-panel hidden">
+        <div class="task-top-bar">
+          <div class="task-badges-wrap">
+            <span id="taskTypeBadge" class="task-badge badge-truth">ðŸ”µ TRUTH</span>
+            <span id="taskTagBadge" class="task-tag-badge">ðŸŽ“ Campus Life</span>
+          </div>
+          <!-- Optional Timer -->
+          <div class="timer-controls">
+            <button id="start30sBtn" class="control-pill-btn" title="Start 30-second timer">â±ï¸ 30s</button>
+            <button id="start60sBtn" class="control-pill-btn" title="Start 60-second timer">â±ï¸ 60s</button>
+            <button id="stopTimerBtn" class="control-pill-btn" title="Stop timer">â¹ï¸ Reset</button>
+          </div>
+        </div>
+
+        <!-- Active Player Info -->
+        <div id="taskPlayerInfo" class="task-player-turn">
+          <!-- e.g. Anjali's turn -->
+        </div>
+
+        <!-- Timer Display Box -->
+        <div id="timerDisplay" class="timer-box hidden">â±ï¸ 0:30</div>
+
+        <!-- Giant High-Contrast Question Card -->
+        <div class="task-content-card">
+          <div id="taskText" class="task-question-text">
+            Question will appear here...
+          </div>
+        </div>
+
+        <!-- Secondary controls: text-to-speech, reroll, switch -->
+        <div class="task-secondary-controls">
+          <button id="speakTaskBtn" class="control-pill-btn" title="Read task aloud">
+            ðŸ—£ï¸ Read Aloud
+          </button>
+          <button id="rerollTaskBtn" class="control-pill-btn" title="Get a different question from same deck">
+            ðŸ”€ Reroll Question
+          </button>
+          <button id="switchTypeBtn" class="control-pill-btn" title="Switch between Truth &amp; Dare">
+            ðŸ”„ Switch to Dare
+          </button>
+        </div>
+
+        <!-- Main Action Buttons -->
+        <div class="task-actions-row">
+          <button id="completeTaskBtn" class="complete-btn">
+            âœ… Task Completed! (Continue)
+          </button>
+          <button id="chickenOutBtn" class="chicken-btn">
+            ðŸ” Chicken Out / Forfeit
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- ========================================================
+         MODAL 1: EXIT DOOR & GAME OPTIONS
+         ======================================================== -->
+    <div id="exitModal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-icon">ðŸšª</div>
+        <h2 class="modal-title">Exit Door Opened!</h2>
+        <p class="modal-desc">
+          Do you want to continue playing, check the party recap &amp; awards, or return to the setup lobby?
+        </p>
+
+        <div class="modal-buttons-stack">
+          <button id="resumeGameBtn" class="modal-action-btn primary">
+            â–¶ï¸ Resume Playing (Keep Going!)
+          </button>
+          <button id="viewRecapBtn" class="modal-action-btn secondary">
+            ðŸ† View Party Awards &amp; Superlatives
+          </button>
+          <button id="endGameLobbyBtn" class="modal-action-btn danger">
+            ðŸ  End Game &amp; Return to Player Setup
+          </button>
+          <button id="closeWindowBtn" class="modal-action-btn secondary" style="opacity:0.85; font-size:0.9rem;">
+            ðŸšª Close Game / Exit Browser
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         MODAL 2: PARTY RECAP & SUPERLATIVES
+         ======================================================== -->
+    <div id="recapModal" class="modal-overlay hidden">
+      <div class="modal-card" style="max-width: 650px;">
+        <div class="modal-icon">ðŸŽ‰</div>
+        <h2 class="modal-title">Party Recap &amp; Superlatives</h2>
+        <p class="modal-desc">Here is how everyone performed tonight:</p>
+
+        <!-- Superlatives Badges -->
+        <div id="recapSuperlatives" class="superlatives-grid">
+          <!-- Daring Champion, Truth Confessor, Chicken of the Night -->
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div id="recapLeaderboard" class="recap-table-wrap">
+          <!-- Dynamically populated table -->
+        </div>
+
+        <div class="modal-buttons-stack" style="flex-direction:row; justify-content:center;">
+          <button id="recapResumeBtn" class="modal-action-btn primary" style="flex:1;">
+            â–¶ï¸ Back to Game
+          </button>
+          <button id="recapNewGameBtn" class="modal-action-btn secondary" style="flex:1;">
+            ðŸ”„ New Game / Setup
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         MODAL 3: CHICKEN OUT / FORFEIT PUNISHMENT
+         ======================================================== -->
+    <div id="forfeitModal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-icon">ðŸ”</div>
+        <h2 class="modal-title"><span id="forfeitPlayerName">Player</span> Chickened Out!</h2>
+        <p class="modal-desc">
+          You refused the challenge! You must complete this forfeit before moving on:
+        </p>
+
+        <div id="forfeitText" class="forfeit-box">
+          Do 15 quick pushups or 20 squats right now!
+        </div>
+
+        <button id="forfeitDoneBtn" class="modal-action-btn primary">
+          ðŸ’ª Forfeit Performed! (Continue Next Round)
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Embedded Question Pack -->
+  <script>
+/**
+ * Truth and Dare Master Question Database
+ * Includes:
+ * - 60 College / Malayalam / Campus Truths
+ * - 60 Savage Roast Truths
+ * - 25 Extreme Spicy & Wild Confession Truths (Bonus)
+ * - 60 College / Drama / Acting Dares
+ * - 60 Savage Roast & Social Dares
+ * - 25 Extreme Spicy & Wild Dares (Bonus)
+ * Total: 145+ Truths & 145+ Dares = ~290 unique challenges!
+ */
+
+const TRUTHS_DATA = [
+  // =================== COLLEGE / CAMPUS VIBES TRUTHS (60) ===================
+  {
+    id: "t_col_1",
+    category: "campus",
+    spice: "mild",
+    tag: "🎓 Campus Life",
+    text: "What's the biggest lie you've told to get attendance or a medical leave letter?"
+  },
+  {
+    id: "t_col_2",
+    category: "campus",
+    spice: "spicy",
+    tag: "🎓 Campus Life",
+    text: "Who in this group would you trust least with your internal marks?"
+  },
+  {
+    id: "t_col_3",
+    category: "campus",
+    spice: "spicy",
+    tag: "💌 Crush Confession",
+    text: "Have you ever sent \"Good morning\" to a crush and then waited 3 hours for the blue tick?"
+  },
+  {
+    id: "t_col_4",
+    category: "campus",
+    spice: "mild",
+    tag: "🚌 College Bus",
+    text: "What's the most embarrassing thing you've done to impress someone on the college bus?"
+  },
+  {
+    id: "t_col_5",
+    category: "campus",
+    spice: "mild",
+    tag: "👨‍🏫 Teacher Drama",
+    text: "Which teacher have you secretly imitated behind their back? Do it now."
+  },
+  {
+    id: "t_col_6",
+    category: "campus",
+    spice: "spicy",
+    tag: "📚 Exam Arrears",
+    text: "What's your worst \"supply\" (arrear) story, and who knows about it?"
+  },
+  {
+    id: "t_col_7",
+    category: "campus",
+    spice: "spicy",
+    tag: "📝 Exam Cheating",
+    text: "Have you ever copied in an exam? What was the most creative method?"
+  },
+  {
+    id: "t_col_8",
+    category: "campus",
+    spice: "mild",
+    tag: "🏃 Bunking",
+    text: "What's the most pathetic excuse you've given to bunk class?"
+  },
+  {
+    id: "t_col_9",
+    category: "campus",
+    spice: "mild",
+    tag: "🎭 Overacting",
+    text: "Who here has the most \"ente ammo\" level of overacting when they get caught?"
+  },
+  {
+    id: "t_col_10",
+    category: "campus",
+    spice: "spicy",
+    tag: "📸 Social Media",
+    text: "What's the cringiest caption you've ever put on an Instagram post?"
+  },
+  {
+    id: "t_col_11",
+    category: "campus",
+    spice: "spicy",
+    tag: "👀 Stalking",
+    text: "Have you ever liked an old photo of someone while stalking and panicked? How did you recover?"
+  },
+  {
+    id: "t_col_12",
+    category: "campus",
+    spice: "mild",
+    tag: "😭 Crybaby",
+    text: "Which person here would be the first to cry if they got low marks?"
+  },
+  {
+    id: "t_col_13",
+    category: "campus",
+    spice: "spicy",
+    tag: "💸 Money Spent",
+    text: "What's the most you've ever spent on a crush, and did it work?"
+  },
+  {
+    id: "t_col_14",
+    category: "campus",
+    spice: "mild",
+    tag: "😴 Sleeping",
+    text: "Have you ever been caught sleeping in class? What happened?"
+  },
+  {
+    id: "t_col_15",
+    category: "campus",
+    spice: "mild",
+    tag: "🍛 Food Craving",
+    text: "What's the worst thing you've done for a free parotta-beef or biriyani treat?"
+  },
+  {
+    id: "t_col_16",
+    category: "campus",
+    spice: "mild",
+    tag: "🎬 Movie Taste",
+    text: "Who in this group has the worst taste in Malayalam movies?"
+  },
+  {
+    id: "t_col_18",
+    category: "campus",
+    spice: "spicy",
+    tag: "🎉 College Fest",
+    text: "What's your most embarrassing moment at an Onam or college day function?"
+  },
+  {
+    id: "t_col_19",
+    category: "campus",
+    spice: "mild",
+    tag: "🤐 Awkward",
+    text: "What's the weirdest thing you've said to a teacher thinking they were your friend?"
+  },
+  {
+    id: "t_col_20",
+    category: "campus",
+    spice: "mild",
+    tag: "😰 Viva Panic",
+    text: "Which person here would run away first during a viva?"
+  },
+  {
+    id: "t_col_21",
+    category: "campus",
+    spice: "spicy",
+    tag: "🤫 Secret Lies",
+    text: "Have you ever told your parents you were at a \"study group\" while you were somewhere else?"
+  },
+  {
+    id: "t_col_22",
+    category: "campus",
+    spice: "spicy",
+    tag: "💔 Heartbreak",
+    text: "What's the most dramatic thing you've done after a breakup or a rejection?"
+  },
+  {
+    id: "t_col_23",
+    category: "campus",
+    spice: "mild",
+    tag: "👍 Ghosting",
+    text: "Which friend here has the best \"reply with a thumbs up and disappear\" energy?"
+  },
+  {
+    id: "t_col_24",
+    category: "campus",
+    spice: "mild",
+    tag: "🏷️ Nicknames",
+    text: "What's the most ridiculous nickname people use for you in college?"
+  },
+  {
+    id: "t_col_25",
+    category: "campus",
+    spice: "mild",
+    tag: "😵 Blank Face",
+    text: "Have you ever pretended to understand a lecture while understanding nothing?"
+  },
+  {
+    id: "t_col_26",
+    category: "campus",
+    spice: "spicy",
+    tag: "🧊 Playing Cool",
+    text: "What's the longest you've gone without replying to someone you actually liked, just to look cool?"
+  },
+  {
+    id: "t_col_27",
+    category: "campus",
+    spice: "mild",
+    tag: "📱 Wrong Number",
+    text: "Who in this group is most likely to send \"Hi\" and then say \"sorry wrong number\"?"
+  },
+  {
+    id: "t_col_28",
+    category: "campus",
+    spice: "mild",
+    tag: "🛍️ Regret Buy",
+    text: "What's the most useless thing you bought from a college fest stall?"
+  },
+  {
+    id: "t_col_29",
+    category: "campus",
+    spice: "spicy",
+    tag: "☕ Canteen Crush",
+    text: "Have you ever liked someone from a different department just to see them in the canteen?"
+  },
+  {
+    id: "t_col_30",
+    category: "campus",
+    spice: "mild",
+    tag: "🚌 College Tour",
+    text: "What's the funniest thing that happened to you on a college tour?"
+  },
+  {
+    id: "t_col_31",
+    category: "campus",
+    spice: "spicy",
+    tag: "🔍 Search History",
+    text: "If your Google search history were projected on the classroom wall, which search would make you leave college?"
+  },
+  {
+    id: "t_col_32",
+    category: "campus",
+    spice: "spicy",
+    tag: "🛏️ Hostel Life",
+    text: "Which friend here would you not want as a roommate in the hostel, and why?"
+  },
+  {
+    id: "t_col_33",
+    category: "campus",
+    spice: "mild",
+    tag: "🙈 Mistaken",
+    text: "Have you ever been mistaken for someone else by a crush? What happened?"
+  },
+  {
+    id: "t_col_34",
+    category: "campus",
+    spice: "spicy",
+    tag: "💬 Group Drama",
+    text: "What's the biggest drama you've caused over a WhatsApp group message?"
+  },
+  {
+    id: "t_col_35",
+    category: "campus",
+    spice: "spicy",
+    tag: "🎒 Last Bench",
+    text: "Which \"last bench\" memory still makes you laugh and blush at the same time?"
+  },
+  {
+    id: "t_col_36",
+    category: "campus",
+    spice: "spicy",
+    tag: "👨‍👩‍👧 Parents",
+    text: "What's the most awkward moment you've had with a friend's parent?"
+  },
+  {
+    id: "t_col_37",
+    category: "campus",
+    spice: "mild",
+    tag: "🛺 Auto Excuses",
+    text: "Who here would be the first to blame the auto driver or the bus when late?"
+  },
+  {
+    id: "t_col_38",
+    category: "campus",
+    spice: "mild",
+    tag: "🛵 Desperate Lift",
+    text: "What's the most desperate thing you've done to get a lift or a bus seat?"
+  },
+  {
+    id: "t_col_39",
+    category: "campus",
+    spice: "spicy",
+    tag: "🤫 Fake Relationship",
+    text: "Have you ever pretended to be in a relationship to avoid someone?"
+  },
+  {
+    id: "t_col_40",
+    category: "campus",
+    spice: "spicy",
+    tag: "📢 Gossip Queen",
+    text: "Who in this group is secretly the biggest gossip?"
+  },
+  {
+    id: "t_col_41",
+    category: "campus",
+    spice: "mild",
+    tag: "🎁 Worst Gift",
+    text: "What's the worst gift you've ever given someone, and what did they do?"
+  },
+  {
+    id: "t_col_42",
+    category: "campus",
+    spice: "mild",
+    tag: "🎂 Forgot B'day",
+    text: "Have you ever forgotten your own friend's birthday and covered it up with a fake wish?"
+  },
+  {
+    id: "t_col_43",
+    category: "campus",
+    spice: "mild",
+    tag: "🎤 Singing Disaster",
+    text: "What's the worst song you've ever sung at a college trip or bus journey?"
+  },
+  {
+    id: "t_col_44",
+    category: "campus",
+    spice: "spicy",
+    tag: "💒 Wedding Invite",
+    text: "Which one of your friends here would you want to bring to your wedding, and which one would you not invite?"
+  },
+  {
+    id: "t_col_45",
+    category: "campus",
+    spice: "mild",
+    tag: "🔕 Silent Mode",
+    text: "Have you ever blamed your phone being on silent when you were actually ignoring someone?"
+  },
+  {
+    id: "t_col_46",
+    category: "campus",
+    spice: "mild",
+    tag: "👵 Parents Exposed",
+    text: "What's the most embarrassing thing your amma or achan has said in front of your friends?"
+  },
+  {
+    id: "t_col_47",
+    category: "campus",
+    spice: "mild",
+    tag: "😭 Farewell",
+    text: "Who in this group is the most likely to cry at a farewell day?"
+  },
+  {
+    id: "t_col_48",
+    category: "campus",
+    spice: "mild",
+    tag: "☕ Chaya Budget",
+    text: "What's the most you've spent on chaya, snacks and recharges in a month, and where did it go?"
+  },
+  {
+    id: "t_col_49",
+    category: "campus",
+    spice: "spicy",
+    tag: "🗣️ College Rumour",
+    text: "What's the funniest rumour about you that went around college?"
+  },
+  {
+    id: "t_col_50",
+    category: "campus",
+    spice: "spicy",
+    tag: "🗑️ Deleted Message",
+    text: "Have you ever deleted a message just after sending it? What was it?"
+  },
+  {
+    id: "t_col_51",
+    category: "campus",
+    spice: "mild",
+    tag: "📱 Reel Star",
+    text: "Which friend here is likely to become a famous reel creator, and which one will never post?"
+  },
+  {
+    id: "t_col_52",
+    category: "campus",
+    spice: "spicy",
+    tag: "🇬🇧 Flirting in English",
+    text: "What's the most awkward thing you've ever said while trying to flirt in English instead of Malayalam?"
+  },
+  {
+    id: "t_col_53",
+    category: "campus",
+    spice: "spicy",
+    tag: "🧢 Flexing Lies",
+    text: "Have you ever lied about your age, marks, or place to look cooler?"
+  },
+  {
+    id: "t_col_54",
+    category: "campus",
+    spice: "mild",
+    tag: "❤️ Secret Pleasure",
+    text: "What's something you secretly love but everyone makes fun of you for?"
+  },
+  {
+    id: "t_col_55",
+    category: "campus",
+    spice: "spicy",
+    tag: "💍 Marriage Fate",
+    text: "Who in this group will most likely end up marrying their college crush, and who won't?"
+  },
+  {
+    id: "t_col_56",
+    category: "campus",
+    spice: "mild",
+    tag: "🚌 KSRTC Rush",
+    text: "What's the most shameless thing you've done to get a seat in a KSRTC bus?"
+  },
+  {
+    id: "t_col_57",
+    category: "campus",
+    spice: "mild",
+    tag: "🥊 Petty Fight",
+    text: "What's the funniest fight you've had with a friend over something very small?"
+  },
+  {
+    id: "t_col_58",
+    category: "campus",
+    spice: "spicy",
+    tag: "🤫 Sibling Crush",
+    text: "Have you ever had a crush on a friend's sibling? How did you hide it?"
+  },
+  {
+    id: "t_col_59",
+    category: "campus",
+    spice: "mild",
+    tag: "🏫 School Cringe",
+    text: "What was the most cringe thing you did in school that you now wish no one remembered?"
+  },
+  {
+    id: "t_col_60",
+    category: "campus",
+    spice: "spicy",
+    tag: "🔒 Secret Vault",
+    text: "Which one secret would you pay anything to make the group forget?"
+  },
+
+  // =================== SAVAGE ROAST TRUTHS (60) ===================
+  {
+    id: "t_rst_1",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Screen Time",
+    text: "Read out your phone's screen time for last week. Which app is the villain?"
+  },
+  {
+    id: "t_rst_2",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Peaked in School",
+    text: "Which person here peaked in Plus Two and has been declining since?"
+  },
+  {
+    id: "t_rst_3",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Brutal Fill-in",
+    text: "Complete this for the person on your left: \"They'd be 10x more bearable if they stopped ____.\""
+  },
+  {
+    id: "t_rst_4",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Crush Burn",
+    text: "What's the worst reply a crush ever gave you? Word for word."
+  },
+  {
+    id: "t_rst_5",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Flop Post",
+    text: "Which of your posts got the fewest likes, and what was the caption?"
+  },
+  {
+    id: "t_rst_6",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Mirror Rehearsal",
+    text: "How many times have you rehearsed a conversation with your crush in the bathroom mirror, and did it help?"
+  },
+  {
+    id: "t_rst_7",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Fake Swag",
+    text: "Who here has the most unearned confidence? Present your evidence."
+  },
+  {
+    id: "t_rst_8",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Biriyani Betrayal",
+    text: "Who would sell out the group first for a free biriyani?"
+  },
+  {
+    id: "t_rst_9",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Fake Guru",
+    text: "Who gives the worst advice but acts like a life coach?"
+  },
+  {
+    id: "t_rst_10",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Fake Smart",
+    text: "What's the fakest thing you've said in class to sound intelligent?"
+  },
+  {
+    id: "t_rst_11",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Slow Reply",
+    text: "Whose reply speed matches a government office?"
+  },
+  {
+    id: "t_rst_12",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Free-loader",
+    text: "Who here is \"busy\" for every plan but free for every treat?"
+  },
+  {
+    id: "t_rst_13",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Delusional",
+    text: "What's your most delusional belief about yourself?"
+  },
+  {
+    id: "t_rst_14",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Fake Study Plan",
+    text: "Whose study timetable is 90% decoration and 10% studying?"
+  },
+  {
+    id: "t_rst_15",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Always Late",
+    text: "Whose \"five minutes away\" has never once been true?"
+  },
+  {
+    id: "t_rst_16",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Blue Tick Pain",
+    text: "What's the saddest \"seen\" you've ever received?"
+  },
+  {
+    id: "t_rst_17",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Grade Drama",
+    text: "Who cries over 48/50 while the rest of us are fighting to pass?"
+  },
+  {
+    id: "t_rst_18",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Zero Follow-through",
+    text: "Who here has the most potential and the least follow-through?"
+  },
+  {
+    id: "t_rst_19",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Dead Hobby",
+    text: "Which of your projects (gym, diet, guitar, coding) died fastest?"
+  },
+  {
+    id: "t_rst_20",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Fake Fine",
+    text: "Who says \"Bro, I'm fine\" while clearly not being fine?"
+  },
+  {
+    id: "t_rst_21",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Savage LinkedIn",
+    text: "Write a fake LinkedIn headline for the person across from you that exposes them."
+  },
+  {
+    id: "t_rst_22",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Bad Liar",
+    text: "Whose face gives away their lie in two seconds?"
+  },
+  {
+    id: "t_rst_23",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Main Character",
+    text: "Who has the worst case of main-character syndrome?"
+  },
+  {
+    id: "t_rst_24",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Streak Desperation",
+    text: "What's the most pathetic thing you've done to keep a Snapchat streak alive?"
+  },
+  {
+    id: "t_rst_25",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Window Seat Traitor",
+    text: "Who would give up the friendship for a window seat on the KSRTC bus?"
+  },
+  {
+    id: "t_rst_26",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Walking Seen Zone",
+    text: "Who is the group's walking \"seen zone\"?"
+  },
+  {
+    id: "t_rst_27",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Playlist Roast",
+    text: "Whose playlist would worry a therapist?"
+  },
+  {
+    id: "t_rst_28",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Fishing Compliments",
+    text: "What compliment have you openly fished for and still not received?"
+  },
+  {
+    id: "t_rst_29",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Worst Explainer",
+    text: "Who would be the worst teacher in this group, judging by how they explain things?"
+  },
+  {
+    id: "t_rst_30",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Next Sem Lie",
+    text: "Who has had \"I'll change after this semester\" on repeat since first year?"
+  },
+  {
+    id: "t_rst_31",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Ippo Varam",
+    text: "Who says \"ippo varam\" and arrives after the party ends?"
+  },
+  {
+    id: "t_rst_32",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Course Amnesia",
+    text: "Who would fail a basic quiz about their own course?"
+  },
+  {
+    id: "t_rst_33",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Bad Gallery",
+    text: "Whose gallery has 4,000 photos and only three good ones?"
+  },
+  {
+    id: "t_rst_34",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Secret Leaker",
+    text: "Who couldn't keep a surprise secret for even ten minutes?"
+  },
+  {
+    id: "t_rst_35",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Assignment Flop",
+    text: "Who copies the assignment and still scores lower than the person they copied from?"
+  },
+  {
+    id: "t_rst_36",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Villain Arc",
+    text: "What would your villain origin story be in this college?"
+  },
+  {
+    id: "t_rst_37",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Moral Support",
+    text: "Who in group projects says \"I'll be the moral support\"?"
+  },
+  {
+    id: "t_rst_38",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Broken Promises",
+    text: "Who is the biggest all-talk champion? Quote their best broken promise."
+  },
+  {
+    id: "t_rst_39",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Denied Cringe",
+    text: "What's the cringiest thing you did for a crush that you still deny?"
+  },
+  {
+    id: "t_rst_40",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Wardrobe Disaster",
+    text: "Which one item in the group's wardrobes must be burned immediately?"
+  },
+  {
+    id: "t_rst_41",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Fake Chill",
+    text: "Who here is 100% faking their \"I don't care about marks\" attitude?"
+  },
+  {
+    id: "t_rst_42",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Embarrassing Laugh",
+    text: "Whose laugh is the most embarrassing in public?"
+  },
+  {
+    id: "t_rst_43",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Attendance Catch",
+    text: "Who would be the first caught in a surprise attendance check?"
+  },
+  {
+    id: "t_rst_44",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Unfunny Reels",
+    text: "Who sends 14 reels a day and has never once been right about what's funny?"
+  },
+  {
+    id: "t_rst_45",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Forever Single",
+    text: "Rate everyone's chances of being single forever from 1 to 10. Justify the lowest score."
+  },
+  {
+    id: "t_rst_46",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Rage Quit",
+    text: "What's your most dramatic WhatsApp group exit, and did anyone even notice?"
+  },
+  {
+    id: "t_rst_47",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Sleeping Liar",
+    text: "Who is the \"Sorry, I was asleep\" liar?"
+  },
+  {
+    id: "t_rst_48",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 11th Hour Flop",
+    text: "Whose last-minute study session has the worst return on investment?"
+  },
+  {
+    id: "t_rst_49",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Future Ghoster",
+    text: "Who will ghost the group first once they get a job or a partner?"
+  },
+  {
+    id: "t_rst_50",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Confidently Wrong",
+    text: "Who gives the most confident wrong answer in class?"
+  },
+  {
+    id: "t_rst_51",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Zero Product",
+    text: "What's one thing about you that's all marketing and no product?"
+  },
+  {
+    id: "t_rst_52",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Bill Dodger",
+    text: "Who is the worst at splitting the canteen bill?"
+  },
+  {
+    id: "t_rst_53",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Attention Status",
+    text: "Whose WhatsApp status is pure attention-seeking?"
+  },
+  {
+    id: "t_rst_54",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Voted Off",
+    text: "If this group were a reality show, who gets voted out first? Defend your vote."
+  },
+  {
+    id: "t_rst_55",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Gossip Admin",
+    text: "Who would start the anonymous college gossip page?"
+  },
+  {
+    id: "t_rst_56",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Wallet Hesitation",
+    text: "Who gets suddenly \"nervous\" only when it's their turn to pay?"
+  },
+  {
+    id: "t_rst_57",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Silent Tolerate",
+    text: "What's your most irritating habit that everyone silently tolerates?"
+  },
+  {
+    id: "t_rst_58",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Worst Bio",
+    text: "Write the first line of the worst dating profile in this group."
+  },
+  {
+    id: "t_rst_59",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Placement Excuse",
+    text: "Who will be the last one placed, and what will their cover story be?"
+  },
+  {
+    id: "t_rst_60",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Group Vote Off",
+    text: "On the count of three, everyone points at the weakest link in the group. The most-pointed-at person defends themselves for 30 seconds."
+  },
+
+  // =================== BONUS: EXTREME SPICY TRUTHS (25) ===================
+  {
+    id: "t_ext_1",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Forbidden Crush",
+    text: "If you were handcuffed to someone in this room for 24 hours and forced to date, who would you choose and why?"
+  },
+  {
+    id: "t_ext_2",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Savage Secret",
+    text: "What is the most scandalous secret you've kept from your parents that would get you disowned if revealed?"
+  },
+  {
+    id: "t_ext_3",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Red Flag",
+    text: "What is the biggest, most toxic red flag you knowingly ignored in a crush just because they were attractive?"
+  },
+  {
+    id: "t_ext_4",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Stalker Exposed",
+    text: "Do you have a fake/burner Instagram or Snapchat account? What is the handle or the last person you stalked on it?"
+  },
+  {
+    id: "t_ext_5",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Late Night DM",
+    text: "What is the thirstiest, most shameless DM you have ever sent or received? Read the exact wording."
+  },
+  {
+    id: "t_ext_6",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Romantic Trade",
+    text: "If you had to swap romantic partners or crushes with someone in this room, whose partner/crush would you take?"
+  },
+  {
+    id: "t_ext_7",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Toxic Move",
+    text: "What's the pettiest or most toxic thing you've done to get revenge on an ex or someone who rejected you?"
+  },
+  {
+    id: "t_ext_8",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Kissing Practice",
+    text: "Have you ever practiced kissing on a mirror, pillow, or hand? Demonstrate your exact technique right now!"
+  },
+  {
+    id: "t_ext_9",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Risky Text",
+    text: "What is the riskiest late-night text you ever sent where you immediately turned off Wi-Fi in absolute terror?"
+  },
+  {
+    id: "t_ext_10",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Hidden Feelings",
+    text: "Have you ever secretly liked someone in this friend group or someone's ex/crush? Confess right now."
+  },
+  {
+    id: "t_ext_11",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Worst Date",
+    text: "What was your worst date or romantic meetup ever, and what dirty trick did you use to escape early?"
+  },
+  {
+    id: "t_ext_12",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Wildest Secret",
+    text: "Who in this room do you think has the wildest, craziest private double-life that none of us know about?"
+  },
+  {
+    id: "t_ext_13",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Inappropriate Flirt",
+    text: "What's the most inappropriate or dangerous place where you've flirted or hooked up?"
+  },
+  {
+    id: "t_ext_14",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Brutal Rating",
+    text: "Rank everyone in this circle based strictly on who gives the best relationship partner vibes (1 to last)."
+  },
+  {
+    id: "t_ext_15",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Hidden Vault",
+    text: "If your hidden photos folder or archived WhatsApp chats were opened right now, what would shock the group most?"
+  },
+  {
+    id: "t_ext_16",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Savage Turn-off",
+    text: "What is a weird physical or personality turn-off you secretly have that makes you lose feelings instantly?"
+  },
+  {
+    id: "t_ext_17",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Ghoster Confession",
+    text: "Have you ever ghosted someone who was head-over-heels for you? What was your real, petty reason?"
+  },
+  {
+    id: "t_ext_18",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Midnight Regret",
+    text: "What is the biggest romantic mistake or 'I should never have texted them' moment you still cringe about at 2 AM?"
+  },
+  {
+    id: "t_ext_19",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Two-timer",
+    text: "Have you ever talked to or flirted with two people at the same time while keeping both on the hook?"
+  },
+  {
+    id: "t_ext_20",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Dream Confession",
+    text: "Have you ever had a weird or romantic dream about someone sitting in this room? Who was it?"
+  },
+  {
+    id: "t_ext_21",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Ex Roast",
+    text: "If your ex wrote a Google Review of you as a partner, how many stars would they give and what would the review say?"
+  },
+  {
+    id: "t_ext_22",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Brutal Truth",
+    text: "Look at the person to your right: what is one brutal piece of dating advice they urgently need to hear?"
+  },
+  {
+    id: "t_ext_23",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Cheating Thoughts",
+    text: "Have you ever had feelings or physical tension with someone while you were already committed?"
+  },
+  {
+    id: "t_ext_24",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 First Impression",
+    text: "What was your real, unfiltered first impression of everyone here when you first met them?"
+  },
+  {
+    id: "t_ext_25",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 The Final Confession",
+    text: "Confess the one thing you have NEVER told a single soul in this room because you were terrified of being judged."
+  }
+];
+
+const DARES_DATA = [
+  // =================== COLLEGE / DRAMA / ACTING DARES ===================
+  {
+    id: "d_col_nagavalli",
+    category: "campus",
+    spice: "spicy",
+    tag: "👻 Nagavalli (Manichitrathazhu)",
+    text: "ACT AS NAGAVALLI: Deliver the iconic 'Vidamatte?!' dialogue with full haunting eyes, manic laughter, and dramatic classical hand mudras for 30 seconds!"
+  },
+  {
+    id: "d_col_kunjikunnan",
+    category: "campus",
+    spice: "mild",
+    tag: "🎭 Kunjikoonan (Kunjikunnan)",
+    text: "ACT AS KUNJIKUNNAN: Do the iconic Dileep hunchback walk across the room, high-pitched innocent voice, and comedic dialogue for 30 seconds!"
+  },
+  {
+    id: "d_col_zoo_animal",
+    category: "campus",
+    spice: "mild",
+    tag: "🦁 Zoo Animal Mimic",
+    text: "IMITATE ZOO ANIMAL SOUNDS: Perform 3 loud, dramatic zoo animal sounds in a row (e.g., wild chimpanzee screech, angry elephant trumpet, roaring lion) with full physical acting until the group guesses each one!"
+  },
+  {
+    id: "d_col_1",
+    category: "campus",
+    spice: "mild",
+    tag: "🎭 Manglish Accent",
+    text: "Talk only in Manglish with a heavy American accent until your next turn."
+  },
+  {
+    id: "d_col_2",
+    category: "campus",
+    spice: "mild",
+    tag: "🎭 Dramatic Meltdown",
+    text: "Do a dramatic \"Bro, I've failed all subjects\" speech in front of imaginary parents."
+  },
+  {
+    id: "d_col_3",
+    category: "campus",
+    spice: "mild",
+    tag: "👨‍🏫 Teacher Mimic",
+    text: "Do a perfect imitation of your strictest teacher while the group guesses who it is."
+  },
+  {
+    id: "d_col_4",
+    category: "campus",
+    spice: "mild",
+    tag: "🎬 Cinema Dialogue",
+    text: "Act out an entire Malayalam movie dialogue scene with full emotions, and the group guesses the movie."
+  },
+  {
+    id: "d_col_5",
+    category: "campus",
+    spice: "mild",
+    tag: "🚌 Bus Conductor",
+    text: "Do your best \"bus conductor\" impression calling out stops and issuing tickets to the group."
+  },
+  {
+    id: "d_col_6",
+    category: "campus",
+    spice: "spicy",
+    tag: "💍 Serious Proposal",
+    text: "Sing a romantic song as if you're proposing to a friend here, in a very serious emotional voice."
+  },
+  {
+    id: "d_col_7",
+    category: "campus",
+    spice: "spicy",
+    tag: "📱 Status Hijack",
+    text: "Let the group choose your WhatsApp status for the next hour."
+  },
+  {
+    id: "d_col_8",
+    category: "campus",
+    spice: "spicy",
+    tag: "💃 Silent Dance",
+    text: "Do a 30-second reel-style dance in the middle of the circle with zero music."
+  },
+  {
+    id: "d_col_9",
+    category: "campus",
+    spice: "mild",
+    tag: "🎬 Silent Climax",
+    text: "Reenact the most dramatic climax scene from any Malayalam film, using only facial expressions."
+  },
+  {
+    id: "d_col_10",
+    category: "campus",
+    spice: "mild",
+    tag: "📰 News Anchor",
+    text: "Speak like a serious TV news anchor and read out a recent text you sent."
+  },
+  {
+    id: "d_col_11",
+    category: "campus",
+    spice: "mild",
+    tag: "🌟 Mass Hero Style",
+    text: "Compliment every person here in the most over-the-top Malayalam movie hero style."
+  },
+  {
+    id: "d_col_12",
+    category: "campus",
+    spice: "mild",
+    tag: "👅 Tongue Twister",
+    text: "Say the tongue twister \"kozhikode kozhi koottil kozhi\" three times at top speed, or take a forfeit."
+  },
+  {
+    id: "d_col_13",
+    category: "campus",
+    spice: "spicy",
+    tag: "💇 Hilarious Styling",
+    text: "Let someone style your hair, dupatta, or shirt collar however they want for the next three rounds."
+  },
+  {
+    id: "d_col_14",
+    category: "campus",
+    spice: "mild",
+    tag: "😡 Invisible Drama",
+    text: "Do an \"angry girlfriend/boyfriend\" dramatic fight scene with an invisible partner for one minute."
+  },
+  {
+    id: "d_col_15",
+    category: "campus",
+    spice: "mild",
+    tag: "🎤 Campus Rap",
+    text: "Make up an impromptu rap about the person on your right using only college and canteen terms."
+  },
+  {
+    id: "d_col_16",
+    category: "campus",
+    spice: "mild",
+    tag: "💼 Mock Interview",
+    text: "Do a fake \"Placement Interview\" where the group asks the weirdest questions and you must answer seriously."
+  },
+  {
+    id: "d_col_17",
+    category: "campus",
+    spice: "mild",
+    tag: "🚶 Slow Motion Entry",
+    text: "Walk like your favourite mass hero entering a fight scene, with slow-motion commentary by the group."
+  },
+  {
+    id: "d_col_18",
+    category: "campus",
+    spice: "mild",
+    tag: "🗳️ Union Chairman",
+    text: "Do a fake election campaign speech for the next college union chairman, using the most ridiculous promises."
+  },
+  {
+    id: "d_col_19",
+    category: "campus",
+    spice: "mild",
+    tag: "🥄 Spoon Farewell",
+    text: "Hold a spoon like a microphone and give an emotional farewell speech as if the group is leaving college forever."
+  },
+  {
+    id: "d_col_20",
+    category: "campus",
+    spice: "mild",
+    tag: "💔 Chair Heartbreak",
+    text: "Say \"I miss you\" to a random object in the room and act completely heartbroken."
+  },
+  {
+    id: "d_col_21",
+    category: "campus",
+    spice: "mild",
+    tag: "📝 Stern Examiner",
+    text: "Pretend to be a stern external examiner, and give everyone in the room fake marks with funny reasons."
+  },
+  {
+    id: "d_col_22",
+    category: "campus",
+    spice: "mild",
+    tag: "🍳 Imaginary Cooking",
+    text: "Do a fake \"Cooking show\" with imaginary ingredients and make the group taste your invisible dish."
+  },
+  {
+    id: "d_col_23",
+    category: "campus",
+    spice: "spicy",
+    tag: "👟 Shoe Swap",
+    text: "Swap one shoe or chappal with someone across the circle and wear it for the rest of the game."
+  },
+  {
+    id: "d_col_24",
+    category: "campus",
+    spice: "mild",
+    tag: "🥁 Pooram Entry",
+    text: "Do a \"Pooram\" style grand dramatic entry while the rest of the group makes intense chenda sounds."
+  },
+  {
+    id: "d_col_25",
+    category: "campus",
+    spice: "mild",
+    tag: "❓ Question Only",
+    text: "Speak only in questions for the next two rounds. No statements allowed!"
+  },
+  {
+    id: "d_col_26",
+    category: "campus",
+    spice: "mild",
+    tag: "🏏 Cricket Commentary",
+    text: "Narrate every single action you do like a passionate cricket commentator until your next turn."
+  },
+  {
+    id: "d_col_27",
+    category: "campus",
+    spice: "spicy",
+    tag: "🖼️ Gallery Reveal",
+    text: "Show the group the last photo in your gallery (you can skip one sensitive one, but you must pick the next)."
+  },
+  {
+    id: "d_col_28",
+    category: "campus",
+    spice: "mild",
+    tag: "🤥 Caught Lying",
+    text: "Do your best impression of a friend here when they are caught red-handed lying."
+  },
+  {
+    id: "d_col_29",
+    category: "campus",
+    spice: "mild",
+    tag: "⏰ 9 AM Alarm",
+    text: "Act like a very lazy college student waking up late for a 9 AM attendance class, in slow motion."
+  },
+  {
+    id: "d_col_30",
+    category: "campus",
+    spice: "mild",
+    tag: "🏛️ Tour Guide",
+    text: "Pretend to be a tour guide showing the group around this room as if it's an ancient historical ruin."
+  },
+  {
+    id: "d_col_31",
+    category: "campus",
+    spice: "mild",
+    tag: "🪑 Chair Proposal",
+    text: "Give a dramatic proposal speech to a chair, including the full \"I'll wait for you forever\" monologue."
+  },
+  {
+    id: "d_col_32",
+    category: "campus",
+    spice: "mild",
+    tag: "🤫 Whisper Mode",
+    text: "Whisper everything you say until your next turn. Not a single normal word!"
+  },
+  {
+    id: "d_col_33",
+    category: "campus",
+    spice: "mild",
+    tag: "📢 Exam Postponed",
+    text: "Do a dramatic \"bad news\" announcement that the semester exams are postponed to tomorrow, with maximum reaction acting."
+  },
+  {
+    id: "d_col_34",
+    category: "campus",
+    spice: "mild",
+    tag: "🏋️ Slow Sit-ups",
+    text: "Do 10 sit-ups or squats while the group counts painfully slowly and dramatically."
+  },
+  {
+    id: "d_col_35",
+    category: "campus",
+    spice: "mild",
+    tag: "🗣️ Silly Accent",
+    text: "Let the group pick a silly accent for you to use for the next two rounds."
+  },
+  {
+    id: "d_col_36",
+    category: "campus",
+    spice: "mild",
+    tag: "😂 Laugh Mimic",
+    text: "Mimic the exact laugh of a friend here until they start laughing too."
+  },
+  {
+    id: "d_col_37",
+    category: "campus",
+    spice: "mild",
+    tag: "🤪 Ridiculous Selfie",
+    text: "Take a selfie with the most ridiculous, ugly face you can possibly make, and show it to the group."
+  },
+  {
+    id: "d_col_38",
+    category: "campus",
+    spice: "spicy",
+    tag: "🔥 Self Roast",
+    text: "Do a brutal 30-second stand-up roast of yourself before anyone else gets the chance."
+  },
+  {
+    id: "d_col_39",
+    category: "campus",
+    spice: "spicy",
+    tag: "🥨 Mystery Snack",
+    text: "Put your hands behind your back, close your eyes, and let someone feed you a mystery snack. Guess what it is!"
+  },
+  {
+    id: "d_col_40",
+    category: "campus",
+    spice: "mild",
+    tag: "👵 Gossip Aunty",
+    text: "Act like a \"gossip aunty\" whispering the latest scandal in the neighborhood, completely made up."
+  },
+  {
+    id: "d_col_41",
+    category: "campus",
+    spice: "mild",
+    tag: "🍲 Mess Hall Cook",
+    text: "Pretend you're a grumpy \"late-night mess hall cook\" shouting at hostel boarders who came after closing time."
+  },
+  {
+    id: "d_col_42",
+    category: "campus",
+    spice: "mild",
+    tag: "🎸 Heavy Metal",
+    text: "Sing a popular nursery rhyme in the style of an aggressive heavy metal rock singer!"
+  },
+  {
+    id: "d_col_43",
+    category: "campus",
+    spice: "spicy",
+    tag: "👑 Group Butler",
+    text: "Be the group's personal butler for one full round: fetch drinks, pass snacks, and bow politely."
+  },
+  {
+    id: "d_col_44",
+    category: "campus",
+    spice: "mild",
+    tag: "🤐 Silent Movie Plot",
+    text: "Explain the plot of a famous blockbuster movie using only gestures and charades, zero sounds allowed."
+  },
+  {
+    id: "d_col_45",
+    category: "campus",
+    spice: "mild",
+    tag: "👑 Medieval King",
+    text: "Convince the group that you are a 10th-century king addressing your royal subjects with a majestic speech."
+  },
+  {
+    id: "d_col_46",
+    category: "campus",
+    spice: "spicy",
+    tag: "😍 Crush vs Teacher",
+    text: "Act out how you behave when your crush walks into the room versus when your strictest teacher walks in."
+  },
+  {
+    id: "d_col_47",
+    category: "campus",
+    spice: "mild",
+    tag: "😲 Ente Ammo!",
+    text: "Say \"Ente ammo!\" in 10 distinctly different emotions in a row (happy, shocked, scared, flirty, bored...)."
+  },
+  {
+    id: "d_col_48",
+    category: "campus",
+    spice: "mild",
+    tag: "📦 Tech Unboxing",
+    text: "Do a fake \"tech influencer unboxing\" video for a completely mundane object (like a pencil or shoe)."
+  },
+  {
+    id: "d_col_49",
+    category: "campus",
+    spice: "spicy",
+    tag: "💘 Cringe Pickup",
+    text: "Make up a maximum cringe pickup line for the person across the circle, and deliver it with deadly confidence."
+  },
+  {
+    id: "d_col_50",
+    category: "campus",
+    spice: "mild",
+    tag: "🌟 Celebrity Struggle",
+    text: "Imitate a celebrity of the group's choice giving an exaggerated interview about their \"struggles before fame\"."
+  },
+  {
+    id: "d_col_51",
+    category: "campus",
+    spice: "spicy",
+    tag: "👁️ Staring Contest",
+    text: "Do an intense, dramatic staring contest with someone chosen by the group for 20 seconds without smiling."
+  },
+  {
+    id: "d_col_52",
+    category: "campus",
+    spice: "mild",
+    tag: "🎤 Live Reporter",
+    text: "Pretend to be a breathless breaking news reporter at a college canteen canteen fight, providing live commentary."
+  },
+  {
+    id: "d_col_53",
+    category: "campus",
+    spice: "mild",
+    tag: "🤳 Vlogger Intro",
+    text: "Do an \"Instagram influencer\" vlog intro as if you're starting an energetic video about the most boring subject ever."
+  },
+  {
+    id: "d_col_54",
+    category: "campus",
+    spice: "mild",
+    tag: "👰 Kerala Wedding",
+    text: "Pretend to be an extremely nervous groom or bride at a traditional Kerala wedding stage, with funny reactions."
+  },
+  {
+    id: "d_col_55",
+    category: "campus",
+    spice: "mild",
+    tag: "💼 Placement Offer",
+    text: "Do a fake \"Placement Day\" victory announcement celebrating a ridiculous job offer from an imaginary company."
+  },
+  {
+    id: "d_col_56",
+    category: "campus",
+    spice: "mild",
+    tag: "🔤 Alliteration Story",
+    text: "Tell a story about your morning using words that mostly start with the same letter for 30 seconds."
+  },
+  {
+    id: "d_col_57",
+    category: "campus",
+    spice: "spicy",
+    tag: "🗳️ Extra Group Dare",
+    text: "Let the group vote on one custom dare for you right now, and you must perform it with zero complaints."
+  },
+  {
+    id: "d_col_58",
+    category: "campus",
+    spice: "mild",
+    tag: "😨 First Year Junior",
+    text: "Say a dramatic dialogue in the voice of a terrified first-year student meeting a dangerous senior in the corridor."
+  },
+  {
+    id: "d_col_59",
+    category: "campus",
+    spice: "mild",
+    tag: "🚌 KSRTC Sound Effects",
+    text: "Pretend to be a KSRTC bus and make all the sounds for 20 seconds, including gear screech, air horn, and conductor bell."
+  },
+  {
+    id: "d_col_60",
+    category: "campus",
+    spice: "mild",
+    tag: "🔮 10 Years Later",
+    text: "Act out your \"dream life\" 10 years from now, and the group gets to interject with one hilarious plot twist."
+  },
+
+  // =================== SAVAGE ROAST & SOCIAL DARES (60) ===================
+  {
+    id: "d_rst_1",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 David Attenborough",
+    text: "Read your last five Instagram captions aloud in a serious nature-documentary voice."
+  },
+  {
+    id: "d_rst_2",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Savage LinkedIn",
+    text: "Let the group write your LinkedIn \"About Me\" summary, then read it aloud with solemn pride."
+  },
+  {
+    id: "d_rst_3",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Flaws-only Intro",
+    text: "Do an honest job interview introduction, but you are only permitted to list your real red flags and character flaws."
+  },
+  {
+    id: "d_rst_4",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Roast Receiver",
+    text: "Take an uninterrupted 30-second roast from the group, then reply with a bow: \"Thank you, I needed that.\""
+  },
+  {
+    id: "d_rst_5",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Screen Time Confession",
+    text: "Show the group your exact weekly screen time and explain what on earth you were doing on your #1 app."
+  },
+  {
+    id: "d_rst_6",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Bill Splitting Mimic",
+    text: "Act out how the person on your right behaves the moment the waiter drops the food bill on the table."
+  },
+  {
+    id: "d_rst_7",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Impersonation Rating",
+    text: "Do an impression of the person sitting across from you. They rate it out of 10; repeat until you score 8 or higher!"
+  },
+  {
+    id: "d_rst_8",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Future Breakup",
+    text: "Write a one-line brutal breakup text from your future self to your present self and read it aloud."
+  },
+  {
+    id: "d_rst_9",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Single TED Talk",
+    text: "Give a 30-second impassioned TED Talk titled: \"Why I Am Destined to Be Single Forever.\""
+  },
+  {
+    id: "d_rst_10",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Dramatic Person",
+    text: "Adopt the voice and mannerisms of the group's most dramatic person for the next three rounds."
+  },
+  {
+    id: "d_rst_11",
+    category: "roast",
+    spice: "spicy",
+    tag: "📱 Group Story Hijack",
+    text: "Post an Instagram story with a picture or caption chosen by the group (within boundaries) for 30 minutes."
+  },
+  {
+    id: "d_rst_12",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Late Entry Smile",
+    text: "Re-enact your signature guilty late entry into class, complete with the fake apologetic smile."
+  },
+  {
+    id: "d_rst_13",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Attendance Obituary",
+    text: "Stand up and read out a solemn funeral obituary for your dying attendance percentage."
+  },
+  {
+    id: "d_rst_14",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Stand-up Roast",
+    text: "Do a 45-second stand-up comedy roast of your own bad habits. If nobody laughs, each friend roasts you once!"
+  },
+  {
+    id: "d_rst_15",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Which Subject?",
+    text: "For the next round, respond with \"Bro, which subject?\" every single time someone addresses you."
+  },
+  {
+    id: "d_rst_16",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Procrastination Ad",
+    text: "Perform a dramatic television commercial advertising the product: \"I'll Start Studying Tomorrow.\""
+  },
+  {
+    id: "d_rst_17",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Fake Wedding Roast",
+    text: "Give an emotional fake wedding toast that subtly roasts the person to your left in front of everyone."
+  },
+  {
+    id: "d_rst_18",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Used Phone Auction",
+    text: "Auction off the person across from you like a refurbished second-hand phone, detailing all their personality glitches."
+  },
+  {
+    id: "d_rst_19",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 1-Star Review",
+    text: "Write and read aloud a scathing 1-star Amazon product review of the person sitting on your right."
+  },
+  {
+    id: "d_rst_20",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Exposed Dating Profile",
+    text: "Read out the unfiltered dating profile bio you would write if you were forced to advertise the person on your left."
+  },
+  {
+    id: "d_rst_21",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Habit Mimic Round",
+    text: "Go around the circle and imitate one signature annoying habit of every single person here."
+  },
+  {
+    id: "d_rst_22",
+    category: "roast",
+    spice: "mild",
+    tag: "💀 Bunking Defense",
+    text: "Act out your classic bunking excuse with the group playing the strict professor. If they reject it, take a forfeit!"
+  },
+  {
+    id: "d_rst_23",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Past Failures Speech",
+    text: "Give an inspirational motivational pep talk to someone here using only a list of their past blunders."
+  },
+  {
+    id: "d_rst_24",
+    category: "roast",
+    spice: "mild",
+    tag: "🏷️ Nickname Bond",
+    text: "Let each person bestow a ridiculous new nickname upon you, and you must answer only to those for the rest of the game."
+  },
+  {
+    id: "d_rst_25",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Day in the Life",
+    text: "Act out a hilarious 'Day in the Life' of the person to your right, from their 10 alarms to midnight doomscrolling."
+  },
+  {
+    id: "d_rst_26",
+    category: "roast",
+    spice: "spicy",
+    tag: "📰 Breaking News Roast",
+    text: "Deliver a dramatic CNN breaking news bulletin about a foolish blunder committed recently by a friend in this room."
+  },
+  {
+    id: "d_rst_27",
+    category: "roast",
+    spice: "spicy",
+    tag: "💡 Failed Startup Pitch",
+    text: "Pitch a venture capital startup based entirely on your most catastrophic failed project or life idea."
+  },
+  {
+    id: "d_rst_28",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 One-word Description",
+    text: "Everyone in the room gives you one honest descriptive word. Read all of them back aloud in a melodramatic voice."
+  },
+  {
+    id: "d_rst_29",
+    category: "roast",
+    spice: "spicy",
+    tag: "📱 Last Text Reading",
+    text: "Read the last text message you sent to anyone in a dramatic theatrical Shakespearean voice."
+  },
+  {
+    id: "d_rst_30",
+    category: "roast",
+    spice: "spicy",
+    tag: "🎙️ Scandal Press Conference",
+    text: "Hold a mock press conference behind a chair and answer juicy 'scandals' invented by the group with straight face."
+  },
+  {
+    id: "d_rst_31",
+    category: "roast",
+    spice: "spicy",
+    tag: "🙏 Public Apology",
+    text: "Apologize to each person here for one real annoying habit you possess, and let them fire back a quick roast."
+  },
+  {
+    id: "d_rst_32",
+    category: "roast",
+    spice: "spicy",
+    tag: "😍 Crush Panic Monologue",
+    text: "Re-enact your exact face and panic when your crush accidentally sits right next to you, with full internal monologue aloud."
+  },
+  {
+    id: "d_rst_33",
+    category: "roast",
+    spice: "spicy",
+    tag: "🎤 Weakest Link Rap",
+    text: "Perform a short comedic diss rap about the 'weakest link' in the group (chosen by quick democratic vote)."
+  },
+  {
+    id: "d_rst_34",
+    category: "roast",
+    spice: "mild",
+    tag: "🎶 Tribute to the Ghost",
+    text: "Sing a solemn acoustic tribute song dedicated to the slowest text replier in the room."
+  },
+  {
+    id: "d_rst_35",
+    category: "roast",
+    spice: "spicy",
+    tag: "💼 Roasted Strengths",
+    text: "Do a job interview pitch: list three strengths. For every one you can't name in 5s, the group adds a roasted weakness!"
+  },
+  {
+    id: "d_rst_36",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 Circle Introduction",
+    text: "Introduce each player in the room to an imaginary crowd with a funny nickname and a 1-line roast."
+  },
+  {
+    id: "d_rst_37",
+    category: "roast",
+    spice: "mild",
+    tag: "📸 Influencer Pose Critique",
+    text: "Strike a high-fashion influencer pose while the group critiques and roasts your posture like fashion judges."
+  },
+  {
+    id: "d_rst_38",
+    category: "roast",
+    spice: "mild",
+    tag: "🗣️ Third Person Talk",
+    text: "Refer to yourself strictly in the third person for the next round (e.g., \"[Your Name] demands water\")."
+  },
+  {
+    id: "d_rst_39",
+    category: "roast",
+    spice: "spicy",
+    tag: "👮 Moral Police",
+    text: "Act as the self-appointed group moral police officer and scold each person for their worst vice."
+  },
+  {
+    id: "d_rst_40",
+    category: "roast",
+    spice: "spicy",
+    tag: "🥂 Backhanded Toast",
+    text: "Give a 20-second wedding toast for the person on your left that exposes their flaws disguised as polite compliments."
+  },
+  {
+    id: "d_rst_41",
+    category: "roast",
+    spice: "mild",
+    tag: "🌦️ Mood Weather Forecast",
+    text: "Deliver a weather report on the group's current mood, predicting who is 90% likely to cancel the next plan."
+  },
+  {
+    id: "d_rst_42",
+    category: "roast",
+    spice: "spicy",
+    tag: "💀 ...And That's Why I'm Single",
+    text: "For the next three rounds, conclude every single sentence you speak with \"...and that's why I'm single.\""
+  },
+  {
+    id: "d_rst_43",
+    category: "roast",
+    spice: "mild",
+    tag: "🦁 WhatsApp Safari",
+    text: "Narrate your friend group WhatsApp chat like an African safari (\"Here we observe the lurker who hasn't spoken since 2023\")."
+  },
+  {
+    id: "d_rst_44",
+    category: "roast",
+    spice: "spicy",
+    tag: "🪧 Missing Person Poster",
+    text: "Create a dramatic missing-person poster announcement out loud for the friend who mysteriously vanishes whenever the bill comes."
+  },
+  {
+    id: "d_rst_45",
+    category: "roast",
+    spice: "spicy",
+    tag: "🚪 Friend Resignation",
+    text: "Formally announce your dramatic resignation from this friend group. The group votes whether your resignation is accepted."
+  },
+  {
+    id: "d_rst_46",
+    category: "roast",
+    spice: "spicy",
+    tag: "🎙️ Voice Note Roast",
+    text: "Record a 20-second voice note roasting yourself and play it back on speakerphone for the whole room."
+  },
+  {
+    id: "d_rst_47",
+    category: "roast",
+    spice: "mild",
+    tag: "📝 Text Style Reviews",
+    text: "Each person gives you a 1-sentence review of your texting habits, and you must reply 'Noted' in a different accent each time."
+  },
+  {
+    id: "d_rst_48",
+    category: "roast",
+    spice: "mild",
+    tag: "🚶 Convict Walk",
+    text: "Walk across the room from the back bench to the front board like a convicted criminal being escorted to sentencing."
+  },
+  {
+    id: "d_rst_49",
+    category: "roast",
+    spice: "spicy",
+    tag: "🗳️ Campaign Slogan",
+    text: "Present a campaign poster slogan electing the person to your right as 'Most Likely to Show Up Late to Their Own Wedding'."
+  },
+  {
+    id: "d_rst_50",
+    category: "roast",
+    spice: "spicy",
+    tag: "🎓 Confident Viva Flop",
+    text: "Pretend to be the person to your right during a viva, answering with maximum cockiness and 100% incorrect facts."
+  },
+  {
+    id: "d_rst_51",
+    category: "roast",
+    spice: "mild",
+    tag: "🦹 Villain BGM Entry",
+    text: "Perform an epic slow-motion villain entrance for the person across from you while the room sings a dark cinematic soundtrack."
+  },
+  {
+    id: "d_rst_52",
+    category: "roast",
+    spice: "spicy",
+    tag: "📜 Rhyming Roast",
+    text: "Roast the last person who made fun of you, and your entire roast must rhyme like poetry."
+  },
+  {
+    id: "d_rst_53",
+    category: "roast",
+    spice: "mild",
+    tag: "🧊 Ice Cold Stranger",
+    text: "For the entire next round, treat everyone in the room as if you've never met them before and you are entirely unimpressed."
+  },
+  {
+    id: "d_rst_54",
+    category: "roast",
+    spice: "spicy",
+    tag: "📱 Emoji Verdict",
+    text: "Show your top 3 most frequently used emojis and defend yourself while the group delivers their psychiatric verdict."
+  },
+  {
+    id: "d_rst_55",
+    category: "roast",
+    spice: "spicy",
+    tag: "🏆 Spiteful Oscar Speech",
+    text: "Give an emotional Oscar acceptance speech thanking only the people who made your college life miserable (the group)."
+  },
+  {
+    id: "d_rst_56",
+    category: "roast",
+    spice: "mild",
+    tag: "🎭 Four Levels of 'I'm Fine'",
+    text: "Act out the phrase \"I'm fine\" across four progressive stages: calm denial, simmering rage, tragic weep, and full meltdown."
+  },
+  {
+    id: "d_rst_57",
+    category: "roast",
+    spice: "mild",
+    tag: "👵 Group Amma Scold",
+    text: "Play the group's stereotypical strict amma and reprimand each person here for their worst lifestyle choice for 20 seconds."
+  },
+  {
+    id: "d_rst_58",
+    category: "roast",
+    spice: "spicy",
+    tag: "🏷️ Official Title Badge",
+    text: "Accept a mocking corporate title bestowed by the group (e.g. 'VP of Ghosting', 'Chief Excuse Officer') for the rest of the game."
+  },
+  {
+    id: "d_rst_59",
+    category: "roast",
+    spice: "spicy",
+    tag: "🔄 Swap Places",
+    text: "Pick any harmless dare from this list for a person of your choice, but you must physically swap seats with them for 2 rounds."
+  },
+  {
+    id: "d_rst_60",
+    category: "roast",
+    spice: "spicy",
+    tag: "👑 FINAL BOSS",
+    text: "FINAL BOSS DARE: The group collectively decides one roast task for you. You cannot refuse, but you earn immunity for 2 rounds afterward!"
+  },
+
+  // =================== BONUS: EXTREME SPICY DARES (25) ===================
+  {
+    id: "d_ext_1",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 15-Second Prank Call",
+    text: "Call your crush or an ex on speakerphone for 15 seconds, say: 'Hey, I was just thinking about you and wanted to hear your voice', and hang up without explaining!"
+  },
+  {
+    id: "d_ext_2",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 DM Inspection",
+    text: "Let the person to your left scroll through your Instagram DMs or WhatsApp chat list for 30 seconds uninterrupted."
+  },
+  {
+    id: "d_ext_3",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Spicy Status",
+    text: "Let the group compose a spicy, suggestive 1-line WhatsApp status and keep it live on your account for 20 minutes."
+  },
+  {
+    id: "d_ext_4",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Intense Stare",
+    text: "Gaze into the eyes of the person opposite you for 45 seconds without blinking, laughing, or looking away. If you break, take a forfeit!"
+  },
+  {
+    id: "d_ext_5",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Sensual Catwalk",
+    text: "Do your best dramatic, sensual slow-motion catwalk across the room while whispering sweet romantic compliments to an empty chair."
+  },
+  {
+    id: "d_ext_6",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Random Emoji Drop",
+    text: "Hand your phone to the person on your right; they get to send a single emoji of their choice (e.g., 🍆, 💍, or 🥺) to your most recent chat."
+  },
+  {
+    id: "d_ext_7",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Wallpaper Takeover",
+    text: "Let the person across from you snap a goofy selfie on your phone and set it as your lock screen wallpaper for the rest of the night."
+  },
+  {
+    id: "d_ext_8",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Passionate Telenovela",
+    text: "Deliver a 60-second passionate, tearful telenovela love confession to someone in the circle chosen by the group."
+  },
+  {
+    id: "d_ext_9",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Ice Cube Poetry",
+    text: "Hold an ice cube in your hand or mouth and recite an emotional love poem to someone until the group says stop."
+  },
+  {
+    id: "d_ext_10",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Romantic Mop Dance",
+    text: "Slow-dance with a broom, mop, or coat hanger for 1 full minute to a romantic slow jam sung by the group."
+  },
+  {
+    id: "d_ext_11",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Recently Deleted Album",
+    text: "Open your phone's 'Recently Deleted' photo album and let the group inspect the top 3 photos."
+  },
+  {
+    id: "d_ext_12",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Dramatic Voice Note",
+    text: "Read aloud the last 3 voice notes or messages you received in your private DMs, with maximum romantic Shakespearean flair."
+  },
+  {
+    id: "d_ext_13",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Serenade on One Knee",
+    text: "Drop to one knee in front of the person to your left and passionately serenade them with a dramatic Bollywood or Malayalam love song."
+  },
+  {
+    id: "d_ext_14",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Face Doodle",
+    text: "Let someone draw a cute little mustache or heart on your cheek with a washable pen/eyeliner for the next 3 rounds."
+  },
+  {
+    id: "d_ext_15",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Spicy Poll",
+    text: "Post an outrageous yes/no poll written by the group on your Instagram Story or close-friends WhatsApp group."
+  },
+  {
+    id: "d_ext_16",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Juicy Ear Secret",
+    text: "Whisper a wild secret about yourself into the ear of the person on your right. They vote whether it's spicy enough or if you must take another dare!"
+  },
+  {
+    id: "d_ext_17",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Jacket Exchange",
+    text: "Swap jackets, shirts, or accessories with the person to your left and wear it proudly for the next 3 rounds."
+  },
+  {
+    id: "d_ext_18",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Independent Flirt Pushups",
+    text: "Do 12 pushups while shouting: \"I am a gorgeous, independent flirt!\" after every single pushup."
+  },
+  {
+    id: "d_ext_19",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Algorithm Roast",
+    text: "Open Instagram Reels or TikTok and let the group examine the first 5 videos on your 'For You' page and roast your algorithm."
+  },
+  {
+    id: "d_ext_20",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Lemon / Pepper Face",
+    text: "Take a bite of raw lemon or a pinch of black pepper, maintain eye contact with the group, and say with a seductive wink: 'Delicious.'"
+  },
+  {
+    id: "d_ext_21",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Group Lap Pose",
+    text: "Sit on the floor like a humble king's pet at the feet of the person across from you until your next turn."
+  },
+  {
+    id: "d_ext_22",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Phone Roulette",
+    text: "Show your search bar suggestions on YouTube or Spotify to the group without clearing anything!"
+  },
+  {
+    id: "d_ext_23",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Heartbeat Check",
+    text: "Put your hand on the chest of the person to your left, close your eyes, and diagnose their romantic diagnosis based on their heartbeat."
+  },
+  {
+    id: "d_ext_24",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 Sensual Commercial",
+    text: "Sell an ordinary bottle of water to the room as if it were a high-end luxury perfume commercial with whispered French words."
+  },
+  {
+    id: "d_ext_25",
+    category: "extreme",
+    spice: "extreme",
+    tag: "🔥 The Group Decree",
+    text: "ULTIMATE SPICY DARE: Let the entire group write one dare on a piece of paper or phone. You must execute it without flinching!"
+  }
+];
+
+// Forfeit punishments if a player chickens out
+const FORFEIT_TASKS = [
+  "Do 15 quick pushups or 20 squats right now!",
+  "Drink an entire glass of water in 10 seconds without stopping.",
+  "Let the group give you an embarrassing nickname that you must answer to for the rest of the game.",
+  "Speak only in an evil villain laugh for the next 2 turns.",
+  "Give a complimentary foot or shoulder massage (with consent) or fetch drinks for everyone.",
+  "Eat a spoonful of plain hot sauce, lemon juice, or raw chili flake.",
+  "Let the person to your right draw a fake unibrow on you with an eyeliner/pen.",
+  "Send a message saying 'I surrender to your greatness' to the 3rd person on your WhatsApp chat list.",
+  "Balance a book or water bottle on your head while standing on one leg for 30 seconds."
+];
+
+// Make data globally accessible
+window.TRUTHS_DATA = TRUTHS_DATA;
+window.DARES_DATA = DARES_DATA;
+window.FORFEIT_TASKS = FORFEIT_TASKS;
+
+  </script>
+  <!-- Embedded Offline Sound & Haptic Synthesizer -->
+  <script>
+/**
+ * Web Audio API Sound Effects Synthesizer
+ * Zero external audio files required — runs 100% offline & instantly!
+ */
+
+class SoundFX {
+  constructor() {
+    this.ctx = null;
+    this.muted = localStorage.getItem('tnd_muted') === 'true';
+  }
+
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        this.ctx = new AudioCtx();
+      }
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  }
+
+  toggleMute() {
+    this.muted = !this.muted;
+    localStorage.setItem('tnd_muted', this.muted);
+    return this.muted;
+  }
+
+  // Mobile haptic feedback helper
+  vibrate(pattern) {
+    if ('vibrate' in navigator) {
+      try {
+        navigator.vibrate(pattern);
+      } catch (e) {}
+    }
+  }
+
+  // Soft UI pop click
+  playClick() {
+    this.vibrate(20);
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    const now = this.ctx.currentTime;
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(450, now);
+    osc.frequency.exponentialRampToValueAtTime(150, now + 0.05);
+
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.05);
+  }
+
+  // Rapid roulette wheel tick
+  playSpinTick(frequency = 600) {
+    this.vibrate(12);
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    const now = this.ctx.currentTime;
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(frequency, now);
+    osc.frequency.exponentialRampToValueAtTime(120, now + 0.03);
+
+    gain.gain.setValueAtTime(0.25, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.03);
+  }
+
+  // Deep dramatic heartbeat thump for suspense moments
+  playHeartbeat() {
+    this.vibrate([60, 40, 60]);
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(85, now);
+    osc.frequency.exponentialRampToValueAtTime(35, now + 0.18);
+
+    gain.gain.setValueAtTime(0.4, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.2);
+  }
+
+  // Dramatic dramatic bass drop / selection chord
+  playChosen() {
+    this.vibrate([80, 40, 160]);
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const freqs = [220, 277.18, 329.63, 440]; // A major chord
+
+    freqs.forEach((f, i) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = i === 0 ? 'sawtooth' : 'triangle';
+      osc.frequency.setValueAtTime(f, now);
+      osc.frequency.exponentialRampToValueAtTime(f * 1.5, now + 0.35);
+
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.4);
+    });
+  }
+
+  // Blue mystical Truth chime
+  playTruth() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+
+    notes.forEach((freq, idx) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const delay = idx * 0.07;
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + delay);
+
+      gain.gain.setValueAtTime(0.15, now + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.35);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(now + delay);
+      osc.stop(now + delay + 0.35);
+    });
+  }
+
+  // Fiery aggressive Dare sound
+  playDare() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    // Power distortion chords
+    const notes = [164.81, 220.00, 329.63];
+
+    notes.forEach((freq) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(freq, now);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.9, now + 0.4);
+
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.45);
+    });
+  }
+
+  // Triumphant victory fanfare (completed task)
+  playSuccess() {
+    this.vibrate([60, 30, 60, 30, 140]);
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const melody = [
+      { f: 523.25, d: 0.1 },  // C5
+      { f: 659.25, d: 0.1 },  // E5
+      { f: 783.99, d: 0.1 },  // G5
+      { f: 1046.50, d: 0.3 }  // C6
+    ];
+
+    let current = now;
+    melody.forEach((note) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(note.f, current);
+
+      gain.gain.setValueAtTime(0.25, current);
+      gain.gain.exponentialRampToValueAtTime(0.001, current + note.d);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(current);
+      osc.stop(current + note.d);
+
+      current += note.d * 0.85;
+    });
+  }
+
+  // Comedic fail buzzer for chicken out
+  playBuzzer() {
+    this.vibrate([220]);
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(140, now);
+    osc.frequency.linearRampToValueAtTime(80, now + 0.35);
+
+    gain.gain.setValueAtTime(0.28, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.4);
+  }
+
+  // Clock tick for countdown timer
+  playTimerTick() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, now);
+
+    gain.gain.setValueAtTime(0.12, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.04);
+  }
+
+  // Siren for spicy / extreme warning
+  playSiren() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(600, now);
+    osc.frequency.linearRampToValueAtTime(900, now + 0.15);
+    osc.frequency.linearRampToValueAtTime(600, now + 0.3);
+
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.32);
+  }
+}
+
+window.soundFX = new SoundFX();
+
+  </script>
+  <!-- Embedded Game Engine -->
+  <script>
+/**
+ * Truth and Dare Party - Main Application Logic
+ */
+
+class TruthAndDareApp {
+  constructor() {
+    this.players = [];
+    this.cooldownSetting = 2; // Default cooldown turns (2 or 3 turns)
+    this.currentRound = 1;
+    this.activePlayer = null;
+    this.activeTask = null;
+    this.activeTaskType = null; // 'truth' | 'dare'
+    this.gameState = 'setup'; // 'setup' | 'ready_to_spin' | 'spinning' | 'choosing' | 'task' | 'recap'
+    
+    this.usedTruthIds = new Set();
+    this.usedDareIds = new Set();
+
+    this.categories = {
+      campus: true,
+      roast: true,
+      extreme: true
+    };
+
+    // Timer state
+    this.timerInterval = null;
+    this.timerSeconds = 0;
+
+    // Sample party names
+    this.sampleNames = ["Rahul", "Anjali", "Fahad", "Deepa", "Vishnu", "Meera", "Arjun", "Sneha"];
+    
+    // Fun avatars emojis and neon colors
+    this.avatarIcons = ["😎", "🔥", "👑", "🚀", "🦁", "🦊", "⚡", "🎭", "🎉", "👻", "🦄", "🎯", "🍕", "🎸"];
+    this.avatarGradients = [
+      "linear-gradient(135deg, #FF6B6B, #FFE66D)",
+      "linear-gradient(135deg, #4E65FF, #92EFFD)",
+      "linear-gradient(135deg, #7F00FF, #E100FF)",
+      "linear-gradient(135deg, #11998e, #38ef7d)",
+      "linear-gradient(135deg, #f857a6, #ff5858)",
+      "linear-gradient(135deg, #ff0844, #ffb199)",
+      "linear-gradient(135deg, #f12711, #f5af19)",
+      "linear-gradient(135deg, #b224ef, #7579ff)"
+    ];
+
+    this.initDOM();
+    this.loadState();
+    this.bindEvents();
+    this.render();
+  }
+
+  initDOM() {
+    // Screens
+    this.setupScreen = document.getElementById('setupScreen');
+    this.gameScreen = document.getElementById('gameScreen');
+    this.exitModal = document.getElementById('exitModal');
+    this.recapModal = document.getElementById('recapModal');
+    this.forfeitModal = document.getElementById('forfeitModal');
+
+    // Inputs & buttons
+    this.playerNameInput = document.getElementById('playerNameInput');
+    this.addPlayerBtn = document.getElementById('addPlayerBtn');
+    this.playerListContainer = document.getElementById('playerListContainer');
+    this.startGameBtn = document.getElementById('startGameBtn');
+    this.loadSampleBtn = document.getElementById('loadSampleBtn');
+    this.clearPlayersBtn = document.getElementById('clearPlayersBtn');
+
+    // Cooldown setting radio / select
+    this.cooldownSelect = document.getElementById('cooldownSelect');
+
+    // Category toggles
+    this.toggleCampus = document.getElementById('toggleCampus');
+    this.toggleRoast = document.getElementById('toggleRoast');
+    this.toggleExtreme = document.getElementById('toggleExtreme');
+
+    // Game screen elements
+    this.roundBadge = document.getElementById('roundBadge');
+    this.playersStrip = document.getElementById('playersStrip');
+    this.spinArea = document.getElementById('spinArea');
+    this.portalStage = document.getElementById('rouletteStage');
+    this.slotCard = document.getElementById('slotCard');
+    this.activeSlotAvatar = document.getElementById('activeSlotAvatar');
+    this.activeSlotName = document.getElementById('activeSlotName');
+    this.slotStatusBadge = document.getElementById('slotStatusBadge');
+    this.eligibleRadarChips = document.getElementById('eligibleRadarChips');
+    this.spinBtn = document.getElementById('spinBtn');
+    this.choiceArea = document.getElementById('choiceArea');
+    this.taskArea = document.getElementById('taskArea');
+    this.chosenPlayerName = document.getElementById('chosenPlayerName');
+    this.chosenPlayerAvatar = document.getElementById('chosenPlayerAvatar');
+
+    // Choice buttons
+    this.chooseTruthBtn = document.getElementById('chooseTruthBtn');
+    this.chooseDareBtn = document.getElementById('chooseDareBtn');
+    this.chooseRandomBtn = document.getElementById('chooseRandomBtn');
+
+    // Task card elements
+    this.taskTypeBadge = document.getElementById('taskTypeBadge');
+    this.taskTagBadge = document.getElementById('taskTagBadge');
+    this.taskPlayerInfo = document.getElementById('taskPlayerInfo');
+    this.taskText = document.getElementById('taskText');
+    this.speakTaskBtn = document.getElementById('speakTaskBtn');
+    this.rerollTaskBtn = document.getElementById('rerollTaskBtn');
+    this.switchTypeBtn = document.getElementById('switchTypeBtn');
+
+    // Action buttons
+    this.completeTaskBtn = document.getElementById('completeTaskBtn');
+    this.chickenOutBtn = document.getElementById('chickenOutBtn');
+
+    // Timer elements
+    this.timerDisplay = document.getElementById('timerDisplay');
+    this.start30sBtn = document.getElementById('start30sBtn');
+    this.start60sBtn = document.getElementById('start60sBtn');
+    this.stopTimerBtn = document.getElementById('stopTimerBtn');
+
+    // Exit modal elements
+    this.exitGameBtn = document.getElementById('exitGameBtn');
+    this.resumeGameBtn = document.getElementById('resumeGameBtn');
+    this.viewRecapBtn = document.getElementById('viewRecapBtn');
+    this.endGameLobbyBtn = document.getElementById('endGameLobbyBtn');
+
+    // Mute toggle
+    this.muteToggleBtn = document.getElementById('muteToggleBtn');
+
+    // Canvas confetti
+    this.canvas = document.getElementById('confettiCanvas');
+    this.ctx = this.canvas ? this.canvas.getContext('2d') : null;
+    this.resizeCanvas();
+    window.addEventListener('resize', () => this.resizeCanvas());
+  }
+
+  resizeCanvas() {
+    if (this.canvas) {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    }
+  }
+
+  loadState() {
+    try {
+      const savedPlayers = localStorage.getItem('tnd_players');
+      if (savedPlayers) {
+        this.players = JSON.parse(savedPlayers);
+      }
+      const savedCooldown = localStorage.getItem('tnd_cooldown');
+      if (savedCooldown) {
+        this.cooldownSetting = parseInt(savedCooldown, 10) || 2;
+        if (this.cooldownSelect) this.cooldownSelect.value = this.cooldownSetting;
+      }
+    } catch (e) {
+      console.warn("Could not load localStorage state", e);
+    }
+
+    if (this.muteToggleBtn) {
+      this.updateMuteIcon();
+    }
+  }
+
+  savePlayers() {
+    try {
+      localStorage.setItem('tnd_players', JSON.stringify(this.players));
+    } catch (e) {
+      console.warn("Could not save players to localStorage", e);
+    }
+  }
+
+  bindEvents() {
+    // Add player
+    this.addPlayerBtn.addEventListener('click', () => this.handleAddPlayer());
+    this.playerNameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') this.handleAddPlayer();
+    });
+
+    // Sample players
+    this.loadSampleBtn.addEventListener('click', () => {
+      window.soundFX.playClick();
+      this.sampleNames.forEach(name => {
+        if (!this.players.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+          this.addPlayer(name);
+        }
+      });
+      this.renderSetupPlayers();
+    });
+
+    // Clear players
+    this.clearPlayersBtn.addEventListener('click', () => {
+      window.soundFX.playClick();
+      if (confirm("Remove all players from the list?")) {
+        this.players = [];
+        this.savePlayers();
+        this.renderSetupPlayers();
+      }
+    });
+
+    // Cooldown setting change
+    if (this.cooldownSelect) {
+      this.cooldownSelect.addEventListener('change', (e) => {
+        this.cooldownSetting = parseInt(e.target.value, 10);
+        localStorage.setItem('tnd_cooldown', this.cooldownSetting);
+        window.soundFX.playClick();
+      });
+    }
+
+    // Category toggles
+    [this.toggleCampus, this.toggleRoast, this.toggleExtreme].forEach(t => {
+      if (t) {
+        t.addEventListener('change', () => {
+          this.categories.campus = this.toggleCampus.checked;
+          this.categories.roast = this.toggleRoast.checked;
+          this.categories.extreme = this.toggleExtreme.checked;
+          window.soundFX.playClick();
+        });
+      }
+    });
+
+    // Start Game
+    this.startGameBtn.addEventListener('click', () => this.startGame());
+
+    // Mute toggle
+    this.muteToggleBtn.addEventListener('click', () => {
+      const isMuted = window.soundFX.toggleMute();
+      this.updateMuteIcon();
+    });
+
+    // Spin button
+    this.spinBtn.addEventListener('click', () => this.spinForPlayer());
+
+    // Choose Truth / Dare / Random
+    this.chooseTruthBtn.addEventListener('click', () => this.selectTaskType('truth'));
+    this.chooseDareBtn.addEventListener('click', () => this.selectTaskType('dare'));
+    this.chooseRandomBtn.addEventListener('click', () => {
+      const randomType = Math.random() > 0.5 ? 'truth' : 'dare';
+      this.selectTaskType(randomType);
+    });
+
+    // Task actions
+    this.completeTaskBtn.addEventListener('click', () => this.completeTask());
+    this.chickenOutBtn.addEventListener('click', () => this.chickenOut());
+
+    // Reroll & Switch task
+    this.rerollTaskBtn.addEventListener('click', () => this.rerollTask());
+    this.switchTypeBtn.addEventListener('click', () => {
+      const newType = this.activeTaskType === 'truth' ? 'dare' : 'truth';
+      this.selectTaskType(newType);
+    });
+
+    // Text to speech
+    this.speakTaskBtn.addEventListener('click', () => this.speakCurrentTask());
+
+    // Timers
+    this.start30sBtn.addEventListener('click', () => this.startTimer(30));
+    this.start60sBtn.addEventListener('click', () => this.startTimer(60));
+    this.stopTimerBtn.addEventListener('click', () => this.stopTimer());
+
+    // Exit Game modal
+    this.exitGameBtn.addEventListener('click', () => {
+      window.soundFX.playClick();
+      this.exitModal.classList.remove('hidden');
+    });
+
+    this.resumeGameBtn.addEventListener('click', () => {
+      window.soundFX.playClick();
+      this.exitModal.classList.add('hidden');
+    });
+
+    this.viewRecapBtn.addEventListener('click', () => {
+      window.soundFX.playClick();
+      this.exitModal.classList.add('hidden');
+      this.showRecap();
+    });
+
+    this.endGameLobbyBtn.addEventListener('click', () => {
+      window.soundFX.playClick();
+      this.exitModal.classList.add('hidden');
+      this.returnToLobby();
+    });
+
+    const closeBtn = document.getElementById('closeWindowBtn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        window.soundFX.playClick();
+        window.close();
+        setTimeout(() => {
+          alert("Party ended! You can now close this tab or press Ctrl+W.");
+        }, 150);
+      });
+    }
+  }
+
+  updateMuteIcon() {
+    if (this.muteToggleBtn) {
+      this.muteToggleBtn.textContent = window.soundFX.muted ? '🔇 Muted' : '🔊 Sound ON';
+      this.muteToggleBtn.classList.toggle('muted-active', window.soundFX.muted);
+    }
+  }
+
+  handleAddPlayer() {
+    const rawName = this.playerNameInput.value.trim();
+    if (!rawName) return;
+
+    if (this.players.some(p => p.name.toLowerCase() === rawName.toLowerCase())) {
+      alert("A player with this name is already in the game!");
+      return;
+    }
+
+    window.soundFX.playClick();
+    this.addPlayer(rawName);
+    this.playerNameInput.value = '';
+    this.playerNameInput.focus();
+    this.renderSetupPlayers();
+  }
+
+  addPlayer(name) {
+    const iconIdx = this.players.length % this.avatarIcons.length;
+    const gradIdx = this.players.length % this.avatarGradients.length;
+    const player = {
+      id: 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+      name: name,
+      avatarEmoji: this.avatarIcons[iconIdx],
+      avatarBg: this.avatarGradients[gradIdx],
+      cooldown: 0,
+      truthsDone: 0,
+      daresDone: 0,
+      forfeits: 0,
+      totalTurns: 0
+    };
+    this.players.push(player);
+    this.savePlayers();
+  }
+
+  removePlayer(playerId) {
+    window.soundFX.playClick();
+    this.players = this.players.filter(p => p.id !== playerId);
+    this.savePlayers();
+    this.renderSetupPlayers();
+  }
+
+  renderSetupPlayers() {
+    this.playerListContainer.innerHTML = '';
+    this.players.forEach(player => {
+      const chip = document.createElement('div');
+      chip.className = 'player-chip';
+      chip.innerHTML = `
+        <span class="player-chip-avatar" style="background:${player.avatarBg}">${player.avatarEmoji}</span>
+        <span class="player-chip-name">${this.escapeHTML(player.name)}</span>
+        <button class="player-chip-remove" title="Remove player">&times;</button>
+      `;
+      chip.querySelector('.player-chip-remove').addEventListener('click', () => {
+        this.removePlayer(player.id);
+      });
+      this.playerListContainer.appendChild(chip);
+    });
+
+    const count = this.players.length;
+    const hint = document.getElementById('playerCountHint');
+    if (hint) {
+      if (count < 2) {
+        hint.innerHTML = `<span class="badge-warning">⚠️ Need at least 2 players to play</span>`;
+      } else if (count < 3 && this.cooldownSetting >= 2) {
+        hint.innerHTML = `<span class="badge-info">ℹ️ 2 players detected (turns will alternate!) For full 2-3 turn cooldown, 3-4+ players are recommended.</span>`;
+      } else {
+        hint.innerHTML = `<span class="badge-success">✅ ${count} players ready to party!</span>`;
+      }
+    }
+
+    this.startGameBtn.disabled = count < 2;
+  }
+
+  startGame() {
+    if (this.players.length < 2) {
+      alert("Please add at least 2 players to start the game!");
+      return;
+    }
+
+    window.soundFX.playSuccess();
+    // Reset all cooldowns for fresh game
+    this.players.forEach(p => {
+      p.cooldown = 0;
+    });
+
+    this.currentRound = 1;
+    this.activePlayer = null;
+    this.activeTask = null;
+    this.usedTruthIds.clear();
+    this.usedDareIds.clear();
+
+    this.setupScreen.classList.add('hidden');
+    this.gameScreen.classList.remove('hidden');
+    this.showSpinArea();
+    this.renderGameHeader();
+  }
+
+  returnToLobby() {
+    this.stopTimer();
+    this.gameScreen.classList.add('hidden');
+    this.setupScreen.classList.remove('hidden');
+    this.renderSetupPlayers();
+  }
+
+  renderGameHeader() {
+    if (this.roundBadge) {
+      this.roundBadge.textContent = `ROUND ${this.currentRound}`;
+    }
+    this.renderPlayersStrip();
+  }
+
+  renderPlayersStrip() {
+    if (!this.playersStrip) return;
+    this.playersStrip.innerHTML = '';
+
+    this.players.forEach(p => {
+      const card = document.createElement('div');
+      const isCurrent = this.activePlayer && this.activePlayer.id === p.id;
+      const isResting = p.cooldown > 0;
+
+      card.className = `strip-player ${isCurrent ? 'active' : ''} ${isResting ? 'resting' : 'ready'}`;
+      
+      let badgeHtml = '';
+      if (isCurrent) {
+        badgeHtml = `<span class="strip-status chosen">🎯 CHOSEN</span>`;
+      } else if (isResting) {
+        badgeHtml = `<span class="strip-status resting">⏳ Resting (${p.cooldown}t)</span>`;
+      } else {
+        badgeHtml = `<span class="strip-status ready">🟢 READY</span>`;
+      }
+
+      card.innerHTML = `
+        <div class="strip-avatar" style="background:${p.avatarBg}">${p.avatarEmoji}</div>
+        <div class="strip-name" title="${this.escapeHTML(p.name)}">${this.escapeHTML(p.name)}</div>
+        ${badgeHtml}
+      `;
+      this.playersStrip.appendChild(card);
+    });
+  }
+
+  showSpinArea() {
+    this.gameState = 'ready_to_spin';
+    this.spinArea.classList.remove('hidden');
+    this.choiceArea.classList.add('hidden');
+    this.taskArea.classList.add('hidden');
+    this.spinBtn.disabled = false;
+
+    // Reset slot card
+    if (this.portalStage) this.portalStage.classList.remove('spinning');
+    if (this.slotCard) {
+      this.slotCard.className = 'slot-card';
+    }
+    if (this.activeSlotAvatar) {
+      this.activeSlotAvatar.textContent = '🎯';
+      this.activeSlotAvatar.style.background = 'linear-gradient(135deg, #7F00FF, #E100FF)';
+    }
+    if (this.activeSlotName) {
+      this.activeSlotName.textContent = 'READY TO SPIN';
+    }
+    if (this.slotStatusBadge) {
+      this.slotStatusBadge.textContent = '🟢 AWAITING FATE';
+      this.slotStatusBadge.style.color = '#00f5d4';
+      this.slotStatusBadge.style.borderColor = 'rgba(0, 245, 212, 0.4)';
+    }
+
+    this.renderEligibleRadarChips();
+    this.renderGameHeader();
+  }
+
+  renderEligibleRadarChips(activePlayerId = null, winnerPlayerId = null) {
+    if (!this.eligibleRadarChips) return;
+    this.eligibleRadarChips.innerHTML = '';
+
+    const eligible = this.players.filter(p => p.cooldown === 0);
+
+    eligible.forEach(p => {
+      const chip = document.createElement('div');
+      const isTarget = activePlayerId === p.id;
+      const isWinner = winnerPlayerId === p.id;
+
+      chip.className = `radar-chip ${isWinner ? 'winner-target' : isTarget ? 'active-target' : ''}`;
+      chip.innerHTML = `
+        <span>${p.avatarEmoji}</span>
+        <span>${this.escapeHTML(p.name)}</span>
+      `;
+      this.eligibleRadarChips.appendChild(chip);
+    });
+  }
+
+  // Calculate safe cooldown to prevent deadlocks
+  getEffectiveCooldown() {
+    const total = this.players.length;
+    // For N players, at most (N - 2) or (N - 1) players can be on cooldown simultaneously
+    // To ensure at least 1 or 2 players are always ready:
+    return Math.max(1, Math.min(this.cooldownSetting, total - 2));
+  }
+
+  spinForPlayer() {
+    if (this.gameState === 'spinning') return;
+    this.gameState = 'spinning';
+    this.spinBtn.disabled = true;
+
+    // Filter eligible players (cooldown === 0)
+    let eligible = this.players.filter(p => p.cooldown === 0);
+
+    // Safeguard: if for any reason all players are on cooldown, decrement all cooldowns until someone is free
+    if (eligible.length === 0) {
+      this.players.forEach(p => {
+        p.cooldown = Math.max(0, p.cooldown - 1);
+      });
+      eligible = this.players.filter(p => p.cooldown === 0);
+      if (eligible.length === 0) eligible = [...this.players];
+    }
+
+    // Pick a random winner from eligible pool
+    const winner = eligible[Math.floor(Math.random() * eligible.length)];
+
+    // Pick 1 or 2 fake-out / near-miss candidates (players other than winner, if available)
+    const otherEligible = eligible.filter(p => p.id !== winner.id);
+    const fakeout1 = otherEligible.length > 0 
+      ? otherEligible[Math.floor(Math.random() * otherEligible.length)] 
+      : winner;
+    const fakeout2 = otherEligible.length > 1 
+      ? otherEligible.filter(p => p.id !== fakeout1.id)[Math.floor(Math.random() * (otherEligible.length - 1))] 
+      : null;
+
+    if (this.portalStage) this.portalStage.classList.add('spinning');
+    if (this.slotCard) {
+      this.slotCard.className = 'slot-card fast-spin';
+    }
+    if (this.slotStatusBadge) {
+      this.slotStatusBadge.textContent = '⚡ SCANNING TARGETS...';
+      this.slotStatusBadge.style.color = '#00f0ff';
+      this.slotStatusBadge.style.borderColor = 'rgba(0, 240, 255, 0.4)';
+    }
+
+    // High speed scramble phase (random duration between 2200ms and 2800ms)
+    const highSpeedDuration = 2200 + Math.random() * 600;
+    const startTime = Date.now();
+
+    const runHighSpeed = () => {
+      const now = Date.now();
+      const elapsed = now - startTime;
+
+      // Pick a random candidate for this frame
+      const randCandidate = eligible[Math.floor(Math.random() * eligible.length)];
+      if (this.activeSlotAvatar) {
+        this.activeSlotAvatar.textContent = randCandidate.avatarEmoji;
+        this.activeSlotAvatar.style.background = randCandidate.avatarBg;
+      }
+      if (this.activeSlotName) {
+        this.activeSlotName.textContent = randCandidate.name;
+      }
+      this.renderEligibleRadarChips(randCandidate.id);
+
+      window.soundFX.playSpinTick(500 + Math.random() * 200);
+
+      if (elapsed < highSpeedDuration) {
+        setTimeout(runHighSpeed, 45);
+      } else {
+        // Start progressive deceleration curve
+        runDeceleration();
+      }
+    };
+
+    // Deceleration steps
+    const decelDelays = [75, 110, 160, 230, 320, 440];
+    let decelIndex = 0;
+
+    const runDeceleration = () => {
+      if (this.slotCard) {
+        this.slotCard.className = 'slot-card suspense-tick';
+      }
+      if (this.slotStatusBadge) {
+        this.slotStatusBadge.textContent = '⚠️ LOCKING IN...';
+        this.slotStatusBadge.style.color = '#ffbe0b';
+        this.slotStatusBadge.style.borderColor = 'rgba(255, 190, 11, 0.5)';
+      }
+
+      const randCandidate = eligible[Math.floor(Math.random() * eligible.length)];
+      if (this.activeSlotAvatar) {
+        this.activeSlotAvatar.textContent = randCandidate.avatarEmoji;
+        this.activeSlotAvatar.style.background = randCandidate.avatarBg;
+      }
+      if (this.activeSlotName) {
+        this.activeSlotName.textContent = randCandidate.name;
+      }
+      this.renderEligibleRadarChips(randCandidate.id);
+
+      window.soundFX.playSpinTick(650 + decelIndex * 60);
+
+      decelIndex++;
+      if (decelIndex < decelDelays.length) {
+        setTimeout(runDeceleration, decelDelays[decelIndex]);
+      } else {
+        // Trigger the Suspense Fake-Out (Near-Miss!)
+        runFakeout();
+      }
+    };
+
+    // Suspense Fake-out: intentionally pauses on fakeout1!
+    const runFakeout = () => {
+      if (this.activeSlotAvatar) {
+        this.activeSlotAvatar.textContent = fakeout1.avatarEmoji;
+        this.activeSlotAvatar.style.background = fakeout1.avatarBg;
+      }
+      if (this.activeSlotName) {
+        this.activeSlotName.textContent = fakeout1.name;
+      }
+      this.renderEligibleRadarChips(fakeout1.id);
+
+      if (this.slotCard) {
+        this.slotCard.className = 'slot-card fakeout';
+      }
+      if (this.slotStatusBadge) {
+        this.slotStatusBadge.textContent = `⚠️ IS IT ${fakeout1.name.toUpperCase()}?!`;
+        this.slotStatusBadge.style.color = '#ff0055';
+        this.slotStatusBadge.style.borderColor = '#ff0055';
+      }
+
+      window.soundFX.playHeartbeat();
+
+      // Long breathless pause (650ms)
+      setTimeout(() => {
+        if (fakeout2 && Math.random() > 0.4) {
+          // Double-twist near miss!
+          if (this.activeSlotAvatar) {
+            this.activeSlotAvatar.textContent = fakeout2.avatarEmoji;
+            this.activeSlotAvatar.style.background = fakeout2.avatarBg;
+          }
+          if (this.activeSlotName) {
+            this.activeSlotName.textContent = fakeout2.name;
+          }
+          this.renderEligibleRadarChips(fakeout2.id);
+          window.soundFX.playSpinTick(850);
+
+          setTimeout(runLockIn, 400);
+        } else {
+          runLockIn();
+        }
+      }, 650);
+    };
+
+    // Final lock in on winner!
+    const runLockIn = () => {
+      this.activePlayer = winner;
+      if (this.activeSlotAvatar) {
+        this.activeSlotAvatar.textContent = winner.avatarEmoji;
+        this.activeSlotAvatar.style.background = winner.avatarBg;
+      }
+      if (this.activeSlotName) {
+        this.activeSlotName.textContent = winner.name;
+      }
+      this.renderEligibleRadarChips(null, winner.id);
+
+      if (this.slotCard) {
+        this.slotCard.className = 'slot-card winner-locked';
+      }
+      if (this.slotStatusBadge) {
+        this.slotStatusBadge.textContent = '🎯 CHOSEN BY FATE!';
+        this.slotStatusBadge.style.color = '#ffe600';
+        this.slotStatusBadge.style.borderColor = '#ffe600';
+      }
+
+      window.soundFX.playChosen();
+      this.triggerConfetti(90);
+
+      setTimeout(() => {
+        this.showChoiceArea();
+      }, 1000);
+    };
+
+    runHighSpeed();
+  }
+
+  showChoiceArea() {
+    this.gameState = 'choosing';
+    this.spinArea.classList.add('hidden');
+    this.choiceArea.classList.remove('hidden');
+    this.taskArea.classList.add('hidden');
+
+    this.chosenPlayerName.textContent = this.activePlayer.name;
+    this.chosenPlayerAvatar.textContent = this.activePlayer.avatarEmoji;
+    this.chosenPlayerAvatar.style.background = this.activePlayer.avatarBg;
+
+    this.renderGameHeader();
+  }
+
+  selectTaskType(type) {
+    this.activeTaskType = type;
+    if (type === 'truth') {
+      window.soundFX.playTruth();
+    } else {
+      window.soundFX.playDare();
+    }
+
+    this.fetchAndDisplayTask();
+  }
+
+  fetchAndDisplayTask() {
+    const isTruth = this.activeTaskType === 'truth';
+    const masterList = isTruth ? window.TRUTHS_DATA : window.DARES_DATA;
+    const usedSet = isTruth ? this.usedTruthIds : this.usedDareIds;
+
+    // Filter by enabled categories
+    let pool = masterList.filter(item => {
+      if (item.category === 'campus' && !this.categories.campus) return false;
+      if (item.category === 'roast' && !this.categories.roast) return false;
+      if (item.category === 'extreme' && !this.categories.extreme) return false;
+      return true;
+    });
+
+    if (pool.length === 0) {
+      // Fallback if user unchecks all
+      pool = [...masterList];
+    }
+
+    // Filter out already used in this session
+    let available = pool.filter(item => !usedSet.has(item.id));
+    if (available.length === 0) {
+      // Deck exhausted! Reset used ids for this type so endless game continues smoothly
+      usedSet.clear();
+      available = [...pool];
+    }
+
+    const task = available[Math.floor(Math.random() * available.length)];
+    usedSet.add(task.id);
+    this.activeTask = task;
+
+    this.showTaskArea();
+  }
+
+  showTaskArea() {
+    this.gameState = 'task';
+    this.choiceArea.classList.add('hidden');
+    this.taskArea.classList.remove('hidden');
+
+    const isTruth = this.activeTaskType === 'truth';
+
+    // Set badge
+    this.taskTypeBadge.textContent = isTruth ? '🔵 TRUTH' : '🔴 DARE';
+    this.taskTypeBadge.className = `task-badge ${isTruth ? 'badge-truth' : 'badge-dare'}`;
+
+    // Tag badge
+    let spiceIndicator = '';
+    if (this.activeTask.spice === 'extreme') {
+      spiceIndicator = ' 🔥 EXTREME';
+      window.soundFX.playSiren();
+    } else if (this.activeTask.spice === 'spicy') {
+      spiceIndicator = ' 🌶️ SPICY';
+    }
+
+    this.taskTagBadge.textContent = `${this.activeTask.tag || 'Challenge'}${spiceIndicator}`;
+    this.taskTagBadge.className = `task-tag-badge spice-${this.activeTask.spice}`;
+
+    // Player text
+    this.taskPlayerInfo.innerHTML = `
+      <span class="task-player-avatar" style="background:${this.activePlayer.avatarBg}">${this.activePlayer.avatarEmoji}</span>
+      <span class="task-player-name">${this.escapeHTML(this.activePlayer.name)}</span>'s turn:
+    `;
+
+    // Task text
+    this.taskText.textContent = this.activeTask.text;
+
+    // Switch button text
+    this.switchTypeBtn.textContent = isTruth ? '🔄 Switch to Dare' : '🔄 Switch to Truth';
+
+    // Reset timer
+    this.stopTimer();
+
+    this.renderGameHeader();
+  }
+
+  rerollTask() {
+    window.soundFX.playClick();
+    this.fetchAndDisplayTask();
+  }
+
+  speakCurrentTask() {
+    if (!('speechSynthesis' in window)) {
+      alert("Text-to-speech is not supported on this browser.");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(this.taskText.textContent);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // Timer controls
+  startTimer(seconds) {
+    this.stopTimer();
+    this.timerSeconds = seconds;
+    this.updateTimerDisplay();
+    this.timerDisplay.classList.remove('hidden');
+
+    this.timerInterval = setInterval(() => {
+      this.timerSeconds--;
+      this.updateTimerDisplay();
+
+      if (this.timerSeconds <= 5 && this.timerSeconds > 0) {
+        window.soundFX.playTimerTick();
+      }
+
+      if (this.timerSeconds <= 0) {
+        this.stopTimer();
+        window.soundFX.playBuzzer();
+        this.timerDisplay.textContent = "⏰ TIME'S UP!";
+        this.timerDisplay.classList.add('timer-ended');
+      }
+    }, 1000);
+  }
+
+  stopTimer() {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
+    }
+    this.timerDisplay.classList.remove('timer-ended');
+    this.timerDisplay.classList.add('hidden');
+  }
+
+  updateTimerDisplay() {
+    const mins = Math.floor(this.timerSeconds / 60);
+    const secs = this.timerSeconds % 60;
+    this.timerDisplay.textContent = `⏱️ ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+
+  completeTask() {
+    this.stopTimer();
+    window.soundFX.playSuccess();
+    this.triggerConfetti(80);
+
+    // Update player stats
+    if (this.activeTaskType === 'truth') {
+      this.activePlayer.truthsDone++;
+    } else {
+      this.activePlayer.daresDone++;
+    }
+    this.activePlayer.totalTurns++;
+
+    // Update cooldowns:
+    // 1. Decrement cooldown for all other players
+    this.players.forEach(p => {
+      if (p.id !== this.activePlayer.id) {
+        p.cooldown = Math.max(0, p.cooldown - 1);
+      }
+    });
+
+    // 2. Set cooldown for the completed player
+    // Apply the configured cooldown setting (2 or 3 turns, safely capped if few players)
+    const effectiveCooldown = this.getEffectiveCooldown();
+    this.activePlayer.cooldown = effectiveCooldown;
+
+    // Advance round
+    this.currentRound++;
+
+    // Continue loop endlessly
+    setTimeout(() => {
+      this.showSpinArea();
+    }, 800);
+  }
+
+  chickenOut() {
+    this.stopTimer();
+    window.soundFX.playBuzzer();
+
+    this.activePlayer.forfeits++;
+    this.activePlayer.totalTurns++;
+
+    // Pick a funny forfeit
+    const forfeit = window.FORFEIT_TASKS[Math.floor(Math.random() * window.FORFEIT_TASKS.length)];
+
+    // Show forfeit modal
+    const modal = document.getElementById('forfeitModal');
+    const playerSpan = document.getElementById('forfeitPlayerName');
+    const textSpan = document.getElementById('forfeitText');
+    const acceptBtn = document.getElementById('forfeitDoneBtn');
+
+    playerSpan.textContent = this.activePlayer.name;
+    textSpan.textContent = forfeit;
+    modal.classList.remove('hidden');
+
+    acceptBtn.onclick = () => {
+      window.soundFX.playClick();
+      modal.classList.add('hidden');
+
+      // Update cooldowns just like completion
+      this.players.forEach(p => {
+        if (p.id !== this.activePlayer.id) {
+          p.cooldown = Math.max(0, p.cooldown - 1);
+        }
+      });
+      this.activePlayer.cooldown = this.getEffectiveCooldown();
+      this.currentRound++;
+
+      this.showSpinArea();
+    };
+  }
+
+  showRecap() {
+    const modal = document.getElementById('recapModal');
+    const container = document.getElementById('recapLeaderboard');
+    const superlatives = document.getElementById('recapSuperlatives');
+
+    // Find superlatives
+    let mostDaring = [...this.players].sort((a,b) => b.daresDone - a.daresDone)[0];
+    let mostTruthful = [...this.players].sort((a,b) => b.truthsDone - a.truthsDone)[0];
+    let mostChickened = [...this.players].sort((a,b) => b.forfeits - a.forfeits)[0];
+
+    superlatives.innerHTML = `
+      <div class="superlative-card dare">
+        <span class="sup-icon">🔥</span>
+        <div class="sup-title">Daring Champion</div>
+        <div class="sup-name">${mostDaring && mostDaring.daresDone > 0 ? mostDaring.name : 'None yet'}</div>
+        <div class="sup-count">${mostDaring ? mostDaring.daresDone : 0} Dares Conquered</div>
+      </div>
+      <div class="superlative-card truth">
+        <span class="sup-icon">💡</span>
+        <div class="sup-title">Truth Confessor</div>
+        <div class="sup-name">${mostTruthful && mostTruthful.truthsDone > 0 ? mostTruthful.name : 'None yet'}</div>
+        <div class="sup-count">${mostTruthful ? mostTruthful.truthsDone : 0} Truths Spilled</div>
+      </div>
+      <div class="superlative-card forfeit">
+        <span class="sup-icon">🐔</span>
+        <div class="sup-title">Chicken of the Night</div>
+        <div class="sup-name">${mostChickened && mostChickened.forfeits > 0 ? mostChickened.name : 'No chickens!'}</div>
+        <div class="sup-count">${mostChickened ? mostChickened.forfeits : 0} Forfeits Taken</div>
+      </div>
+    `;
+
+    // Leaderboard table
+    const sorted = [...this.players].sort((a,b) => (b.daresDone + b.truthsDone) - (a.daresDone + a.truthsDone));
+    let rowsHtml = '';
+    sorted.forEach((p, idx) => {
+      rowsHtml += `
+        <tr>
+          <td>#${idx + 1}</td>
+          <td><span style="margin-right:6px">${p.avatarEmoji}</span> <strong>${this.escapeHTML(p.name)}</strong></td>
+          <td><span class="badge-truth">${p.truthsDone}</span></td>
+          <td><span class="badge-dare">${p.daresDone}</span></td>
+          <td><span class="badge-forfeit">${p.forfeits}</span></td>
+          <td><strong>${p.truthsDone + p.daresDone}</strong></td>
+        </tr>
+      `;
+    });
+
+    container.innerHTML = `
+      <table class="recap-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Truths</th>
+            <th>Dares</th>
+            <th>Chickened</th>
+            <th>Total Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+        </tbody>
+      </table>
+    `;
+
+    modal.classList.remove('hidden');
+
+    const resumeBtn = document.getElementById('recapResumeBtn');
+    resumeBtn.onclick = () => {
+      window.soundFX.playClick();
+      modal.classList.add('hidden');
+    };
+
+    const newGameBtn = document.getElementById('recapNewGameBtn');
+    newGameBtn.onclick = () => {
+      window.soundFX.playClick();
+      modal.classList.add('hidden');
+      this.returnToLobby();
+    };
+  }
+
+  // HTML5 Canvas confetti generator
+  triggerConfetti(particleCount = 70) {
+    if (!this.ctx) return;
+    const colors = ['#FF1493', '#00F0FF', '#FFE600', '#7B2CBF', '#00FF66', '#FF4500'];
+    const particles = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: window.innerWidth / 2 + (Math.random() - 0.5) * 200,
+        y: window.innerHeight / 2 - 50,
+        vx: (Math.random() - 0.5) * 14,
+        vy: (Math.random() - 1.2) * 14,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 10,
+        gravity: 0.35,
+        opacity: 1
+      });
+    }
+
+    let frame = 0;
+    const animate = () => {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      let alive = false;
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        p.rotation += p.rotSpeed;
+        p.opacity -= 0.012;
+
+        if (p.opacity > 0) {
+          alive = true;
+          this.ctx.save();
+          this.ctx.globalAlpha = Math.max(0, p.opacity);
+          this.ctx.translate(p.x, p.y);
+          this.ctx.rotate((p.rotation * Math.PI) / 180);
+          this.ctx.fillStyle = p.color;
+          this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          this.ctx.restore();
+        }
+      });
+
+      frame++;
+      if (alive && frame < 120) {
+        requestAnimationFrame(animate);
+      } else {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }
+
+  escapeHTML(str) {
+    if (!str) return '';
+    return str.replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+    );
+  }
+
+  render() {
+    this.renderSetupPlayers();
+  }
+}
+
+// Instantiate once DOM is ready
+window.addEventListener('DOMContentLoaded', () => {
+  window.app = new TruthAndDareApp();
+
+  // Register PWA Service Worker for 100% offline Airplane Mode play
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch((err) => {
+      console.warn("ServiceWorker registration failed", err);
+    });
+  }
+
+  // Handle PWA Install Prompt
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('installAppBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) {
+      installBtn.classList.remove('hidden');
+    }
+  });
+
+  if (installBtn) {
+    // Show install button on mobile browsers
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+      installBtn.classList.remove('hidden');
+    }
+
+    installBtn.addEventListener('click', () => {
+      window.soundFX.playClick();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            installBtn.classList.add('hidden');
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+          alert("📱 Install on iPhone:\n\n1. Tap the Share button (square with arrow ⎋) at the bottom of Safari.\n2. Tap 'Add to Home Screen' ➕.\n\nOnce added, you can turn on Airplane mode and play completely offline anytime!");
+        } else {
+          alert("📲 To Install as App:\n\nTap the browser menu (⋮) in Chrome or Edge, then select 'Add to Home screen' or 'Install App'.\n\nOnce installed, you can play offline in Airplane mode!");
+        }
+      }
+    });
+  }
+});
+
+  </script>
+</body>
+</html>
