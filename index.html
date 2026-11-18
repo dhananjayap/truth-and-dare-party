@@ -1438,35 +1438,265 @@ body::after {
   50% { opacity: 0.55; }
 }
 
-/* Responsive adjustments */
+/* Responsive Mobile-Optimized Layout */
 @media (max-width: 600px) {
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
   .app-container {
+    padding: 8px 10px;
+    max-width: 100vw;
+  }
+
+  /* Compact mobile header */
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
     padding: 10px 12px;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .logo-area {
+    justify-content: center;
+  }
+
+  .logo-title {
+    font-size: 1.25rem;
+  }
+
+  .header-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .header-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 80px;
+  }
+
+  /* Glass Panels */
+  .glass-panel {
+    padding: 16px 12px;
+    margin-bottom: 14px;
+    border-radius: var(--radius-md);
   }
 
   .setup-hero h1 {
-    font-size: 1.8rem;
+    font-size: 1.65rem;
+  }
+
+  .setup-hero p {
+    font-size: 0.92rem;
+  }
+
+  /* Mobile Input: Stack vertically to prevent button clipping */
+  .input-row {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .styled-input {
+    width: 100%;
+    font-size: 0.98rem;
+    padding: 12px 14px;
+  }
+
+  .primary-btn#addPlayerBtn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    justify-content: center;
+  }
+
+  /* Quick actions row */
+  .quick-actions-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* Settings grid single column */
+  .settings-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .setting-card {
+    padding: 14px 12px;
+  }
+
+  .setting-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .category-checkbox-label {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+
+  /* Big Start Button */
+  .big-start-btn {
+    padding: 15px;
+    font-size: 1.1rem;
+  }
+
+  /* Suspense Spotlight Stage on Mobile */
+  .spin-panel {
+    padding: 16px 8px;
+  }
+
+  .spin-heading {
+    font-size: 1.45rem;
+  }
+
+  .spin-subheading {
+    font-size: 0.88rem;
+    margin-bottom: 18px;
+  }
+
+  .portal-stage {
+    height: 220px;
+    max-width: 100%;
+    margin-bottom: 18px;
+  }
+
+  .portal-energy-ring {
+    width: 280px;
+    height: 280px;
+  }
+
+  .slot-card {
+    width: 92%;
+    padding: 16px 10px;
+    gap: 8px;
+  }
+
+  .slot-avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 2.2rem;
+  }
+
+  /* Fix truncated text: Allow wrapping & reduce font size */
+  .slot-name {
+    font-size: 1.35rem;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    line-height: 1.25;
+    max-height: 2.5em;
+  }
+
+  .slot-status-badge {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+  }
+
+  .radar-chip {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+  }
+
+  .spin-action-btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 20px;
+    font-size: 1.05rem;
+  }
+
+  /* Choice Screen */
+  .chosen-avatar {
+    width: 68px;
+    height: 68px;
+    font-size: 2.2rem;
+  }
+
+  .chosen-name {
+    font-size: 1.6rem;
   }
 
   .choice-cards-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .choice-btn-card {
+    padding: 20px 16px;
+    gap: 8px;
+  }
+
+  .choice-btn-card .choice-icon {
+    font-size: 2.4rem;
+  }
+
+  .choice-btn-card .choice-title {
+    font-size: 1.35rem;
+  }
+
+  /* Task Screen */
+  .task-panel {
+    padding: 16px 12px;
+  }
+
+  .task-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .timer-controls {
+    display: flex;
+    gap: 6px;
+  }
+
+  .control-pill-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .task-question-text {
+    font-size: 1.2rem;
+    line-height: 1.4;
   }
 
   .task-actions-row {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .task-question-text {
-    font-size: 1.25rem;
+  .complete-btn {
+    padding: 15px 20px;
+    font-size: 1.05rem;
   }
 
-  .roulette-container {
-    height: 100px;
+  .chicken-btn {
+    padding: 13px 16px;
+    font-size: 0.92rem;
   }
 
-  .reel-item {
-    width: 90px;
-    height: 75px;
+  /* Superlatives in recap */
+  .superlatives-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-card {
+    padding: 20px 14px;
+    max-width: 95vw;
+  }
+
+  .modal-title {
+    font-size: 1.35rem;
   }
 }
 
@@ -1804,413 +2034,413 @@ const TRUTHS_DATA = [
     id: "t_col_1",
     category: "campus",
     spice: "mild",
-    tag: "🎓 Campus Life",
+    tag: "\uD83C\uDF93 Campus Life",
     text: "What's the biggest lie you've told to get attendance or a medical leave letter?"
   },
   {
     id: "t_col_2",
     category: "campus",
     spice: "spicy",
-    tag: "🎓 Campus Life",
+    tag: "\uD83C\uDF93 Campus Life",
     text: "Who in this group would you trust least with your internal marks?"
   },
   {
     id: "t_col_3",
     category: "campus",
     spice: "spicy",
-    tag: "💌 Crush Confession",
+    tag: "\uD83D\uDC8C Crush Confession",
     text: "Have you ever sent \"Good morning\" to a crush and then waited 3 hours for the blue tick?"
   },
   {
     id: "t_col_4",
     category: "campus",
     spice: "mild",
-    tag: "🚌 College Bus",
+    tag: "\uD83D\uDE8C College Bus",
     text: "What's the most embarrassing thing you've done to impress someone on the college bus?"
   },
   {
     id: "t_col_5",
     category: "campus",
     spice: "mild",
-    tag: "👨‍🏫 Teacher Drama",
+    tag: "\uD83D\uDC68\u200D\uD83C\uDFEB Teacher Drama",
     text: "Which teacher have you secretly imitated behind their back? Do it now."
   },
   {
     id: "t_col_6",
     category: "campus",
     spice: "spicy",
-    tag: "📚 Exam Arrears",
+    tag: "\uD83D\uDCDA Exam Arrears",
     text: "What's your worst \"supply\" (arrear) story, and who knows about it?"
   },
   {
     id: "t_col_7",
     category: "campus",
     spice: "spicy",
-    tag: "📝 Exam Cheating",
+    tag: "\uD83D\uDCDD Exam Cheating",
     text: "Have you ever copied in an exam? What was the most creative method?"
   },
   {
     id: "t_col_8",
     category: "campus",
     spice: "mild",
-    tag: "🏃 Bunking",
+    tag: "\uD83C\uDFC3 Bunking",
     text: "What's the most pathetic excuse you've given to bunk class?"
   },
   {
     id: "t_col_9",
     category: "campus",
     spice: "mild",
-    tag: "🎭 Overacting",
+    tag: "\uD83C\uDFAD Overacting",
     text: "Who here has the most \"ente ammo\" level of overacting when they get caught?"
   },
   {
     id: "t_col_10",
     category: "campus",
     spice: "spicy",
-    tag: "📸 Social Media",
+    tag: "\uD83D\uDCF8 Social Media",
     text: "What's the cringiest caption you've ever put on an Instagram post?"
   },
   {
     id: "t_col_11",
     category: "campus",
     spice: "spicy",
-    tag: "👀 Stalking",
+    tag: "\uD83D\uDC40 Stalking",
     text: "Have you ever liked an old photo of someone while stalking and panicked? How did you recover?"
   },
   {
     id: "t_col_12",
     category: "campus",
     spice: "mild",
-    tag: "😭 Crybaby",
+    tag: "\uD83D\uDE2D Crybaby",
     text: "Which person here would be the first to cry if they got low marks?"
   },
   {
     id: "t_col_13",
     category: "campus",
     spice: "spicy",
-    tag: "💸 Money Spent",
+    tag: "\uD83D\uDCB8 Money Spent",
     text: "What's the most you've ever spent on a crush, and did it work?"
   },
   {
     id: "t_col_14",
     category: "campus",
     spice: "mild",
-    tag: "😴 Sleeping",
+    tag: "\uD83D\uDE34 Sleeping",
     text: "Have you ever been caught sleeping in class? What happened?"
   },
   {
     id: "t_col_15",
     category: "campus",
     spice: "mild",
-    tag: "🍛 Food Craving",
+    tag: "\uD83C\uDF5B Food Craving",
     text: "What's the worst thing you've done for a free parotta-beef or biriyani treat?"
   },
   {
     id: "t_col_16",
     category: "campus",
     spice: "mild",
-    tag: "🎬 Movie Taste",
+    tag: "\uD83C\uDFAC Movie Taste",
     text: "Who in this group has the worst taste in Malayalam movies?"
   },
   {
     id: "t_col_18",
     category: "campus",
     spice: "spicy",
-    tag: "🎉 College Fest",
+    tag: "\uD83C\uDF89 College Fest",
     text: "What's your most embarrassing moment at an Onam or college day function?"
   },
   {
     id: "t_col_19",
     category: "campus",
     spice: "mild",
-    tag: "🤐 Awkward",
+    tag: "\uD83E\uDD10 Awkward",
     text: "What's the weirdest thing you've said to a teacher thinking they were your friend?"
   },
   {
     id: "t_col_20",
     category: "campus",
     spice: "mild",
-    tag: "😰 Viva Panic",
+    tag: "\uD83D\uDE30 Viva Panic",
     text: "Which person here would run away first during a viva?"
   },
   {
     id: "t_col_21",
     category: "campus",
     spice: "spicy",
-    tag: "🤫 Secret Lies",
+    tag: "\uD83E\uDD2B Secret Lies",
     text: "Have you ever told your parents you were at a \"study group\" while you were somewhere else?"
   },
   {
     id: "t_col_22",
     category: "campus",
     spice: "spicy",
-    tag: "💔 Heartbreak",
+    tag: "\uD83D\uDC94 Heartbreak",
     text: "What's the most dramatic thing you've done after a breakup or a rejection?"
   },
   {
     id: "t_col_23",
     category: "campus",
     spice: "mild",
-    tag: "👍 Ghosting",
+    tag: "\uD83D\uDC4D Ghosting",
     text: "Which friend here has the best \"reply with a thumbs up and disappear\" energy?"
   },
   {
     id: "t_col_24",
     category: "campus",
     spice: "mild",
-    tag: "🏷️ Nicknames",
+    tag: "\uD83C\uDFF7\uFE0F Nicknames",
     text: "What's the most ridiculous nickname people use for you in college?"
   },
   {
     id: "t_col_25",
     category: "campus",
     spice: "mild",
-    tag: "😵 Blank Face",
+    tag: "\uD83D\uDE35 Blank Face",
     text: "Have you ever pretended to understand a lecture while understanding nothing?"
   },
   {
     id: "t_col_26",
     category: "campus",
     spice: "spicy",
-    tag: "🧊 Playing Cool",
+    tag: "\uD83E\uDDCA Playing Cool",
     text: "What's the longest you've gone without replying to someone you actually liked, just to look cool?"
   },
   {
     id: "t_col_27",
     category: "campus",
     spice: "mild",
-    tag: "📱 Wrong Number",
+    tag: "\uD83D\uDCF1 Wrong Number",
     text: "Who in this group is most likely to send \"Hi\" and then say \"sorry wrong number\"?"
   },
   {
     id: "t_col_28",
     category: "campus",
     spice: "mild",
-    tag: "🛍️ Regret Buy",
+    tag: "\uD83D\uDECD\uFE0F Regret Buy",
     text: "What's the most useless thing you bought from a college fest stall?"
   },
   {
     id: "t_col_29",
     category: "campus",
     spice: "spicy",
-    tag: "☕ Canteen Crush",
+    tag: "\u2615 Canteen Crush",
     text: "Have you ever liked someone from a different department just to see them in the canteen?"
   },
   {
     id: "t_col_30",
     category: "campus",
     spice: "mild",
-    tag: "🚌 College Tour",
+    tag: "\uD83D\uDE8C College Tour",
     text: "What's the funniest thing that happened to you on a college tour?"
   },
   {
     id: "t_col_31",
     category: "campus",
     spice: "spicy",
-    tag: "🔍 Search History",
+    tag: "\uD83D\uDD0D Search History",
     text: "If your Google search history were projected on the classroom wall, which search would make you leave college?"
   },
   {
     id: "t_col_32",
     category: "campus",
     spice: "spicy",
-    tag: "🛏️ Hostel Life",
+    tag: "\uD83D\uDECF\uFE0F Hostel Life",
     text: "Which friend here would you not want as a roommate in the hostel, and why?"
   },
   {
     id: "t_col_33",
     category: "campus",
     spice: "mild",
-    tag: "🙈 Mistaken",
+    tag: "\uD83D\uDE48 Mistaken",
     text: "Have you ever been mistaken for someone else by a crush? What happened?"
   },
   {
     id: "t_col_34",
     category: "campus",
     spice: "spicy",
-    tag: "💬 Group Drama",
+    tag: "\uD83D\uDCAC Group Drama",
     text: "What's the biggest drama you've caused over a WhatsApp group message?"
   },
   {
     id: "t_col_35",
     category: "campus",
     spice: "spicy",
-    tag: "🎒 Last Bench",
+    tag: "\uD83C\uDF92 Last Bench",
     text: "Which \"last bench\" memory still makes you laugh and blush at the same time?"
   },
   {
     id: "t_col_36",
     category: "campus",
     spice: "spicy",
-    tag: "👨‍👩‍👧 Parents",
+    tag: "\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67 Parents",
     text: "What's the most awkward moment you've had with a friend's parent?"
   },
   {
     id: "t_col_37",
     category: "campus",
     spice: "mild",
-    tag: "🛺 Auto Excuses",
+    tag: "\uD83D\uDEFA Auto Excuses",
     text: "Who here would be the first to blame the auto driver or the bus when late?"
   },
   {
     id: "t_col_38",
     category: "campus",
     spice: "mild",
-    tag: "🛵 Desperate Lift",
+    tag: "\uD83D\uDEF5 Desperate Lift",
     text: "What's the most desperate thing you've done to get a lift or a bus seat?"
   },
   {
     id: "t_col_39",
     category: "campus",
     spice: "spicy",
-    tag: "🤫 Fake Relationship",
+    tag: "\uD83E\uDD2B Fake Relationship",
     text: "Have you ever pretended to be in a relationship to avoid someone?"
   },
   {
     id: "t_col_40",
     category: "campus",
     spice: "spicy",
-    tag: "📢 Gossip Queen",
+    tag: "\uD83D\uDCE2 Gossip Queen",
     text: "Who in this group is secretly the biggest gossip?"
   },
   {
     id: "t_col_41",
     category: "campus",
     spice: "mild",
-    tag: "🎁 Worst Gift",
+    tag: "\uD83C\uDF81 Worst Gift",
     text: "What's the worst gift you've ever given someone, and what did they do?"
   },
   {
     id: "t_col_42",
     category: "campus",
     spice: "mild",
-    tag: "🎂 Forgot B'day",
+    tag: "\uD83C\uDF82 Forgot B'day",
     text: "Have you ever forgotten your own friend's birthday and covered it up with a fake wish?"
   },
   {
     id: "t_col_43",
     category: "campus",
     spice: "mild",
-    tag: "🎤 Singing Disaster",
+    tag: "\uD83C\uDFA4 Singing Disaster",
     text: "What's the worst song you've ever sung at a college trip or bus journey?"
   },
   {
     id: "t_col_44",
     category: "campus",
     spice: "spicy",
-    tag: "💒 Wedding Invite",
+    tag: "\uD83D\uDC92 Wedding Invite",
     text: "Which one of your friends here would you want to bring to your wedding, and which one would you not invite?"
   },
   {
     id: "t_col_45",
     category: "campus",
     spice: "mild",
-    tag: "🔕 Silent Mode",
+    tag: "\uD83D\uDD15 Silent Mode",
     text: "Have you ever blamed your phone being on silent when you were actually ignoring someone?"
   },
   {
     id: "t_col_46",
     category: "campus",
     spice: "mild",
-    tag: "👵 Parents Exposed",
+    tag: "\uD83D\uDC75 Parents Exposed",
     text: "What's the most embarrassing thing your amma or achan has said in front of your friends?"
   },
   {
     id: "t_col_47",
     category: "campus",
     spice: "mild",
-    tag: "😭 Farewell",
+    tag: "\uD83D\uDE2D Farewell",
     text: "Who in this group is the most likely to cry at a farewell day?"
   },
   {
     id: "t_col_48",
     category: "campus",
     spice: "mild",
-    tag: "☕ Chaya Budget",
+    tag: "\u2615 Chaya Budget",
     text: "What's the most you've spent on chaya, snacks and recharges in a month, and where did it go?"
   },
   {
     id: "t_col_49",
     category: "campus",
     spice: "spicy",
-    tag: "🗣️ College Rumour",
+    tag: "\uD83D\uDDE3\uFE0F College Rumour",
     text: "What's the funniest rumour about you that went around college?"
   },
   {
     id: "t_col_50",
     category: "campus",
     spice: "spicy",
-    tag: "🗑️ Deleted Message",
+    tag: "\uD83D\uDDD1\uFE0F Deleted Message",
     text: "Have you ever deleted a message just after sending it? What was it?"
   },
   {
     id: "t_col_51",
     category: "campus",
     spice: "mild",
-    tag: "📱 Reel Star",
+    tag: "\uD83D\uDCF1 Reel Star",
     text: "Which friend here is likely to become a famous reel creator, and which one will never post?"
   },
   {
     id: "t_col_52",
     category: "campus",
     spice: "spicy",
-    tag: "🇬🇧 Flirting in English",
+    tag: "\uD83C\uDDEC\uD83C\uDDE7 Flirting in English",
     text: "What's the most awkward thing you've ever said while trying to flirt in English instead of Malayalam?"
   },
   {
     id: "t_col_53",
     category: "campus",
     spice: "spicy",
-    tag: "🧢 Flexing Lies",
+    tag: "\uD83E\uDDE2 Flexing Lies",
     text: "Have you ever lied about your age, marks, or place to look cooler?"
   },
   {
     id: "t_col_54",
     category: "campus",
     spice: "mild",
-    tag: "❤️ Secret Pleasure",
+    tag: "\u2764\uFE0F Secret Pleasure",
     text: "What's something you secretly love but everyone makes fun of you for?"
   },
   {
     id: "t_col_55",
     category: "campus",
     spice: "spicy",
-    tag: "💍 Marriage Fate",
+    tag: "\uD83D\uDC8D Marriage Fate",
     text: "Who in this group will most likely end up marrying their college crush, and who won't?"
   },
   {
     id: "t_col_56",
     category: "campus",
     spice: "mild",
-    tag: "🚌 KSRTC Rush",
+    tag: "\uD83D\uDE8C KSRTC Rush",
     text: "What's the most shameless thing you've done to get a seat in a KSRTC bus?"
   },
   {
     id: "t_col_57",
     category: "campus",
     spice: "mild",
-    tag: "🥊 Petty Fight",
+    tag: "\uD83E\uDD4A Petty Fight",
     text: "What's the funniest fight you've had with a friend over something very small?"
   },
   {
     id: "t_col_58",
     category: "campus",
     spice: "spicy",
-    tag: "🤫 Sibling Crush",
+    tag: "\uD83E\uDD2B Sibling Crush",
     text: "Have you ever had a crush on a friend's sibling? How did you hide it?"
   },
   {
     id: "t_col_59",
     category: "campus",
     spice: "mild",
-    tag: "🏫 School Cringe",
+    tag: "\uD83C\uDFEB School Cringe",
     text: "What was the most cringe thing you did in school that you now wish no one remembered?"
   },
   {
     id: "t_col_60",
     category: "campus",
     spice: "spicy",
-    tag: "🔒 Secret Vault",
+    tag: "\uD83D\uDD12 Secret Vault",
     text: "Which one secret would you pay anything to make the group forget?"
   },
 
@@ -2219,420 +2449,420 @@ const TRUTHS_DATA = [
     id: "t_rst_1",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Screen Time",
+    tag: "\uD83D\uDC80 Screen Time",
     text: "Read out your phone's screen time for last week. Which app is the villain?"
   },
   {
     id: "t_rst_2",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Peaked in School",
+    tag: "\uD83D\uDC80 Peaked in School",
     text: "Which person here peaked in Plus Two and has been declining since?"
   },
   {
     id: "t_rst_3",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Brutal Fill-in",
+    tag: "\uD83D\uDC80 Brutal Fill-in",
     text: "Complete this for the person on your left: \"They'd be 10x more bearable if they stopped ____.\""
   },
   {
     id: "t_rst_4",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Crush Burn",
+    tag: "\uD83D\uDC80 Crush Burn",
     text: "What's the worst reply a crush ever gave you? Word for word."
   },
   {
     id: "t_rst_5",
     category: "roast",
     spice: "mild",
-    tag: "💀 Flop Post",
+    tag: "\uD83D\uDC80 Flop Post",
     text: "Which of your posts got the fewest likes, and what was the caption?"
   },
   {
     id: "t_rst_6",
     category: "roast",
     spice: "mild",
-    tag: "💀 Mirror Rehearsal",
+    tag: "\uD83D\uDC80 Mirror Rehearsal",
     text: "How many times have you rehearsed a conversation with your crush in the bathroom mirror, and did it help?"
   },
   {
     id: "t_rst_7",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Fake Swag",
+    tag: "\uD83D\uDC80 Fake Swag",
     text: "Who here has the most unearned confidence? Present your evidence."
   },
   {
     id: "t_rst_8",
     category: "roast",
     spice: "mild",
-    tag: "💀 Biriyani Betrayal",
+    tag: "\uD83D\uDC80 Biriyani Betrayal",
     text: "Who would sell out the group first for a free biriyani?"
   },
   {
     id: "t_rst_9",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Fake Guru",
+    tag: "\uD83D\uDC80 Fake Guru",
     text: "Who gives the worst advice but acts like a life coach?"
   },
   {
     id: "t_rst_10",
     category: "roast",
     spice: "mild",
-    tag: "💀 Fake Smart",
+    tag: "\uD83D\uDC80 Fake Smart",
     text: "What's the fakest thing you've said in class to sound intelligent?"
   },
   {
     id: "t_rst_11",
     category: "roast",
     spice: "mild",
-    tag: "💀 Slow Reply",
+    tag: "\uD83D\uDC80 Slow Reply",
     text: "Whose reply speed matches a government office?"
   },
   {
     id: "t_rst_12",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Free-loader",
+    tag: "\uD83D\uDC80 Free-loader",
     text: "Who here is \"busy\" for every plan but free for every treat?"
   },
   {
     id: "t_rst_13",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Delusional",
+    tag: "\uD83D\uDC80 Delusional",
     text: "What's your most delusional belief about yourself?"
   },
   {
     id: "t_rst_14",
     category: "roast",
     spice: "mild",
-    tag: "💀 Fake Study Plan",
+    tag: "\uD83D\uDC80 Fake Study Plan",
     text: "Whose study timetable is 90% decoration and 10% studying?"
   },
   {
     id: "t_rst_15",
     category: "roast",
     spice: "mild",
-    tag: "💀 Always Late",
+    tag: "\uD83D\uDC80 Always Late",
     text: "Whose \"five minutes away\" has never once been true?"
   },
   {
     id: "t_rst_16",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Blue Tick Pain",
+    tag: "\uD83D\uDC80 Blue Tick Pain",
     text: "What's the saddest \"seen\" you've ever received?"
   },
   {
     id: "t_rst_17",
     category: "roast",
     spice: "mild",
-    tag: "💀 Grade Drama",
+    tag: "\uD83D\uDC80 Grade Drama",
     text: "Who cries over 48/50 while the rest of us are fighting to pass?"
   },
   {
     id: "t_rst_18",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Zero Follow-through",
+    tag: "\uD83D\uDC80 Zero Follow-through",
     text: "Who here has the most potential and the least follow-through?"
   },
   {
     id: "t_rst_19",
     category: "roast",
     spice: "mild",
-    tag: "💀 Dead Hobby",
+    tag: "\uD83D\uDC80 Dead Hobby",
     text: "Which of your projects (gym, diet, guitar, coding) died fastest?"
   },
   {
     id: "t_rst_20",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Fake Fine",
+    tag: "\uD83D\uDC80 Fake Fine",
     text: "Who says \"Bro, I'm fine\" while clearly not being fine?"
   },
   {
     id: "t_rst_21",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Savage LinkedIn",
+    tag: "\uD83D\uDC80 Savage LinkedIn",
     text: "Write a fake LinkedIn headline for the person across from you that exposes them."
   },
   {
     id: "t_rst_22",
     category: "roast",
     spice: "mild",
-    tag: "💀 Bad Liar",
+    tag: "\uD83D\uDC80 Bad Liar",
     text: "Whose face gives away their lie in two seconds?"
   },
   {
     id: "t_rst_23",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Main Character",
+    tag: "\uD83D\uDC80 Main Character",
     text: "Who has the worst case of main-character syndrome?"
   },
   {
     id: "t_rst_24",
     category: "roast",
     spice: "mild",
-    tag: "💀 Streak Desperation",
+    tag: "\uD83D\uDC80 Streak Desperation",
     text: "What's the most pathetic thing you've done to keep a Snapchat streak alive?"
   },
   {
     id: "t_rst_25",
     category: "roast",
     spice: "mild",
-    tag: "💀 Window Seat Traitor",
+    tag: "\uD83D\uDC80 Window Seat Traitor",
     text: "Who would give up the friendship for a window seat on the KSRTC bus?"
   },
   {
     id: "t_rst_26",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Walking Seen Zone",
+    tag: "\uD83D\uDC80 Walking Seen Zone",
     text: "Who is the group's walking \"seen zone\"?"
   },
   {
     id: "t_rst_27",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Playlist Roast",
+    tag: "\uD83D\uDC80 Playlist Roast",
     text: "Whose playlist would worry a therapist?"
   },
   {
     id: "t_rst_28",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Fishing Compliments",
+    tag: "\uD83D\uDC80 Fishing Compliments",
     text: "What compliment have you openly fished for and still not received?"
   },
   {
     id: "t_rst_29",
     category: "roast",
     spice: "mild",
-    tag: "💀 Worst Explainer",
+    tag: "\uD83D\uDC80 Worst Explainer",
     text: "Who would be the worst teacher in this group, judging by how they explain things?"
   },
   {
     id: "t_rst_30",
     category: "roast",
     spice: "mild",
-    tag: "💀 Next Sem Lie",
+    tag: "\uD83D\uDC80 Next Sem Lie",
     text: "Who has had \"I'll change after this semester\" on repeat since first year?"
   },
   {
     id: "t_rst_31",
     category: "roast",
     spice: "mild",
-    tag: "💀 Ippo Varam",
+    tag: "\uD83D\uDC80 Ippo Varam",
     text: "Who says \"ippo varam\" and arrives after the party ends?"
   },
   {
     id: "t_rst_32",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Course Amnesia",
+    tag: "\uD83D\uDC80 Course Amnesia",
     text: "Who would fail a basic quiz about their own course?"
   },
   {
     id: "t_rst_33",
     category: "roast",
     spice: "mild",
-    tag: "💀 Bad Gallery",
+    tag: "\uD83D\uDC80 Bad Gallery",
     text: "Whose gallery has 4,000 photos and only three good ones?"
   },
   {
     id: "t_rst_34",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Secret Leaker",
+    tag: "\uD83D\uDC80 Secret Leaker",
     text: "Who couldn't keep a surprise secret for even ten minutes?"
   },
   {
     id: "t_rst_35",
     category: "roast",
     spice: "mild",
-    tag: "💀 Assignment Flop",
+    tag: "\uD83D\uDC80 Assignment Flop",
     text: "Who copies the assignment and still scores lower than the person they copied from?"
   },
   {
     id: "t_rst_36",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Villain Arc",
+    tag: "\uD83D\uDC80 Villain Arc",
     text: "What would your villain origin story be in this college?"
   },
   {
     id: "t_rst_37",
     category: "roast",
     spice: "mild",
-    tag: "💀 Moral Support",
+    tag: "\uD83D\uDC80 Moral Support",
     text: "Who in group projects says \"I'll be the moral support\"?"
   },
   {
     id: "t_rst_38",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Broken Promises",
+    tag: "\uD83D\uDC80 Broken Promises",
     text: "Who is the biggest all-talk champion? Quote their best broken promise."
   },
   {
     id: "t_rst_39",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Denied Cringe",
+    tag: "\uD83D\uDC80 Denied Cringe",
     text: "What's the cringiest thing you did for a crush that you still deny?"
   },
   {
     id: "t_rst_40",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Wardrobe Disaster",
+    tag: "\uD83D\uDC80 Wardrobe Disaster",
     text: "Which one item in the group's wardrobes must be burned immediately?"
   },
   {
     id: "t_rst_41",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Fake Chill",
+    tag: "\uD83D\uDC80 Fake Chill",
     text: "Who here is 100% faking their \"I don't care about marks\" attitude?"
   },
   {
     id: "t_rst_42",
     category: "roast",
     spice: "mild",
-    tag: "💀 Embarrassing Laugh",
+    tag: "\uD83D\uDC80 Embarrassing Laugh",
     text: "Whose laugh is the most embarrassing in public?"
   },
   {
     id: "t_rst_43",
     category: "roast",
     spice: "mild",
-    tag: "💀 Attendance Catch",
+    tag: "\uD83D\uDC80 Attendance Catch",
     text: "Who would be the first caught in a surprise attendance check?"
   },
   {
     id: "t_rst_44",
     category: "roast",
     spice: "mild",
-    tag: "💀 Unfunny Reels",
+    tag: "\uD83D\uDC80 Unfunny Reels",
     text: "Who sends 14 reels a day and has never once been right about what's funny?"
   },
   {
     id: "t_rst_45",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Forever Single",
+    tag: "\uD83D\uDC80 Forever Single",
     text: "Rate everyone's chances of being single forever from 1 to 10. Justify the lowest score."
   },
   {
     id: "t_rst_46",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Rage Quit",
+    tag: "\uD83D\uDC80 Rage Quit",
     text: "What's your most dramatic WhatsApp group exit, and did anyone even notice?"
   },
   {
     id: "t_rst_47",
     category: "roast",
     spice: "mild",
-    tag: "💀 Sleeping Liar",
+    tag: "\uD83D\uDC80 Sleeping Liar",
     text: "Who is the \"Sorry, I was asleep\" liar?"
   },
   {
     id: "t_rst_48",
     category: "roast",
     spice: "mild",
-    tag: "💀 11th Hour Flop",
+    tag: "\uD83D\uDC80 11th Hour Flop",
     text: "Whose last-minute study session has the worst return on investment?"
   },
   {
     id: "t_rst_49",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Future Ghoster",
+    tag: "\uD83D\uDC80 Future Ghoster",
     text: "Who will ghost the group first once they get a job or a partner?"
   },
   {
     id: "t_rst_50",
     category: "roast",
     spice: "mild",
-    tag: "💀 Confidently Wrong",
+    tag: "\uD83D\uDC80 Confidently Wrong",
     text: "Who gives the most confident wrong answer in class?"
   },
   {
     id: "t_rst_51",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Zero Product",
+    tag: "\uD83D\uDC80 Zero Product",
     text: "What's one thing about you that's all marketing and no product?"
   },
   {
     id: "t_rst_52",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Bill Dodger",
+    tag: "\uD83D\uDC80 Bill Dodger",
     text: "Who is the worst at splitting the canteen bill?"
   },
   {
     id: "t_rst_53",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Attention Status",
+    tag: "\uD83D\uDC80 Attention Status",
     text: "Whose WhatsApp status is pure attention-seeking?"
   },
   {
     id: "t_rst_54",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Voted Off",
+    tag: "\uD83D\uDC80 Voted Off",
     text: "If this group were a reality show, who gets voted out first? Defend your vote."
   },
   {
     id: "t_rst_55",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Gossip Admin",
+    tag: "\uD83D\uDC80 Gossip Admin",
     text: "Who would start the anonymous college gossip page?"
   },
   {
     id: "t_rst_56",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Wallet Hesitation",
+    tag: "\uD83D\uDC80 Wallet Hesitation",
     text: "Who gets suddenly \"nervous\" only when it's their turn to pay?"
   },
   {
     id: "t_rst_57",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Silent Tolerate",
+    tag: "\uD83D\uDC80 Silent Tolerate",
     text: "What's your most irritating habit that everyone silently tolerates?"
   },
   {
     id: "t_rst_58",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Worst Bio",
+    tag: "\uD83D\uDC80 Worst Bio",
     text: "Write the first line of the worst dating profile in this group."
   },
   {
     id: "t_rst_59",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Placement Excuse",
+    tag: "\uD83D\uDC80 Placement Excuse",
     text: "Who will be the last one placed, and what will their cover story be?"
   },
   {
     id: "t_rst_60",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Group Vote Off",
+    tag: "\uD83D\uDC80 Group Vote Off",
     text: "On the count of three, everyone points at the weakest link in the group. The most-pointed-at person defends themselves for 30 seconds."
   },
 
@@ -2641,175 +2871,175 @@ const TRUTHS_DATA = [
     id: "t_ext_1",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Forbidden Crush",
+    tag: "\uD83D\uDD25 Forbidden Crush",
     text: "If you were handcuffed to someone in this room for 24 hours and forced to date, who would you choose and why?"
   },
   {
     id: "t_ext_2",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Savage Secret",
+    tag: "\uD83D\uDD25 Savage Secret",
     text: "What is the most scandalous secret you've kept from your parents that would get you disowned if revealed?"
   },
   {
     id: "t_ext_3",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Red Flag",
+    tag: "\uD83D\uDD25 Red Flag",
     text: "What is the biggest, most toxic red flag you knowingly ignored in a crush just because they were attractive?"
   },
   {
     id: "t_ext_4",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Stalker Exposed",
+    tag: "\uD83D\uDD25 Stalker Exposed",
     text: "Do you have a fake/burner Instagram or Snapchat account? What is the handle or the last person you stalked on it?"
   },
   {
     id: "t_ext_5",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Late Night DM",
+    tag: "\uD83D\uDD25 Late Night DM",
     text: "What is the thirstiest, most shameless DM you have ever sent or received? Read the exact wording."
   },
   {
     id: "t_ext_6",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Romantic Trade",
+    tag: "\uD83D\uDD25 Romantic Trade",
     text: "If you had to swap romantic partners or crushes with someone in this room, whose partner/crush would you take?"
   },
   {
     id: "t_ext_7",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Toxic Move",
+    tag: "\uD83D\uDD25 Toxic Move",
     text: "What's the pettiest or most toxic thing you've done to get revenge on an ex or someone who rejected you?"
   },
   {
     id: "t_ext_8",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Kissing Practice",
+    tag: "\uD83D\uDD25 Kissing Practice",
     text: "Have you ever practiced kissing on a mirror, pillow, or hand? Demonstrate your exact technique right now!"
   },
   {
     id: "t_ext_9",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Risky Text",
+    tag: "\uD83D\uDD25 Risky Text",
     text: "What is the riskiest late-night text you ever sent where you immediately turned off Wi-Fi in absolute terror?"
   },
   {
     id: "t_ext_10",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Hidden Feelings",
+    tag: "\uD83D\uDD25 Hidden Feelings",
     text: "Have you ever secretly liked someone in this friend group or someone's ex/crush? Confess right now."
   },
   {
     id: "t_ext_11",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Worst Date",
+    tag: "\uD83D\uDD25 Worst Date",
     text: "What was your worst date or romantic meetup ever, and what dirty trick did you use to escape early?"
   },
   {
     id: "t_ext_12",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Wildest Secret",
+    tag: "\uD83D\uDD25 Wildest Secret",
     text: "Who in this room do you think has the wildest, craziest private double-life that none of us know about?"
   },
   {
     id: "t_ext_13",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Inappropriate Flirt",
+    tag: "\uD83D\uDD25 Inappropriate Flirt",
     text: "What's the most inappropriate or dangerous place where you've flirted or hooked up?"
   },
   {
     id: "t_ext_14",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Brutal Rating",
+    tag: "\uD83D\uDD25 Brutal Rating",
     text: "Rank everyone in this circle based strictly on who gives the best relationship partner vibes (1 to last)."
   },
   {
     id: "t_ext_15",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Hidden Vault",
+    tag: "\uD83D\uDD25 Hidden Vault",
     text: "If your hidden photos folder or archived WhatsApp chats were opened right now, what would shock the group most?"
   },
   {
     id: "t_ext_16",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Savage Turn-off",
+    tag: "\uD83D\uDD25 Savage Turn-off",
     text: "What is a weird physical or personality turn-off you secretly have that makes you lose feelings instantly?"
   },
   {
     id: "t_ext_17",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Ghoster Confession",
+    tag: "\uD83D\uDD25 Ghoster Confession",
     text: "Have you ever ghosted someone who was head-over-heels for you? What was your real, petty reason?"
   },
   {
     id: "t_ext_18",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Midnight Regret",
+    tag: "\uD83D\uDD25 Midnight Regret",
     text: "What is the biggest romantic mistake or 'I should never have texted them' moment you still cringe about at 2 AM?"
   },
   {
     id: "t_ext_19",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Two-timer",
+    tag: "\uD83D\uDD25 Two-timer",
     text: "Have you ever talked to or flirted with two people at the same time while keeping both on the hook?"
   },
   {
     id: "t_ext_20",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Dream Confession",
+    tag: "\uD83D\uDD25 Dream Confession",
     text: "Have you ever had a weird or romantic dream about someone sitting in this room? Who was it?"
   },
   {
     id: "t_ext_21",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Ex Roast",
+    tag: "\uD83D\uDD25 Ex Roast",
     text: "If your ex wrote a Google Review of you as a partner, how many stars would they give and what would the review say?"
   },
   {
     id: "t_ext_22",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Brutal Truth",
+    tag: "\uD83D\uDD25 Brutal Truth",
     text: "Look at the person to your right: what is one brutal piece of dating advice they urgently need to hear?"
   },
   {
     id: "t_ext_23",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Cheating Thoughts",
+    tag: "\uD83D\uDD25 Cheating Thoughts",
     text: "Have you ever had feelings or physical tension with someone while you were already committed?"
   },
   {
     id: "t_ext_24",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 First Impression",
+    tag: "\uD83D\uDD25 First Impression",
     text: "What was your real, unfiltered first impression of everyone here when you first met them?"
   },
   {
     id: "t_ext_25",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 The Final Confession",
+    tag: "\uD83D\uDD25 The Final Confession",
     text: "Confess the one thing you have NEVER told a single soul in this room because you were terrified of being judged."
   }
 ];
@@ -2820,441 +3050,441 @@ const DARES_DATA = [
     id: "d_col_nagavalli",
     category: "campus",
     spice: "spicy",
-    tag: "👻 Nagavalli (Manichitrathazhu)",
+    tag: "\uD83D\uDC7B Nagavalli (Manichitrathazhu)",
     text: "ACT AS NAGAVALLI: Deliver the iconic 'Vidamatte?!' dialogue with full haunting eyes, manic laughter, and dramatic classical hand mudras for 30 seconds!"
   },
   {
     id: "d_col_kunjikunnan",
     category: "campus",
     spice: "mild",
-    tag: "🎭 Kunjikoonan (Kunjikunnan)",
+    tag: "\uD83C\uDFAD Kunjikoonan (Kunjikunnan)",
     text: "ACT AS KUNJIKUNNAN: Do the iconic Dileep hunchback walk across the room, high-pitched innocent voice, and comedic dialogue for 30 seconds!"
   },
   {
     id: "d_col_zoo_animal",
     category: "campus",
     spice: "mild",
-    tag: "🦁 Zoo Animal Mimic",
+    tag: "\uD83E\uDD81 Zoo Animal Mimic",
     text: "IMITATE ZOO ANIMAL SOUNDS: Perform 3 loud, dramatic zoo animal sounds in a row (e.g., wild chimpanzee screech, angry elephant trumpet, roaring lion) with full physical acting until the group guesses each one!"
   },
   {
     id: "d_col_1",
     category: "campus",
     spice: "mild",
-    tag: "🎭 Manglish Accent",
+    tag: "\uD83C\uDFAD Manglish Accent",
     text: "Talk only in Manglish with a heavy American accent until your next turn."
   },
   {
     id: "d_col_2",
     category: "campus",
     spice: "mild",
-    tag: "🎭 Dramatic Meltdown",
+    tag: "\uD83C\uDFAD Dramatic Meltdown",
     text: "Do a dramatic \"Bro, I've failed all subjects\" speech in front of imaginary parents."
   },
   {
     id: "d_col_3",
     category: "campus",
     spice: "mild",
-    tag: "👨‍🏫 Teacher Mimic",
+    tag: "\uD83D\uDC68\u200D\uD83C\uDFEB Teacher Mimic",
     text: "Do a perfect imitation of your strictest teacher while the group guesses who it is."
   },
   {
     id: "d_col_4",
     category: "campus",
     spice: "mild",
-    tag: "🎬 Cinema Dialogue",
+    tag: "\uD83C\uDFAC Cinema Dialogue",
     text: "Act out an entire Malayalam movie dialogue scene with full emotions, and the group guesses the movie."
   },
   {
     id: "d_col_5",
     category: "campus",
     spice: "mild",
-    tag: "🚌 Bus Conductor",
+    tag: "\uD83D\uDE8C Bus Conductor",
     text: "Do your best \"bus conductor\" impression calling out stops and issuing tickets to the group."
   },
   {
     id: "d_col_6",
     category: "campus",
     spice: "spicy",
-    tag: "💍 Serious Proposal",
+    tag: "\uD83D\uDC8D Serious Proposal",
     text: "Sing a romantic song as if you're proposing to a friend here, in a very serious emotional voice."
   },
   {
     id: "d_col_7",
     category: "campus",
     spice: "spicy",
-    tag: "📱 Status Hijack",
+    tag: "\uD83D\uDCF1 Status Hijack",
     text: "Let the group choose your WhatsApp status for the next hour."
   },
   {
     id: "d_col_8",
     category: "campus",
     spice: "spicy",
-    tag: "💃 Silent Dance",
+    tag: "\uD83D\uDC83 Silent Dance",
     text: "Do a 30-second reel-style dance in the middle of the circle with zero music."
   },
   {
     id: "d_col_9",
     category: "campus",
     spice: "mild",
-    tag: "🎬 Silent Climax",
+    tag: "\uD83C\uDFAC Silent Climax",
     text: "Reenact the most dramatic climax scene from any Malayalam film, using only facial expressions."
   },
   {
     id: "d_col_10",
     category: "campus",
     spice: "mild",
-    tag: "📰 News Anchor",
+    tag: "\uD83D\uDCF0 News Anchor",
     text: "Speak like a serious TV news anchor and read out a recent text you sent."
   },
   {
     id: "d_col_11",
     category: "campus",
     spice: "mild",
-    tag: "🌟 Mass Hero Style",
+    tag: "\uD83C\uDF1F Mass Hero Style",
     text: "Compliment every person here in the most over-the-top Malayalam movie hero style."
   },
   {
     id: "d_col_12",
     category: "campus",
     spice: "mild",
-    tag: "👅 Tongue Twister",
+    tag: "\uD83D\uDC45 Tongue Twister",
     text: "Say the tongue twister \"kozhikode kozhi koottil kozhi\" three times at top speed, or take a forfeit."
   },
   {
     id: "d_col_13",
     category: "campus",
     spice: "spicy",
-    tag: "💇 Hilarious Styling",
+    tag: "\uD83D\uDC87 Hilarious Styling",
     text: "Let someone style your hair, dupatta, or shirt collar however they want for the next three rounds."
   },
   {
     id: "d_col_14",
     category: "campus",
     spice: "mild",
-    tag: "😡 Invisible Drama",
+    tag: "\uD83D\uDE21 Invisible Drama",
     text: "Do an \"angry girlfriend/boyfriend\" dramatic fight scene with an invisible partner for one minute."
   },
   {
     id: "d_col_15",
     category: "campus",
     spice: "mild",
-    tag: "🎤 Campus Rap",
+    tag: "\uD83C\uDFA4 Campus Rap",
     text: "Make up an impromptu rap about the person on your right using only college and canteen terms."
   },
   {
     id: "d_col_16",
     category: "campus",
     spice: "mild",
-    tag: "💼 Mock Interview",
+    tag: "\uD83D\uDCBC Mock Interview",
     text: "Do a fake \"Placement Interview\" where the group asks the weirdest questions and you must answer seriously."
   },
   {
     id: "d_col_17",
     category: "campus",
     spice: "mild",
-    tag: "🚶 Slow Motion Entry",
+    tag: "\uD83D\uDEB6 Slow Motion Entry",
     text: "Walk like your favourite mass hero entering a fight scene, with slow-motion commentary by the group."
   },
   {
     id: "d_col_18",
     category: "campus",
     spice: "mild",
-    tag: "🗳️ Union Chairman",
+    tag: "\uD83D\uDDF3\uFE0F Union Chairman",
     text: "Do a fake election campaign speech for the next college union chairman, using the most ridiculous promises."
   },
   {
     id: "d_col_19",
     category: "campus",
     spice: "mild",
-    tag: "🥄 Spoon Farewell",
+    tag: "\uD83E\uDD44 Spoon Farewell",
     text: "Hold a spoon like a microphone and give an emotional farewell speech as if the group is leaving college forever."
   },
   {
     id: "d_col_20",
     category: "campus",
     spice: "mild",
-    tag: "💔 Chair Heartbreak",
+    tag: "\uD83D\uDC94 Chair Heartbreak",
     text: "Say \"I miss you\" to a random object in the room and act completely heartbroken."
   },
   {
     id: "d_col_21",
     category: "campus",
     spice: "mild",
-    tag: "📝 Stern Examiner",
+    tag: "\uD83D\uDCDD Stern Examiner",
     text: "Pretend to be a stern external examiner, and give everyone in the room fake marks with funny reasons."
   },
   {
     id: "d_col_22",
     category: "campus",
     spice: "mild",
-    tag: "🍳 Imaginary Cooking",
+    tag: "\uD83C\uDF73 Imaginary Cooking",
     text: "Do a fake \"Cooking show\" with imaginary ingredients and make the group taste your invisible dish."
   },
   {
     id: "d_col_23",
     category: "campus",
     spice: "spicy",
-    tag: "👟 Shoe Swap",
+    tag: "\uD83D\uDC5F Shoe Swap",
     text: "Swap one shoe or chappal with someone across the circle and wear it for the rest of the game."
   },
   {
     id: "d_col_24",
     category: "campus",
     spice: "mild",
-    tag: "🥁 Pooram Entry",
+    tag: "\uD83E\uDD41 Pooram Entry",
     text: "Do a \"Pooram\" style grand dramatic entry while the rest of the group makes intense chenda sounds."
   },
   {
     id: "d_col_25",
     category: "campus",
     spice: "mild",
-    tag: "❓ Question Only",
+    tag: "\u2753 Question Only",
     text: "Speak only in questions for the next two rounds. No statements allowed!"
   },
   {
     id: "d_col_26",
     category: "campus",
     spice: "mild",
-    tag: "🏏 Cricket Commentary",
+    tag: "\uD83C\uDFCF Cricket Commentary",
     text: "Narrate every single action you do like a passionate cricket commentator until your next turn."
   },
   {
     id: "d_col_27",
     category: "campus",
     spice: "spicy",
-    tag: "🖼️ Gallery Reveal",
+    tag: "\uD83D\uDDBC\uFE0F Gallery Reveal",
     text: "Show the group the last photo in your gallery (you can skip one sensitive one, but you must pick the next)."
   },
   {
     id: "d_col_28",
     category: "campus",
     spice: "mild",
-    tag: "🤥 Caught Lying",
+    tag: "\uD83E\uDD25 Caught Lying",
     text: "Do your best impression of a friend here when they are caught red-handed lying."
   },
   {
     id: "d_col_29",
     category: "campus",
     spice: "mild",
-    tag: "⏰ 9 AM Alarm",
+    tag: "\u23F0 9 AM Alarm",
     text: "Act like a very lazy college student waking up late for a 9 AM attendance class, in slow motion."
   },
   {
     id: "d_col_30",
     category: "campus",
     spice: "mild",
-    tag: "🏛️ Tour Guide",
+    tag: "\uD83C\uDFDB\uFE0F Tour Guide",
     text: "Pretend to be a tour guide showing the group around this room as if it's an ancient historical ruin."
   },
   {
     id: "d_col_31",
     category: "campus",
     spice: "mild",
-    tag: "🪑 Chair Proposal",
+    tag: "\uD83E\uDE91 Chair Proposal",
     text: "Give a dramatic proposal speech to a chair, including the full \"I'll wait for you forever\" monologue."
   },
   {
     id: "d_col_32",
     category: "campus",
     spice: "mild",
-    tag: "🤫 Whisper Mode",
+    tag: "\uD83E\uDD2B Whisper Mode",
     text: "Whisper everything you say until your next turn. Not a single normal word!"
   },
   {
     id: "d_col_33",
     category: "campus",
     spice: "mild",
-    tag: "📢 Exam Postponed",
+    tag: "\uD83D\uDCE2 Exam Postponed",
     text: "Do a dramatic \"bad news\" announcement that the semester exams are postponed to tomorrow, with maximum reaction acting."
   },
   {
     id: "d_col_34",
     category: "campus",
     spice: "mild",
-    tag: "🏋️ Slow Sit-ups",
+    tag: "\uD83C\uDFCB\uFE0F Slow Sit-ups",
     text: "Do 10 sit-ups or squats while the group counts painfully slowly and dramatically."
   },
   {
     id: "d_col_35",
     category: "campus",
     spice: "mild",
-    tag: "🗣️ Silly Accent",
+    tag: "\uD83D\uDDE3\uFE0F Silly Accent",
     text: "Let the group pick a silly accent for you to use for the next two rounds."
   },
   {
     id: "d_col_36",
     category: "campus",
     spice: "mild",
-    tag: "😂 Laugh Mimic",
+    tag: "\uD83D\uDE02 Laugh Mimic",
     text: "Mimic the exact laugh of a friend here until they start laughing too."
   },
   {
     id: "d_col_37",
     category: "campus",
     spice: "mild",
-    tag: "🤪 Ridiculous Selfie",
+    tag: "\uD83E\uDD2A Ridiculous Selfie",
     text: "Take a selfie with the most ridiculous, ugly face you can possibly make, and show it to the group."
   },
   {
     id: "d_col_38",
     category: "campus",
     spice: "spicy",
-    tag: "🔥 Self Roast",
+    tag: "\uD83D\uDD25 Self Roast",
     text: "Do a brutal 30-second stand-up roast of yourself before anyone else gets the chance."
   },
   {
     id: "d_col_39",
     category: "campus",
     spice: "spicy",
-    tag: "🥨 Mystery Snack",
+    tag: "\uD83E\uDD68 Mystery Snack",
     text: "Put your hands behind your back, close your eyes, and let someone feed you a mystery snack. Guess what it is!"
   },
   {
     id: "d_col_40",
     category: "campus",
     spice: "mild",
-    tag: "👵 Gossip Aunty",
+    tag: "\uD83D\uDC75 Gossip Aunty",
     text: "Act like a \"gossip aunty\" whispering the latest scandal in the neighborhood, completely made up."
   },
   {
     id: "d_col_41",
     category: "campus",
     spice: "mild",
-    tag: "🍲 Mess Hall Cook",
+    tag: "\uD83C\uDF72 Mess Hall Cook",
     text: "Pretend you're a grumpy \"late-night mess hall cook\" shouting at hostel boarders who came after closing time."
   },
   {
     id: "d_col_42",
     category: "campus",
     spice: "mild",
-    tag: "🎸 Heavy Metal",
+    tag: "\uD83C\uDFB8 Heavy Metal",
     text: "Sing a popular nursery rhyme in the style of an aggressive heavy metal rock singer!"
   },
   {
     id: "d_col_43",
     category: "campus",
     spice: "spicy",
-    tag: "👑 Group Butler",
+    tag: "\uD83D\uDC51 Group Butler",
     text: "Be the group's personal butler for one full round: fetch drinks, pass snacks, and bow politely."
   },
   {
     id: "d_col_44",
     category: "campus",
     spice: "mild",
-    tag: "🤐 Silent Movie Plot",
+    tag: "\uD83E\uDD10 Silent Movie Plot",
     text: "Explain the plot of a famous blockbuster movie using only gestures and charades, zero sounds allowed."
   },
   {
     id: "d_col_45",
     category: "campus",
     spice: "mild",
-    tag: "👑 Medieval King",
+    tag: "\uD83D\uDC51 Medieval King",
     text: "Convince the group that you are a 10th-century king addressing your royal subjects with a majestic speech."
   },
   {
     id: "d_col_46",
     category: "campus",
     spice: "spicy",
-    tag: "😍 Crush vs Teacher",
+    tag: "\uD83D\uDE0D Crush vs Teacher",
     text: "Act out how you behave when your crush walks into the room versus when your strictest teacher walks in."
   },
   {
     id: "d_col_47",
     category: "campus",
     spice: "mild",
-    tag: "😲 Ente Ammo!",
+    tag: "\uD83D\uDE32 Ente Ammo!",
     text: "Say \"Ente ammo!\" in 10 distinctly different emotions in a row (happy, shocked, scared, flirty, bored...)."
   },
   {
     id: "d_col_48",
     category: "campus",
     spice: "mild",
-    tag: "📦 Tech Unboxing",
+    tag: "\uD83D\uDCE6 Tech Unboxing",
     text: "Do a fake \"tech influencer unboxing\" video for a completely mundane object (like a pencil or shoe)."
   },
   {
     id: "d_col_49",
     category: "campus",
     spice: "spicy",
-    tag: "💘 Cringe Pickup",
+    tag: "\uD83D\uDC98 Cringe Pickup",
     text: "Make up a maximum cringe pickup line for the person across the circle, and deliver it with deadly confidence."
   },
   {
     id: "d_col_50",
     category: "campus",
     spice: "mild",
-    tag: "🌟 Celebrity Struggle",
+    tag: "\uD83C\uDF1F Celebrity Struggle",
     text: "Imitate a celebrity of the group's choice giving an exaggerated interview about their \"struggles before fame\"."
   },
   {
     id: "d_col_51",
     category: "campus",
     spice: "spicy",
-    tag: "👁️ Staring Contest",
+    tag: "\uD83D\uDC41\uFE0F Staring Contest",
     text: "Do an intense, dramatic staring contest with someone chosen by the group for 20 seconds without smiling."
   },
   {
     id: "d_col_52",
     category: "campus",
     spice: "mild",
-    tag: "🎤 Live Reporter",
+    tag: "\uD83C\uDFA4 Live Reporter",
     text: "Pretend to be a breathless breaking news reporter at a college canteen canteen fight, providing live commentary."
   },
   {
     id: "d_col_53",
     category: "campus",
     spice: "mild",
-    tag: "🤳 Vlogger Intro",
+    tag: "\uD83E\uDD33 Vlogger Intro",
     text: "Do an \"Instagram influencer\" vlog intro as if you're starting an energetic video about the most boring subject ever."
   },
   {
     id: "d_col_54",
     category: "campus",
     spice: "mild",
-    tag: "👰 Kerala Wedding",
+    tag: "\uD83D\uDC70 Kerala Wedding",
     text: "Pretend to be an extremely nervous groom or bride at a traditional Kerala wedding stage, with funny reactions."
   },
   {
     id: "d_col_55",
     category: "campus",
     spice: "mild",
-    tag: "💼 Placement Offer",
+    tag: "\uD83D\uDCBC Placement Offer",
     text: "Do a fake \"Placement Day\" victory announcement celebrating a ridiculous job offer from an imaginary company."
   },
   {
     id: "d_col_56",
     category: "campus",
     spice: "mild",
-    tag: "🔤 Alliteration Story",
+    tag: "\uD83D\uDD24 Alliteration Story",
     text: "Tell a story about your morning using words that mostly start with the same letter for 30 seconds."
   },
   {
     id: "d_col_57",
     category: "campus",
     spice: "spicy",
-    tag: "🗳️ Extra Group Dare",
+    tag: "\uD83D\uDDF3\uFE0F Extra Group Dare",
     text: "Let the group vote on one custom dare for you right now, and you must perform it with zero complaints."
   },
   {
     id: "d_col_58",
     category: "campus",
     spice: "mild",
-    tag: "😨 First Year Junior",
+    tag: "\uD83D\uDE28 First Year Junior",
     text: "Say a dramatic dialogue in the voice of a terrified first-year student meeting a dangerous senior in the corridor."
   },
   {
     id: "d_col_59",
     category: "campus",
     spice: "mild",
-    tag: "🚌 KSRTC Sound Effects",
+    tag: "\uD83D\uDE8C KSRTC Sound Effects",
     text: "Pretend to be a KSRTC bus and make all the sounds for 20 seconds, including gear screech, air horn, and conductor bell."
   },
   {
     id: "d_col_60",
     category: "campus",
     spice: "mild",
-    tag: "🔮 10 Years Later",
+    tag: "\uD83D\uDD2E 10 Years Later",
     text: "Act out your \"dream life\" 10 years from now, and the group gets to interject with one hilarious plot twist."
   },
 
@@ -3263,420 +3493,420 @@ const DARES_DATA = [
     id: "d_rst_1",
     category: "roast",
     spice: "spicy",
-    tag: "💀 David Attenborough",
+    tag: "\uD83D\uDC80 David Attenborough",
     text: "Read your last five Instagram captions aloud in a serious nature-documentary voice."
   },
   {
     id: "d_rst_2",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Savage LinkedIn",
+    tag: "\uD83D\uDC80 Savage LinkedIn",
     text: "Let the group write your LinkedIn \"About Me\" summary, then read it aloud with solemn pride."
   },
   {
     id: "d_rst_3",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Flaws-only Intro",
+    tag: "\uD83D\uDC80 Flaws-only Intro",
     text: "Do an honest job interview introduction, but you are only permitted to list your real red flags and character flaws."
   },
   {
     id: "d_rst_4",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Roast Receiver",
+    tag: "\uD83D\uDC80 Roast Receiver",
     text: "Take an uninterrupted 30-second roast from the group, then reply with a bow: \"Thank you, I needed that.\""
   },
   {
     id: "d_rst_5",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Screen Time Confession",
+    tag: "\uD83D\uDC80 Screen Time Confession",
     text: "Show the group your exact weekly screen time and explain what on earth you were doing on your #1 app."
   },
   {
     id: "d_rst_6",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Bill Splitting Mimic",
+    tag: "\uD83D\uDC80 Bill Splitting Mimic",
     text: "Act out how the person on your right behaves the moment the waiter drops the food bill on the table."
   },
   {
     id: "d_rst_7",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Impersonation Rating",
+    tag: "\uD83D\uDC80 Impersonation Rating",
     text: "Do an impression of the person sitting across from you. They rate it out of 10; repeat until you score 8 or higher!"
   },
   {
     id: "d_rst_8",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Future Breakup",
+    tag: "\uD83D\uDC80 Future Breakup",
     text: "Write a one-line brutal breakup text from your future self to your present self and read it aloud."
   },
   {
     id: "d_rst_9",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Single TED Talk",
+    tag: "\uD83D\uDC80 Single TED Talk",
     text: "Give a 30-second impassioned TED Talk titled: \"Why I Am Destined to Be Single Forever.\""
   },
   {
     id: "d_rst_10",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Dramatic Person",
+    tag: "\uD83D\uDC80 Dramatic Person",
     text: "Adopt the voice and mannerisms of the group's most dramatic person for the next three rounds."
   },
   {
     id: "d_rst_11",
     category: "roast",
     spice: "spicy",
-    tag: "📱 Group Story Hijack",
+    tag: "\uD83D\uDCF1 Group Story Hijack",
     text: "Post an Instagram story with a picture or caption chosen by the group (within boundaries) for 30 minutes."
   },
   {
     id: "d_rst_12",
     category: "roast",
     spice: "mild",
-    tag: "💀 Late Entry Smile",
+    tag: "\uD83D\uDC80 Late Entry Smile",
     text: "Re-enact your signature guilty late entry into class, complete with the fake apologetic smile."
   },
   {
     id: "d_rst_13",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Attendance Obituary",
+    tag: "\uD83D\uDC80 Attendance Obituary",
     text: "Stand up and read out a solemn funeral obituary for your dying attendance percentage."
   },
   {
     id: "d_rst_14",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Stand-up Roast",
+    tag: "\uD83D\uDC80 Stand-up Roast",
     text: "Do a 45-second stand-up comedy roast of your own bad habits. If nobody laughs, each friend roasts you once!"
   },
   {
     id: "d_rst_15",
     category: "roast",
     spice: "mild",
-    tag: "💀 Which Subject?",
+    tag: "\uD83D\uDC80 Which Subject?",
     text: "For the next round, respond with \"Bro, which subject?\" every single time someone addresses you."
   },
   {
     id: "d_rst_16",
     category: "roast",
     spice: "mild",
-    tag: "💀 Procrastination Ad",
+    tag: "\uD83D\uDC80 Procrastination Ad",
     text: "Perform a dramatic television commercial advertising the product: \"I'll Start Studying Tomorrow.\""
   },
   {
     id: "d_rst_17",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Fake Wedding Roast",
+    tag: "\uD83D\uDC80 Fake Wedding Roast",
     text: "Give an emotional fake wedding toast that subtly roasts the person to your left in front of everyone."
   },
   {
     id: "d_rst_18",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Used Phone Auction",
+    tag: "\uD83D\uDC80 Used Phone Auction",
     text: "Auction off the person across from you like a refurbished second-hand phone, detailing all their personality glitches."
   },
   {
     id: "d_rst_19",
     category: "roast",
     spice: "spicy",
-    tag: "💀 1-Star Review",
+    tag: "\uD83D\uDC80 1-Star Review",
     text: "Write and read aloud a scathing 1-star Amazon product review of the person sitting on your right."
   },
   {
     id: "d_rst_20",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Exposed Dating Profile",
+    tag: "\uD83D\uDC80 Exposed Dating Profile",
     text: "Read out the unfiltered dating profile bio you would write if you were forced to advertise the person on your left."
   },
   {
     id: "d_rst_21",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Habit Mimic Round",
+    tag: "\uD83D\uDC80 Habit Mimic Round",
     text: "Go around the circle and imitate one signature annoying habit of every single person here."
   },
   {
     id: "d_rst_22",
     category: "roast",
     spice: "mild",
-    tag: "💀 Bunking Defense",
+    tag: "\uD83D\uDC80 Bunking Defense",
     text: "Act out your classic bunking excuse with the group playing the strict professor. If they reject it, take a forfeit!"
   },
   {
     id: "d_rst_23",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Past Failures Speech",
+    tag: "\uD83D\uDC80 Past Failures Speech",
     text: "Give an inspirational motivational pep talk to someone here using only a list of their past blunders."
   },
   {
     id: "d_rst_24",
     category: "roast",
     spice: "mild",
-    tag: "🏷️ Nickname Bond",
+    tag: "\uD83C\uDFF7\uFE0F Nickname Bond",
     text: "Let each person bestow a ridiculous new nickname upon you, and you must answer only to those for the rest of the game."
   },
   {
     id: "d_rst_25",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Day in the Life",
+    tag: "\uD83D\uDC80 Day in the Life",
     text: "Act out a hilarious 'Day in the Life' of the person to your right, from their 10 alarms to midnight doomscrolling."
   },
   {
     id: "d_rst_26",
     category: "roast",
     spice: "spicy",
-    tag: "📰 Breaking News Roast",
+    tag: "\uD83D\uDCF0 Breaking News Roast",
     text: "Deliver a dramatic CNN breaking news bulletin about a foolish blunder committed recently by a friend in this room."
   },
   {
     id: "d_rst_27",
     category: "roast",
     spice: "spicy",
-    tag: "💡 Failed Startup Pitch",
+    tag: "\uD83D\uDCA1 Failed Startup Pitch",
     text: "Pitch a venture capital startup based entirely on your most catastrophic failed project or life idea."
   },
   {
     id: "d_rst_28",
     category: "roast",
     spice: "spicy",
-    tag: "💀 One-word Description",
+    tag: "\uD83D\uDC80 One-word Description",
     text: "Everyone in the room gives you one honest descriptive word. Read all of them back aloud in a melodramatic voice."
   },
   {
     id: "d_rst_29",
     category: "roast",
     spice: "spicy",
-    tag: "📱 Last Text Reading",
+    tag: "\uD83D\uDCF1 Last Text Reading",
     text: "Read the last text message you sent to anyone in a dramatic theatrical Shakespearean voice."
   },
   {
     id: "d_rst_30",
     category: "roast",
     spice: "spicy",
-    tag: "🎙️ Scandal Press Conference",
+    tag: "\uD83C\uDF99\uFE0F Scandal Press Conference",
     text: "Hold a mock press conference behind a chair and answer juicy 'scandals' invented by the group with straight face."
   },
   {
     id: "d_rst_31",
     category: "roast",
     spice: "spicy",
-    tag: "🙏 Public Apology",
+    tag: "\uD83D\uDE4F Public Apology",
     text: "Apologize to each person here for one real annoying habit you possess, and let them fire back a quick roast."
   },
   {
     id: "d_rst_32",
     category: "roast",
     spice: "spicy",
-    tag: "😍 Crush Panic Monologue",
+    tag: "\uD83D\uDE0D Crush Panic Monologue",
     text: "Re-enact your exact face and panic when your crush accidentally sits right next to you, with full internal monologue aloud."
   },
   {
     id: "d_rst_33",
     category: "roast",
     spice: "spicy",
-    tag: "🎤 Weakest Link Rap",
+    tag: "\uD83C\uDFA4 Weakest Link Rap",
     text: "Perform a short comedic diss rap about the 'weakest link' in the group (chosen by quick democratic vote)."
   },
   {
     id: "d_rst_34",
     category: "roast",
     spice: "mild",
-    tag: "🎶 Tribute to the Ghost",
+    tag: "\uD83C\uDFB6 Tribute to the Ghost",
     text: "Sing a solemn acoustic tribute song dedicated to the slowest text replier in the room."
   },
   {
     id: "d_rst_35",
     category: "roast",
     spice: "spicy",
-    tag: "💼 Roasted Strengths",
+    tag: "\uD83D\uDCBC Roasted Strengths",
     text: "Do a job interview pitch: list three strengths. For every one you can't name in 5s, the group adds a roasted weakness!"
   },
   {
     id: "d_rst_36",
     category: "roast",
     spice: "spicy",
-    tag: "💀 Circle Introduction",
+    tag: "\uD83D\uDC80 Circle Introduction",
     text: "Introduce each player in the room to an imaginary crowd with a funny nickname and a 1-line roast."
   },
   {
     id: "d_rst_37",
     category: "roast",
     spice: "mild",
-    tag: "📸 Influencer Pose Critique",
+    tag: "\uD83D\uDCF8 Influencer Pose Critique",
     text: "Strike a high-fashion influencer pose while the group critiques and roasts your posture like fashion judges."
   },
   {
     id: "d_rst_38",
     category: "roast",
     spice: "mild",
-    tag: "🗣️ Third Person Talk",
+    tag: "\uD83D\uDDE3\uFE0F Third Person Talk",
     text: "Refer to yourself strictly in the third person for the next round (e.g., \"[Your Name] demands water\")."
   },
   {
     id: "d_rst_39",
     category: "roast",
     spice: "spicy",
-    tag: "👮 Moral Police",
+    tag: "\uD83D\uDC6E Moral Police",
     text: "Act as the self-appointed group moral police officer and scold each person for their worst vice."
   },
   {
     id: "d_rst_40",
     category: "roast",
     spice: "spicy",
-    tag: "🥂 Backhanded Toast",
+    tag: "\uD83E\uDD42 Backhanded Toast",
     text: "Give a 20-second wedding toast for the person on your left that exposes their flaws disguised as polite compliments."
   },
   {
     id: "d_rst_41",
     category: "roast",
     spice: "mild",
-    tag: "🌦️ Mood Weather Forecast",
+    tag: "\uD83C\uDF26\uFE0F Mood Weather Forecast",
     text: "Deliver a weather report on the group's current mood, predicting who is 90% likely to cancel the next plan."
   },
   {
     id: "d_rst_42",
     category: "roast",
     spice: "spicy",
-    tag: "💀 ...And That's Why I'm Single",
+    tag: "\uD83D\uDC80 ...And That's Why I'm Single",
     text: "For the next three rounds, conclude every single sentence you speak with \"...and that's why I'm single.\""
   },
   {
     id: "d_rst_43",
     category: "roast",
     spice: "mild",
-    tag: "🦁 WhatsApp Safari",
+    tag: "\uD83E\uDD81 WhatsApp Safari",
     text: "Narrate your friend group WhatsApp chat like an African safari (\"Here we observe the lurker who hasn't spoken since 2023\")."
   },
   {
     id: "d_rst_44",
     category: "roast",
     spice: "spicy",
-    tag: "🪧 Missing Person Poster",
+    tag: "\uD83E\uDEA7 Missing Person Poster",
     text: "Create a dramatic missing-person poster announcement out loud for the friend who mysteriously vanishes whenever the bill comes."
   },
   {
     id: "d_rst_45",
     category: "roast",
     spice: "spicy",
-    tag: "🚪 Friend Resignation",
+    tag: "\uD83D\uDEAA Friend Resignation",
     text: "Formally announce your dramatic resignation from this friend group. The group votes whether your resignation is accepted."
   },
   {
     id: "d_rst_46",
     category: "roast",
     spice: "spicy",
-    tag: "🎙️ Voice Note Roast",
+    tag: "\uD83C\uDF99\uFE0F Voice Note Roast",
     text: "Record a 20-second voice note roasting yourself and play it back on speakerphone for the whole room."
   },
   {
     id: "d_rst_47",
     category: "roast",
     spice: "mild",
-    tag: "📝 Text Style Reviews",
+    tag: "\uD83D\uDCDD Text Style Reviews",
     text: "Each person gives you a 1-sentence review of your texting habits, and you must reply 'Noted' in a different accent each time."
   },
   {
     id: "d_rst_48",
     category: "roast",
     spice: "mild",
-    tag: "🚶 Convict Walk",
+    tag: "\uD83D\uDEB6 Convict Walk",
     text: "Walk across the room from the back bench to the front board like a convicted criminal being escorted to sentencing."
   },
   {
     id: "d_rst_49",
     category: "roast",
     spice: "spicy",
-    tag: "🗳️ Campaign Slogan",
+    tag: "\uD83D\uDDF3\uFE0F Campaign Slogan",
     text: "Present a campaign poster slogan electing the person to your right as 'Most Likely to Show Up Late to Their Own Wedding'."
   },
   {
     id: "d_rst_50",
     category: "roast",
     spice: "spicy",
-    tag: "🎓 Confident Viva Flop",
+    tag: "\uD83C\uDF93 Confident Viva Flop",
     text: "Pretend to be the person to your right during a viva, answering with maximum cockiness and 100% incorrect facts."
   },
   {
     id: "d_rst_51",
     category: "roast",
     spice: "mild",
-    tag: "🦹 Villain BGM Entry",
+    tag: "\uD83E\uDDB9 Villain BGM Entry",
     text: "Perform an epic slow-motion villain entrance for the person across from you while the room sings a dark cinematic soundtrack."
   },
   {
     id: "d_rst_52",
     category: "roast",
     spice: "spicy",
-    tag: "📜 Rhyming Roast",
+    tag: "\uD83D\uDCDC Rhyming Roast",
     text: "Roast the last person who made fun of you, and your entire roast must rhyme like poetry."
   },
   {
     id: "d_rst_53",
     category: "roast",
     spice: "mild",
-    tag: "🧊 Ice Cold Stranger",
+    tag: "\uD83E\uDDCA Ice Cold Stranger",
     text: "For the entire next round, treat everyone in the room as if you've never met them before and you are entirely unimpressed."
   },
   {
     id: "d_rst_54",
     category: "roast",
     spice: "spicy",
-    tag: "📱 Emoji Verdict",
+    tag: "\uD83D\uDCF1 Emoji Verdict",
     text: "Show your top 3 most frequently used emojis and defend yourself while the group delivers their psychiatric verdict."
   },
   {
     id: "d_rst_55",
     category: "roast",
     spice: "spicy",
-    tag: "🏆 Spiteful Oscar Speech",
+    tag: "\uD83C\uDFC6 Spiteful Oscar Speech",
     text: "Give an emotional Oscar acceptance speech thanking only the people who made your college life miserable (the group)."
   },
   {
     id: "d_rst_56",
     category: "roast",
     spice: "mild",
-    tag: "🎭 Four Levels of 'I'm Fine'",
+    tag: "\uD83C\uDFAD Four Levels of 'I'm Fine'",
     text: "Act out the phrase \"I'm fine\" across four progressive stages: calm denial, simmering rage, tragic weep, and full meltdown."
   },
   {
     id: "d_rst_57",
     category: "roast",
     spice: "mild",
-    tag: "👵 Group Amma Scold",
+    tag: "\uD83D\uDC75 Group Amma Scold",
     text: "Play the group's stereotypical strict amma and reprimand each person here for their worst lifestyle choice for 20 seconds."
   },
   {
     id: "d_rst_58",
     category: "roast",
     spice: "spicy",
-    tag: "🏷️ Official Title Badge",
+    tag: "\uD83C\uDFF7\uFE0F Official Title Badge",
     text: "Accept a mocking corporate title bestowed by the group (e.g. 'VP of Ghosting', 'Chief Excuse Officer') for the rest of the game."
   },
   {
     id: "d_rst_59",
     category: "roast",
     spice: "spicy",
-    tag: "🔄 Swap Places",
+    tag: "\uD83D\uDD04 Swap Places",
     text: "Pick any harmless dare from this list for a person of your choice, but you must physically swap seats with them for 2 rounds."
   },
   {
     id: "d_rst_60",
     category: "roast",
     spice: "spicy",
-    tag: "👑 FINAL BOSS",
+    tag: "\uD83D\uDC51 FINAL BOSS",
     text: "FINAL BOSS DARE: The group collectively decides one roast task for you. You cannot refuse, but you earn immunity for 2 rounds afterward!"
   },
 
@@ -3685,175 +3915,175 @@ const DARES_DATA = [
     id: "d_ext_1",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 15-Second Prank Call",
+    tag: "\uD83D\uDD25 15-Second Prank Call",
     text: "Call your crush or an ex on speakerphone for 15 seconds, say: 'Hey, I was just thinking about you and wanted to hear your voice', and hang up without explaining!"
   },
   {
     id: "d_ext_2",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 DM Inspection",
+    tag: "\uD83D\uDD25 DM Inspection",
     text: "Let the person to your left scroll through your Instagram DMs or WhatsApp chat list for 30 seconds uninterrupted."
   },
   {
     id: "d_ext_3",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Spicy Status",
+    tag: "\uD83D\uDD25 Spicy Status",
     text: "Let the group compose a spicy, suggestive 1-line WhatsApp status and keep it live on your account for 20 minutes."
   },
   {
     id: "d_ext_4",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Intense Stare",
+    tag: "\uD83D\uDD25 Intense Stare",
     text: "Gaze into the eyes of the person opposite you for 45 seconds without blinking, laughing, or looking away. If you break, take a forfeit!"
   },
   {
     id: "d_ext_5",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Sensual Catwalk",
+    tag: "\uD83D\uDD25 Sensual Catwalk",
     text: "Do your best dramatic, sensual slow-motion catwalk across the room while whispering sweet romantic compliments to an empty chair."
   },
   {
     id: "d_ext_6",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Random Emoji Drop",
-    text: "Hand your phone to the person on your right; they get to send a single emoji of their choice (e.g., 🍆, 💍, or 🥺) to your most recent chat."
+    tag: "\uD83D\uDD25 Random Emoji Drop",
+    text: "Hand your phone to the person on your right; they get to send a single emoji of their choice (e.g., \uD83C\uDF46, \uD83D\uDC8D, or \uD83E\uDD7A) to your most recent chat."
   },
   {
     id: "d_ext_7",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Wallpaper Takeover",
+    tag: "\uD83D\uDD25 Wallpaper Takeover",
     text: "Let the person across from you snap a goofy selfie on your phone and set it as your lock screen wallpaper for the rest of the night."
   },
   {
     id: "d_ext_8",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Passionate Telenovela",
+    tag: "\uD83D\uDD25 Passionate Telenovela",
     text: "Deliver a 60-second passionate, tearful telenovela love confession to someone in the circle chosen by the group."
   },
   {
     id: "d_ext_9",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Ice Cube Poetry",
+    tag: "\uD83D\uDD25 Ice Cube Poetry",
     text: "Hold an ice cube in your hand or mouth and recite an emotional love poem to someone until the group says stop."
   },
   {
     id: "d_ext_10",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Romantic Mop Dance",
+    tag: "\uD83D\uDD25 Romantic Mop Dance",
     text: "Slow-dance with a broom, mop, or coat hanger for 1 full minute to a romantic slow jam sung by the group."
   },
   {
     id: "d_ext_11",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Recently Deleted Album",
+    tag: "\uD83D\uDD25 Recently Deleted Album",
     text: "Open your phone's 'Recently Deleted' photo album and let the group inspect the top 3 photos."
   },
   {
     id: "d_ext_12",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Dramatic Voice Note",
+    tag: "\uD83D\uDD25 Dramatic Voice Note",
     text: "Read aloud the last 3 voice notes or messages you received in your private DMs, with maximum romantic Shakespearean flair."
   },
   {
     id: "d_ext_13",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Serenade on One Knee",
+    tag: "\uD83D\uDD25 Serenade on One Knee",
     text: "Drop to one knee in front of the person to your left and passionately serenade them with a dramatic Bollywood or Malayalam love song."
   },
   {
     id: "d_ext_14",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Face Doodle",
+    tag: "\uD83D\uDD25 Face Doodle",
     text: "Let someone draw a cute little mustache or heart on your cheek with a washable pen/eyeliner for the next 3 rounds."
   },
   {
     id: "d_ext_15",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Spicy Poll",
+    tag: "\uD83D\uDD25 Spicy Poll",
     text: "Post an outrageous yes/no poll written by the group on your Instagram Story or close-friends WhatsApp group."
   },
   {
     id: "d_ext_16",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Juicy Ear Secret",
+    tag: "\uD83D\uDD25 Juicy Ear Secret",
     text: "Whisper a wild secret about yourself into the ear of the person on your right. They vote whether it's spicy enough or if you must take another dare!"
   },
   {
     id: "d_ext_17",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Jacket Exchange",
+    tag: "\uD83D\uDD25 Jacket Exchange",
     text: "Swap jackets, shirts, or accessories with the person to your left and wear it proudly for the next 3 rounds."
   },
   {
     id: "d_ext_18",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Independent Flirt Pushups",
+    tag: "\uD83D\uDD25 Independent Flirt Pushups",
     text: "Do 12 pushups while shouting: \"I am a gorgeous, independent flirt!\" after every single pushup."
   },
   {
     id: "d_ext_19",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Algorithm Roast",
+    tag: "\uD83D\uDD25 Algorithm Roast",
     text: "Open Instagram Reels or TikTok and let the group examine the first 5 videos on your 'For You' page and roast your algorithm."
   },
   {
     id: "d_ext_20",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Lemon / Pepper Face",
+    tag: "\uD83D\uDD25 Lemon / Pepper Face",
     text: "Take a bite of raw lemon or a pinch of black pepper, maintain eye contact with the group, and say with a seductive wink: 'Delicious.'"
   },
   {
     id: "d_ext_21",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Group Lap Pose",
+    tag: "\uD83D\uDD25 Group Lap Pose",
     text: "Sit on the floor like a humble king's pet at the feet of the person across from you until your next turn."
   },
   {
     id: "d_ext_22",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Phone Roulette",
+    tag: "\uD83D\uDD25 Phone Roulette",
     text: "Show your search bar suggestions on YouTube or Spotify to the group without clearing anything!"
   },
   {
     id: "d_ext_23",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Heartbeat Check",
+    tag: "\uD83D\uDD25 Heartbeat Check",
     text: "Put your hand on the chest of the person to your left, close your eyes, and diagnose their romantic diagnosis based on their heartbeat."
   },
   {
     id: "d_ext_24",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 Sensual Commercial",
+    tag: "\uD83D\uDD25 Sensual Commercial",
     text: "Sell an ordinary bottle of water to the room as if it were a high-end luxury perfume commercial with whispered French words."
   },
   {
     id: "d_ext_25",
     category: "extreme",
     spice: "extreme",
-    tag: "🔥 The Group Decree",
+    tag: "\uD83D\uDD25 The Group Decree",
     text: "ULTIMATE SPICY DARE: Let the entire group write one dare on a piece of paper or phone. You must execute it without flinching!"
   }
 ];
@@ -3878,7 +4108,7 @@ window.FORFEIT_TASKS = FORFEIT_TASKS;
 
 /**
  * Web Audio API Sound Effects Synthesizer
- * Zero external audio files required — runs 100% offline & instantly!
+ * Zero external audio files required \u2014 runs 100% offline & instantly!
  */
 
 class SoundFX {
@@ -4218,7 +4448,7 @@ class TruthAndDareApp {
     this.sampleNames = ["Rahul", "Anjali", "Fahad", "Deepa", "Vishnu", "Meera", "Arjun", "Sneha"];
     
     // Fun avatars emojis and neon colors
-    this.avatarIcons = ["😎", "🔥", "👑", "🚀", "🦁", "🦊", "⚡", "🎭", "🎉", "👻", "🦄", "🎯", "🍕", "🎸"];
+    this.avatarIcons = ["\uD83D\uDE0E", "\uD83D\uDD25", "\uD83D\uDC51", "\uD83D\uDE80", "\uD83E\uDD81", "\uD83E\uDD8A", "\u26A1", "\uD83C\uDFAD", "\uD83C\uDF89", "\uD83D\uDC7B", "\uD83E\uDD84", "\uD83C\uDFAF", "\uD83C\uDF55", "\uD83C\uDFB8"];
     this.avatarGradients = [
       "linear-gradient(135deg, #FF6B6B, #FFE66D)",
       "linear-gradient(135deg, #4E65FF, #92EFFD)",
@@ -4476,7 +4706,7 @@ class TruthAndDareApp {
 
   updateMuteIcon() {
     if (this.muteToggleBtn) {
-      this.muteToggleBtn.textContent = window.soundFX.muted ? '🔇 Muted' : '🔊 Sound ON';
+      this.muteToggleBtn.textContent = window.soundFX.muted ? '\uD83D\uDD07 Muted' : '\uD83D\uDD0A Sound ON';
       this.muteToggleBtn.classList.toggle('muted-active', window.soundFX.muted);
     }
   }
@@ -4542,11 +4772,11 @@ class TruthAndDareApp {
     const hint = document.getElementById('playerCountHint');
     if (hint) {
       if (count < 2) {
-        hint.innerHTML = `<span class="badge-warning">⚠️ Need at least 2 players to play</span>`;
+        hint.innerHTML = `<span class="badge-warning">\u26A0\uFE0F Need at least 2 players to play</span>`;
       } else if (count < 3 && this.cooldownSetting >= 2) {
-        hint.innerHTML = `<span class="badge-info">ℹ️ 2 players detected (turns will alternate!) For full 2-3 turn cooldown, 3-4+ players are recommended.</span>`;
+        hint.innerHTML = `<span class="badge-info">\u2139\uFE0F 2 players detected (turns will alternate!) For full 2-3 turn cooldown, 3-4+ players are recommended.</span>`;
       } else {
-        hint.innerHTML = `<span class="badge-success">✅ ${count} players ready to party!</span>`;
+        hint.innerHTML = `<span class="badge-success">\u2705 ${count} players ready to party!</span>`;
       }
     }
 
@@ -4604,11 +4834,11 @@ class TruthAndDareApp {
       
       let badgeHtml = '';
       if (isCurrent) {
-        badgeHtml = `<span class="strip-status chosen">🎯 CHOSEN</span>`;
+        badgeHtml = `<span class="strip-status chosen">\uD83C\uDFAF CHOSEN</span>`;
       } else if (isResting) {
-        badgeHtml = `<span class="strip-status resting">⏳ Resting (${p.cooldown}t)</span>`;
+        badgeHtml = `<span class="strip-status resting">\u23F3 Resting (${p.cooldown}t)</span>`;
       } else {
-        badgeHtml = `<span class="strip-status ready">🟢 READY</span>`;
+        badgeHtml = `<span class="strip-status ready">\uD83D\uDFE2 READY</span>`;
       }
 
       card.innerHTML = `
@@ -4633,14 +4863,14 @@ class TruthAndDareApp {
       this.slotCard.className = 'slot-card';
     }
     if (this.activeSlotAvatar) {
-      this.activeSlotAvatar.textContent = '🎯';
+      this.activeSlotAvatar.textContent = '\uD83C\uDFAF';
       this.activeSlotAvatar.style.background = 'linear-gradient(135deg, #7F00FF, #E100FF)';
     }
     if (this.activeSlotName) {
       this.activeSlotName.textContent = 'READY TO SPIN';
     }
     if (this.slotStatusBadge) {
-      this.slotStatusBadge.textContent = '🟢 AWAITING FATE';
+      this.slotStatusBadge.textContent = '\uD83D\uDFE2 AWAITING FATE';
       this.slotStatusBadge.style.color = '#00f5d4';
       this.slotStatusBadge.style.borderColor = 'rgba(0, 245, 212, 0.4)';
     }
@@ -4711,7 +4941,7 @@ class TruthAndDareApp {
       this.slotCard.className = 'slot-card fast-spin';
     }
     if (this.slotStatusBadge) {
-      this.slotStatusBadge.textContent = '⚡ SCANNING TARGETS...';
+      this.slotStatusBadge.textContent = '\u26A1 SCANNING TARGETS...';
       this.slotStatusBadge.style.color = '#00f0ff';
       this.slotStatusBadge.style.borderColor = 'rgba(0, 240, 255, 0.4)';
     }
@@ -4754,7 +4984,7 @@ class TruthAndDareApp {
         this.slotCard.className = 'slot-card suspense-tick';
       }
       if (this.slotStatusBadge) {
-        this.slotStatusBadge.textContent = '⚠️ LOCKING IN...';
+        this.slotStatusBadge.textContent = '\u26A0\uFE0F LOCKING IN...';
         this.slotStatusBadge.style.color = '#ffbe0b';
         this.slotStatusBadge.style.borderColor = 'rgba(255, 190, 11, 0.5)';
       }
@@ -4795,7 +5025,7 @@ class TruthAndDareApp {
         this.slotCard.className = 'slot-card fakeout';
       }
       if (this.slotStatusBadge) {
-        this.slotStatusBadge.textContent = `⚠️ IS IT ${fakeout1.name.toUpperCase()}?!`;
+        this.slotStatusBadge.textContent = `\u26A0\uFE0F IS IT ${fakeout1.name.toUpperCase()}?!`;
         this.slotStatusBadge.style.color = '#ff0055';
         this.slotStatusBadge.style.borderColor = '#ff0055';
       }
@@ -4839,7 +5069,7 @@ class TruthAndDareApp {
         this.slotCard.className = 'slot-card winner-locked';
       }
       if (this.slotStatusBadge) {
-        this.slotStatusBadge.textContent = '🎯 CHOSEN BY FATE!';
+        this.slotStatusBadge.textContent = '\uD83C\uDFAF CHOSEN BY FATE!';
         this.slotStatusBadge.style.color = '#ffe600';
         this.slotStatusBadge.style.borderColor = '#ffe600';
       }
@@ -4920,16 +5150,16 @@ class TruthAndDareApp {
     const isTruth = this.activeTaskType === 'truth';
 
     // Set badge
-    this.taskTypeBadge.textContent = isTruth ? '🔵 TRUTH' : '🔴 DARE';
+    this.taskTypeBadge.textContent = isTruth ? '\uD83D\uDD35 TRUTH' : '\uD83D\uDD34 DARE';
     this.taskTypeBadge.className = `task-badge ${isTruth ? 'badge-truth' : 'badge-dare'}`;
 
     // Tag badge
     let spiceIndicator = '';
     if (this.activeTask.spice === 'extreme') {
-      spiceIndicator = ' 🔥 EXTREME';
+      spiceIndicator = ' \uD83D\uDD25 EXTREME';
       window.soundFX.playSiren();
     } else if (this.activeTask.spice === 'spicy') {
-      spiceIndicator = ' 🌶️ SPICY';
+      spiceIndicator = ' \uD83C\uDF36\uFE0F SPICY';
     }
 
     this.taskTagBadge.textContent = `${this.activeTask.tag || 'Challenge'}${spiceIndicator}`;
@@ -4945,7 +5175,7 @@ class TruthAndDareApp {
     this.taskText.textContent = this.activeTask.text;
 
     // Switch button text
-    this.switchTypeBtn.textContent = isTruth ? '🔄 Switch to Dare' : '🔄 Switch to Truth';
+    this.switchTypeBtn.textContent = isTruth ? '\uD83D\uDD04 Switch to Dare' : '\uD83D\uDD04 Switch to Truth';
 
     // Reset timer
     this.stopTimer();
@@ -4988,7 +5218,7 @@ class TruthAndDareApp {
       if (this.timerSeconds <= 0) {
         this.stopTimer();
         window.soundFX.playBuzzer();
-        this.timerDisplay.textContent = "⏰ TIME'S UP!";
+        this.timerDisplay.textContent = "\u23F0 TIME'S UP!";
         this.timerDisplay.classList.add('timer-ended');
       }
     }, 1000);
@@ -5006,7 +5236,7 @@ class TruthAndDareApp {
   updateTimerDisplay() {
     const mins = Math.floor(this.timerSeconds / 60);
     const secs = this.timerSeconds % 60;
-    this.timerDisplay.textContent = `⏱️ ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    this.timerDisplay.textContent = `\u23F1\uFE0F ${mins}:${secs < 10 ? '0' : ''}${secs}`;
   }
 
   completeTask() {
@@ -5093,19 +5323,19 @@ class TruthAndDareApp {
 
     superlatives.innerHTML = `
       <div class="superlative-card dare">
-        <span class="sup-icon">🔥</span>
+        <span class="sup-icon">\uD83D\uDD25</span>
         <div class="sup-title">Daring Champion</div>
         <div class="sup-name">${mostDaring && mostDaring.daresDone > 0 ? mostDaring.name : 'None yet'}</div>
         <div class="sup-count">${mostDaring ? mostDaring.daresDone : 0} Dares Conquered</div>
       </div>
       <div class="superlative-card truth">
-        <span class="sup-icon">💡</span>
+        <span class="sup-icon">\uD83D\uDCA1</span>
         <div class="sup-title">Truth Confessor</div>
         <div class="sup-name">${mostTruthful && mostTruthful.truthsDone > 0 ? mostTruthful.name : 'None yet'}</div>
         <div class="sup-count">${mostTruthful ? mostTruthful.truthsDone : 0} Truths Spilled</div>
       </div>
       <div class="superlative-card forfeit">
-        <span class="sup-icon">🐔</span>
+        <span class="sup-icon">\uD83D\uDC14</span>
         <div class="sup-title">Chicken of the Night</div>
         <div class="sup-name">${mostChickened && mostChickened.forfeits > 0 ? mostChickened.name : 'No chickens!'}</div>
         <div class="sup-count">${mostChickened ? mostChickened.forfeits : 0} Forfeits Taken</div>
@@ -5273,9 +5503,9 @@ window.addEventListener('DOMContentLoaded', () => {
       } else {
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         if (isIOS) {
-          alert("📱 Install on iPhone:\n\n1. Tap the Share button (square with arrow ⎋) at the bottom of Safari.\n2. Tap 'Add to Home Screen' ➕.\n\nOnce added, you can turn on Airplane mode and play completely offline anytime!");
+          alert("\uD83D\uDCF1 Install on iPhone:\n\n1. Tap the Share button (square with arrow \u238B) at the bottom of Safari.\n2. Tap 'Add to Home Screen' \u2795.\n\nOnce added, you can turn on Airplane mode and play completely offline anytime!");
         } else {
-          alert("📲 To Install as App:\n\nTap the browser menu (⋮) in Chrome or Edge, then select 'Add to Home screen' or 'Install App'.\n\nOnce installed, you can play offline in Airplane mode!");
+          alert("\uD83D\uDCF2 To Install as App:\n\nTap the browser menu (\u22EE) in Chrome or Edge, then select 'Add to Home screen' or 'Install App'.\n\nOnce installed, you can play offline in Airplane mode!");
         }
       }
     });
