@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Truth &amp; Dare" />
-  <title>Truth &amp; Dare Party â€” Offline Edition</title>
+  <title>Truth &amp; Dare Party &mdash; Offline Edition</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/png" href="icon-192.png" />
   <link rel="apple-touch-icon" href="icon-192.png" />
@@ -1484,9 +1484,9 @@ body::after {
         <div class="logo-title">TRUTH &amp; DARE</div>
       </div>
       <div class="header-actions">
-        <button id="installAppBtn" class="header-btn install-btn" title="Install to Phone Home Screen">ðŸ“² Install App</button>
-        <button id="muteToggleBtn" class="header-btn" title="Toggle Sound">ðŸ”Š Sound ON</button>
-        <button id="exitGameBtn" class="header-btn exit-btn" title="Exit or view game recap">ðŸšª Exit Door</button>
+        <button id="installAppBtn" class="header-btn install-btn" title="Install to Phone Home Screen">&#128241; Install App</button>
+        <button id="muteToggleBtn" class="header-btn" title="Toggle Sound">&#128266; Sound ON</button>
+        <button id="exitGameBtn" class="header-btn exit-btn" title="Exit or view game recap">&#128682; Exit Door</button>
       </div>
     </header>
 
@@ -1510,16 +1510,16 @@ body::after {
             maxlength="25"
             autocomplete="off"
           />
-          <button id="addPlayerBtn" class="primary-btn">âž• Add Player</button>
+          <button id="addPlayerBtn" class="primary-btn">&#10133; Add Player</button>
         </div>
 
         <!-- Quick actions -->
         <div class="quick-actions-row">
-          <span id="playerCountHint" class="badge-warning">âš ï¸ Need at least 2 players</span>
+          <span id="playerCountHint" class="badge-warning">&#9888;&#65039; Need at least 2 players</span>
           <div>
-            <button id="loadSampleBtn" class="text-btn">âš¡ Add Party Squad</button>
+            <button id="loadSampleBtn" class="text-btn">&#9889; Add Party Squad</button>
             <span style="color:var(--text-muted); margin:0 6px;">|</span>
-            <button id="clearPlayersBtn" class="text-btn danger">ðŸ—‘ï¸ Clear All</button>
+            <button id="clearPlayersBtn" class="text-btn danger">&#128465; Clear All</button>
           </div>
         </div>
 
@@ -1535,7 +1535,7 @@ body::after {
       <section class="settings-grid">
         <!-- Turn Cooldown Rule -->
         <div class="setting-card">
-          <h3>â±ï¸ Player Cooldown Rule</h3>
+          <h3>&#9201; Player Cooldown Rule</h3>
           <p>Prevent recently called players from being picked again immediately:</p>
           <select id="cooldownSelect" class="select-styled">
             <option value="2" selected>Wait 2 turns after completing (Recommended)</option>
@@ -1546,20 +1546,20 @@ body::after {
 
         <!-- Spicy Categories -->
         <div class="setting-card">
-          <h3>ðŸŒ¶ï¸ Question Packs &amp; Spice</h3>
+          <h3>&#127798;&#65039; Question Packs &amp; Spice</h3>
           <p>Select which decks to shuffle into the endless party loop:</p>
           <div class="categories-list">
             <label class="category-checkbox-label">
               <input type="checkbox" id="toggleCampus" checked />
-              <span>ðŸŽ“ <strong>Campus Life</strong> (60 Truths + 60 Dares)</span>
+              <span>&#127891; <strong>Campus Life</strong> (60 Truths + 60 Dares)</span>
             </label>
             <label class="category-checkbox-label">
               <input type="checkbox" id="toggleRoast" checked />
-              <span>ðŸ’€ <strong>Savage Roast</strong> (60 Truths + 60 Dares)</span>
+              <span>&#128128; <strong>Savage Roast</strong> (60 Truths + 60 Dares)</span>
             </label>
             <label class="category-checkbox-label">
               <input type="checkbox" id="toggleExtreme" checked />
-              <span>ðŸ”¥ <strong>Extreme Spicy &amp; Wild</strong> (50 Bonus Questions)</span>
+              <span>&#128293; <strong>Extreme Spicy &amp; Wild</strong> (50 Bonus Questions)</span>
             </label>
           </div>
         </div>
@@ -1567,7 +1567,7 @@ body::after {
 
       <!-- Big Start Button -->
       <button id="startGameBtn" class="primary-btn big-start-btn" disabled>
-        ðŸš€ START THE PARTY
+        &#128640; START THE PARTY
       </button>
     </main>
 
@@ -1597,9 +1597,9 @@ body::after {
           <div class="portal-scanner-line"></div>
           
           <div class="slot-card" id="slotCard">
-            <div id="activeSlotAvatar" class="slot-avatar">ðŸŽ¯</div>
+            <div id="activeSlotAvatar" class="slot-avatar">&#127919;</div>
             <div id="activeSlotName" class="slot-name">READY TO SPIN</div>
-            <div id="slotStatusBadge" class="slot-status-badge">ðŸŸ¢ AWAITING FATE</div>
+            <div id="slotStatusBadge" class="slot-status-badge">&#128994; AWAITING FATE</div>
           </div>
         </div>
 
@@ -1612,14 +1612,14 @@ body::after {
         </div>
 
         <button id="spinBtn" class="primary-btn spin-action-btn">
-          âš¡ ACTIVATE WHEEL OF FATE!
+          &#9889; ACTIVATE WHEEL OF FATE!
         </button>
       </div>
 
-      <!-- PHASE 2: PLAYER CHOSEN â€” CHOOSE TRUTH OR DARE -->
+      <!-- PHASE 2: PLAYER CHOSEN - CHOOSE TRUTH OR DARE -->
       <div id="choiceArea" class="choice-panel hidden">
         <div class="chosen-banner">
-          <div id="chosenPlayerAvatar" class="chosen-avatar">ðŸ˜Ž</div>
+          <div id="chosenPlayerAvatar" class="chosen-avatar">&#128526;</div>
           <h2 id="chosenPlayerName" class="chosen-name">Player</h2>
           <div class="chosen-prompt">Choose Your Destiny!</div>
         </div>
@@ -1627,21 +1627,21 @@ body::after {
         <div class="choice-cards-grid">
           <!-- Truth Option -->
           <div id="chooseTruthBtn" class="choice-btn-card truth">
-            <span class="choice-icon">ðŸ”µ</span>
+            <span class="choice-icon">&#128309;</span>
             <div class="choice-title">TRUTH</div>
             <div class="choice-desc">Confess real secrets, campus scandals &amp; awkward moments</div>
           </div>
 
           <!-- Dare Option -->
           <div id="chooseDareBtn" class="choice-btn-card dare">
-            <span class="choice-icon">ðŸ”´</span>
+            <span class="choice-icon">&#128308;</span>
             <div class="choice-title">DARE</div>
             <div class="choice-desc">Execute crazy acting, savage roasts &amp; wild party challenges</div>
           </div>
 
           <!-- Random Option -->
           <div id="chooseRandomBtn" class="choice-btn-card random">
-            <span class="choice-icon">ðŸŽ²</span>
+            <span class="choice-icon">&#127922;</span>
             <div class="choice-title">RANDOM</div>
             <div class="choice-desc">Leave your fate entirely to the universe!</div>
           </div>
@@ -1652,14 +1652,14 @@ body::after {
       <div id="taskArea" class="task-panel hidden">
         <div class="task-top-bar">
           <div class="task-badges-wrap">
-            <span id="taskTypeBadge" class="task-badge badge-truth">ðŸ”µ TRUTH</span>
-            <span id="taskTagBadge" class="task-tag-badge">ðŸŽ“ Campus Life</span>
+            <span id="taskTypeBadge" class="task-badge badge-truth">&#128309; TRUTH</span>
+            <span id="taskTagBadge" class="task-tag-badge">&#127891; Campus Life</span>
           </div>
           <!-- Optional Timer -->
           <div class="timer-controls">
-            <button id="start30sBtn" class="control-pill-btn" title="Start 30-second timer">â±ï¸ 30s</button>
-            <button id="start60sBtn" class="control-pill-btn" title="Start 60-second timer">â±ï¸ 60s</button>
-            <button id="stopTimerBtn" class="control-pill-btn" title="Stop timer">â¹ï¸ Reset</button>
+            <button id="start30sBtn" class="control-pill-btn" title="Start 30-second timer">&#9201; 30s</button>
+            <button id="start60sBtn" class="control-pill-btn" title="Start 60-second timer">&#9201; 60s</button>
+            <button id="stopTimerBtn" class="control-pill-btn" title="Stop timer">&#9209; Reset</button>
           </div>
         </div>
 
@@ -1669,7 +1669,7 @@ body::after {
         </div>
 
         <!-- Timer Display Box -->
-        <div id="timerDisplay" class="timer-box hidden">â±ï¸ 0:30</div>
+        <div id="timerDisplay" class="timer-box hidden">&#9201; 0:30</div>
 
         <!-- Giant High-Contrast Question Card -->
         <div class="task-content-card">
@@ -1681,23 +1681,23 @@ body::after {
         <!-- Secondary controls: text-to-speech, reroll, switch -->
         <div class="task-secondary-controls">
           <button id="speakTaskBtn" class="control-pill-btn" title="Read task aloud">
-            ðŸ—£ï¸ Read Aloud
+            &#128483;&#65039; Read Aloud
           </button>
           <button id="rerollTaskBtn" class="control-pill-btn" title="Get a different question from same deck">
-            ðŸ”€ Reroll Question
+            &#128256; Reroll Question
           </button>
           <button id="switchTypeBtn" class="control-pill-btn" title="Switch between Truth &amp; Dare">
-            ðŸ”„ Switch to Dare
+            &#128259; Switch to Dare
           </button>
         </div>
 
         <!-- Main Action Buttons -->
         <div class="task-actions-row">
           <button id="completeTaskBtn" class="complete-btn">
-            âœ… Task Completed! (Continue)
+            &#9989; Task Completed! (Continue)
           </button>
           <button id="chickenOutBtn" class="chicken-btn">
-            ðŸ” Chicken Out / Forfeit
+            &#128020; Chicken Out / Forfeit
           </button>
         </div>
       </div>
@@ -1708,7 +1708,7 @@ body::after {
          ======================================================== -->
     <div id="exitModal" class="modal-overlay hidden">
       <div class="modal-card">
-        <div class="modal-icon">ðŸšª</div>
+        <div class="modal-icon">&#128682;</div>
         <h2 class="modal-title">Exit Door Opened!</h2>
         <p class="modal-desc">
           Do you want to continue playing, check the party recap &amp; awards, or return to the setup lobby?
@@ -1716,16 +1716,16 @@ body::after {
 
         <div class="modal-buttons-stack">
           <button id="resumeGameBtn" class="modal-action-btn primary">
-            â–¶ï¸ Resume Playing (Keep Going!)
+            &#9654;&#65039; Resume Playing (Keep Going!)
           </button>
           <button id="viewRecapBtn" class="modal-action-btn secondary">
-            ðŸ† View Party Awards &amp; Superlatives
+            &#127942; View Party Awards &amp; Superlatives
           </button>
           <button id="endGameLobbyBtn" class="modal-action-btn danger">
-            ðŸ  End Game &amp; Return to Player Setup
+            &#127968; End Game &amp; Return to Player Setup
           </button>
           <button id="closeWindowBtn" class="modal-action-btn secondary" style="opacity:0.85; font-size:0.9rem;">
-            ðŸšª Close Game / Exit Browser
+            &#128682; Close Game / Exit Browser
           </button>
         </div>
       </div>
@@ -1736,7 +1736,7 @@ body::after {
          ======================================================== -->
     <div id="recapModal" class="modal-overlay hidden">
       <div class="modal-card" style="max-width: 650px;">
-        <div class="modal-icon">ðŸŽ‰</div>
+        <div class="modal-icon">&#127881;</div>
         <h2 class="modal-title">Party Recap &amp; Superlatives</h2>
         <p class="modal-desc">Here is how everyone performed tonight:</p>
 
@@ -1752,10 +1752,10 @@ body::after {
 
         <div class="modal-buttons-stack" style="flex-direction:row; justify-content:center;">
           <button id="recapResumeBtn" class="modal-action-btn primary" style="flex:1;">
-            â–¶ï¸ Back to Game
+            &#9654;&#65039; Back to Game
           </button>
           <button id="recapNewGameBtn" class="modal-action-btn secondary" style="flex:1;">
-            ðŸ”„ New Game / Setup
+            &#128259; New Game / Setup
           </button>
         </div>
       </div>
@@ -1766,7 +1766,7 @@ body::after {
          ======================================================== -->
     <div id="forfeitModal" class="modal-overlay hidden">
       <div class="modal-card">
-        <div class="modal-icon">ðŸ”</div>
+        <div class="modal-icon">&#128020;</div>
         <h2 class="modal-title"><span id="forfeitPlayerName">Player</span> Chickened Out!</h2>
         <p class="modal-desc">
           You refused the challenge! You must complete this forfeit before moving on:
@@ -1777,7 +1777,7 @@ body::after {
         </div>
 
         <button id="forfeitDoneBtn" class="modal-action-btn primary">
-          ðŸ’ª Forfeit Performed! (Continue Next Round)
+          &#128170; Forfeit Performed! (Continue Next Round)
         </button>
       </div>
     </div>
@@ -3876,9 +3876,6 @@ window.TRUTHS_DATA = TRUTHS_DATA;
 window.DARES_DATA = DARES_DATA;
 window.FORFEIT_TASKS = FORFEIT_TASKS;
 
-  </script>
-  <!-- Embedded Offline Sound & Haptic Synthesizer -->
-  <script>
 /**
  * Web Audio API Sound Effects Synthesizer
  * Zero external audio files required — runs 100% offline & instantly!
@@ -4190,9 +4187,6 @@ class SoundFX {
 
 window.soundFX = new SoundFX();
 
-  </script>
-  <!-- Embedded Game Engine -->
-  <script>
 /**
  * Truth and Dare Party - Main Application Logic
  */
